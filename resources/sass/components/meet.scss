@@ -1,0 +1,106 @@
+#meet{
+    padding: 100px 0 100px;
+    box-sizing: border-box;
+    position: relative;
+
+    .card{
+        background-color: white;
+        // width: 90%;
+        // margin: 10px auto;
+        margin-top: 10px;
+        box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+        box-sizing: border-box;
+        padding: 20px;
+        //border-radius: 3px;
+        .date__hour{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: $color__blue;
+            margin-bottom: 20px;
+        }
+        .practitioner__pills{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .practitioner{
+                font-size: 25px;
+                color: $color__blue;
+            }
+            .pills{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .pill{
+                    background-color: $color__blue;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    margin-left: 10px;
+                    img{
+                        width: 58%;
+                    }
+                    &.phone{
+                        background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+                    }
+                    &.message{
+                        background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+                    }
+                    &.delete{
+                        position: relative;
+                        background-image: linear-gradient(to left bottom, #a21b1b, #ad2928, #b73634, #c14241, #cb4e4e);
+                        a{
+                            position: absolute;
+                            top:0;
+                            bottom:0;
+                            right:0;
+                            left:0;
+                        }
+                        div{
+                            position: absolute;
+                            top: calc(50% - 1px);
+                            left: calc(50% - 8px);
+                            height: 1px;
+                            width: 16px;
+                            margin: 0 auto;
+                            background-color: white;
+                            transform-origin: 50% 50%;
+                            &.cross__first{
+                                transform: rotate(45deg);
+                            }
+                            &.cross__second{
+                                transform: rotate(-45deg);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .noMeeting{
+        z-index: 1;
+        position: fixed;
+        top:calc(50% - 40px);
+        left:0;
+        right: 0;
+        font-size: 20px; 
+        font-family: 'Montserrat', sans-serif;
+        p{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            text-align: center;
+            background-color: white;
+            color: $color__blue;
+            line-height: 25px;
+            box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+
+        }
+    }
+}
