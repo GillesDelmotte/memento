@@ -464,7 +464,6 @@ table {
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   padding: 20px;
-  border-radius: 3px;
 }
 
 #profile .card label,
@@ -1438,6 +1437,7 @@ table {
   align-items: center;
   justify-content: center;
   background-color: white;
+  color: #526586;
   padding: 10px;
   box-sizing: border-box;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
@@ -1600,5 +1600,126 @@ table {
   justify-content: center;
   background-color: rgba(0, 128, 0, 0.5);
   color: white;
+}
+
+#meet {
+  padding: 100px 0 100px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#meet .card {
+  background-color: white;
+  margin-top: 10px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+#meet .card .date__hour {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #526586;
+  margin-bottom: 20px;
+}
+
+#meet .card .practitioner__pills {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#meet .card .practitioner__pills .practitioner {
+  font-size: 25px;
+  color: #526586;
+}
+
+#meet .card .practitioner__pills .pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#meet .card .practitioner__pills .pills .pill {
+  background-color: #526586;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+#meet .card .practitioner__pills .pills .pill img {
+  width: 58%;
+}
+
+#meet .card .practitioner__pills .pills .pill.phone {
+  background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+}
+
+#meet .card .practitioner__pills .pills .pill.message {
+  background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+}
+
+#meet .card .practitioner__pills .pills .pill.delete {
+  position: relative;
+  background-image: linear-gradient(to left bottom, #a21b1b, #ad2928, #b73634, #c14241, #cb4e4e);
+}
+
+#meet .card .practitioner__pills .pills .pill.delete a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#meet .card .practitioner__pills .pills .pill.delete div {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: calc(50% - 8px);
+  height: 1px;
+  width: 16px;
+  margin: 0 auto;
+  background-color: white;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+
+#meet .card .practitioner__pills .pills .pill.delete div.cross__first {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+#meet .card .practitioner__pills .pills .pill.delete div.cross__second {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+#meet .noMeeting {
+  z-index: 1;
+  position: fixed;
+  top: calc(50% - 40px);
+  left: 0;
+  right: 0;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#meet .noMeeting p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  text-align: center;
+  background-color: white;
+  color: #526586;
+  line-height: 25px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
 }
 

@@ -1866,6 +1866,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1873,19 +1907,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Meet",
   data: function data() {
     return {
-      componentReady: false
+      componentReady: false,
+      myAppointments: null
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["currentUser"])),
-  methods: {},
+  methods: {
+    deleteAppointment: function deleteAppointment(e, schedule_id, hour, date) {
+      var _this = this;
+
+      e.preventDefault();
+      e.stopPropagation();
+      window.axios.post("/deleteAppointment", {
+        schedule_id: schedule_id,
+        hour: hour,
+        date: date
+      }).then(function (response) {
+        window.axios.post("/getMyAppointments").then(function (response) {
+          _this.myAppointments = response.data;
+          _this.componentReady = true;
+        })["catch"](function (error) {
+          return console.error(error);
+        });
+      })["catch"](function (error) {
+        return console.error(error);
+      });
+    }
+  },
   beforeMount: function beforeMount() {
     _store_js__WEBPACK_IMPORTED_MODULE_0__["default"].commit("setComponentDisplayed", "Rendez-vous");
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     this.$store.dispatch("setCurrentUser").then(function () {
-      _this.componentReady = true;
+      window.axios.post("/getMyAppointments").then(function (response) {
+        _this2.myAppointments = response.data;
+        _this2.componentReady = true;
+      })["catch"](function (error) {
+        return console.error(error);
+      });
     });
   }
 });
@@ -42306,11 +42367,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "container" }, [
-    _vm.componentReady ? _c("div") : _c("div", [_vm._v("plz wait...")])
+  return _c("section", { attrs: { id: "meet" } }, [
+    _vm.componentReady
+      ? _c("div", [
+          _vm.myAppointments.length === 0
+            ? _c("div", { staticClass: "noMeeting" }, [
+                _c("p", [_vm._v("vous n'avez pas de rendez-vous")])
+              ])
+            : _c("div", [
+                _c(
+                  "ul",
+                  { staticClass: "list cards" },
+                  _vm._l(_vm.myAppointments, function(appointment) {
+                    return _c(
+                      "li",
+                      { key: appointment.id, staticClass: "list__item card" },
+                      [
+                        _c("div", { staticClass: "date__hour" }, [
+                          _c("span", { staticClass: "hour" }, [
+                            _vm._v(_vm._s(appointment.hour))
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "date" }, [
+                            _vm._v(_vm._s(appointment.date))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "practitioner__pills" }, [
+                          _c("span", { staticClass: "practitioner" }, [
+                            _vm._v(
+                              _vm._s(appointment.schedule.practitioner.name)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "pills" }, [
+                            _vm._m(0, true),
+                            _vm._v(" "),
+                            _vm._m(1, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "pill delete" }, [
+                              _c("a", {
+                                attrs: { href: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteAppointment(
+                                      $event,
+                                      appointment.schedule.id,
+                                      appointment.hour,
+                                      appointment.date
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "cross__first" }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "cross__second" })
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ])
+        ])
+      : _c("div", { staticClass: "loader" }, [_vm._v("plz wait...")])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "pill phone" }, [
+      _c("img", {
+        attrs: { src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"), alt: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "pill message" }, [
+      _c("img", {
+        attrs: { src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"), alt: "" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -43583,7 +43730,7 @@ var render = function() {
         _vm._v(" "),
         this.displayed === "holiday"
           ? _c("div", { staticClass: "holiday" }, [
-              _c("p", [_vm._v("vous etes en congé")])
+              _c("p", [_vm._v("vous êtes en congé")])
             ])
           : _vm._e()
       ])
