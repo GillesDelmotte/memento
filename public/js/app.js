@@ -2610,8 +2610,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       e.preventDefault();
       e.stopPropagation();
       var data = {
-        user_id: this.practitioner.id,
-        client_id: this.currentUser.id,
+        user_id: this.currentUser.id,
+        schedule_id: this.schedule.id,
         hour: hour,
         date: this.date
       };
@@ -3326,8 +3326,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this3 = this;
 
     this.$store.dispatch("setScheduleDays", this.currentUser.id).then(function () {
-      _this3.componentReady = true;
-      _this3.day;
+      _this3.$store.dispatch("setAppointments", _this3.schedule.id).then(function () {
+        _this3.componentReady = true;
+        _this3.day;
+      });
     });
   }
 });
@@ -60873,7 +60875,8 @@ var state = {
   allJob: null,
   allPractitioner: null,
   allSchedule: null,
-  schedule: null
+  schedule: null,
+  appointments: null
 };
 var getters = {};
 var mutations = {
@@ -60894,6 +60897,9 @@ var mutations = {
   },
   setSchedule: function setSchedule(state, schedule) {
     state.schedule = schedule;
+  },
+  setAppointments: function setAppointments(state, appointments) {
+    state.appointments = appointments;
   }
 };
 var actions = {
@@ -60940,6 +60946,18 @@ var actions = {
         id: payload
       }).then(function (response) {
         commit('setSchedule', response.data);
+        resolve();
+      });
+    });
+  },
+  setAppointments: function setAppointments(_ref6, payload) {
+    var commit = _ref6.commit;
+    return new Promise(function (resolve, reject) {
+      window.axios.post('/setAppointments', {
+        id: payload
+      }).then(function (response) {
+        console.log(response);
+        commit('setAppointments', response.data);
         resolve();
       });
     });
