@@ -15,7 +15,7 @@
           <p>{{hour}}</p>
           <p>{{createListMorning[index + 1]}}</p>
         </div>
-        <div class="person" v-if="index != createListMorning.length - 1"></div>
+        <div class="person" v-if="index != createListMorning.length - 1">{{getAppointement(hour)}}</div>
       </li>
     </ul>
     <ul class="list">
@@ -24,7 +24,7 @@
           <p>{{hour}}</p>
           <p>{{createListAfternoon[index + 1]}}</p>
         </div>
-        <div class="person" v-if="index != createListAfternoon.length - 1"></div>
+        <div class="person" v-if="index != createListAfternoon.length - 1">{{getAppointement(hour)}}</div>
       </li>
     </ul>
     <div class="noSchedule" v-if="this.displayed === 'noSchedule'">
@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["schedule", "currentUser"]),
+    ...mapState(["schedule", "currentUser", "appointments"]),
     day() {
       var d = new Date();
 
@@ -217,6 +217,16 @@ export default {
     },
     redirect() {
       router.push({ name: "newSchedule" });
+    },
+    getAppointement(hour) {
+      const appointment = this.appointments.filter(
+        appointment =>
+          appointment.hour === hour && appointment.date === this.date
+      );
+
+      if (appointment[0] != undefined) {
+        return appointment[0].client.name;
+      }
     }
   },
   beforeMount() {
@@ -224,10 +234,12 @@ export default {
   },
   mounted() {
     this.$store.dispatch("setScheduleDays", this.currentUser.id).then(() => {
-      this.$store.dispatch("setAppointments", this.schedule.id).then(() => {
-        this.componentReady = true;
-        this.day;
-      });
+      this.$store
+        .dispatch("setAppointments", { id: this.schedule.id, client: true })
+        .then(() => {
+          this.componentReady = true;
+          this.day;
+        });
     });
   }
 };

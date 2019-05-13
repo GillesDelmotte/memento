@@ -135,6 +135,18 @@
                     left:0;
                     bottom:0;
                 }
+                &.disabled{
+                    width: 30%;
+                    opacity: 0.4;
+                    background-color: $color__blue;
+                }
+
+                &.myAppointment{
+                    display: flex;
+                    justify-content: center;
+                    background-color: rgba($color: green, $alpha: 0.5);
+                    color: white;
+                }
             }
         }
     }

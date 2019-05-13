@@ -16,7 +16,12 @@ class AppointmentController extends Controller
     {
         $appointments = Appointment::where('schedule_id', $request['id'])->get();
 
-        return $appointments;
+        if($request['client'] === true){
+            return $appointments->load('client');
+        }else{
+            return $appointments;
+        }
+
     }
 
     /**
@@ -85,8 +90,12 @@ class AppointmentController extends Controller
      * @param  \memento\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Appointment $appointment)
+    public function destroy(Appointment $appointment, Request $request)
     {
-        //
+        $schedule_id = $request['schedule_id'];
+        $hour = $request['hour'];
+        $date = $request['date'];
+        $appointment = Appointment::where('schedule_id', $schedule_id)->where('hour', $hour)->where('date', $date)->first();
+        $appointment->delete();
     }
 }

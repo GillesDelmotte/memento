@@ -16,8 +16,19 @@
           <p>{{hour}}</p>
           <p>{{createListMorning[index + 1]}}</p>
         </div>
-        <div class="person" v-if="index != createListMorning.length - 1">
+        <div class="person" v-if="index != createListMorning.length - 1 && reserved(hour) === true">
           <a href @click="reserve($event, hour)"></a>
+        </div>
+        <div
+          v-else-if="index != createListMorning.length - 1  && reserved(hour) === false"
+          class="person disabled"
+        ></div>
+        <div
+          v-else-if="index != createListMorning.length - 1  && reserved(hour) === 'myAppointment'"
+          class="person myAppointment"
+        >
+          <a href @click="deleteAppointment($event,hour)"></a>
+          {{currentUser.name}}
         </div>
       </li>
     </ul>
@@ -27,8 +38,23 @@
           <p>{{hour}}</p>
           <p>{{createListAfternoon[index + 1]}}</p>
         </div>
-        <div class="person" v-if="index != createListAfternoon.length - 1">
+
+        <div
+          class="person"
+          v-if="index != createListAfternoon.length - 1 && reserved(hour) === true"
+        >
           <a href @click="reserve($event, hour)"></a>
+        </div>
+        <div
+          v-else-if="index != createListMorning.length - 1 && reserved(hour) === false"
+          class="person disabled"
+        ></div>
+        <div
+          v-else-if="index != createListMorning.length - 1  && reserved(hour) === 'myAppointment'"
+          class="person myAppointment"
+        >
+          <a href @click="deleteAppointment($event, hour)"></a>
+          {{currentUser.name}}
         </div>
       </li>
     </ul>
@@ -66,7 +92,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["schedule", "allPractitioner", "currentUser"]),
+    ...mapState(["schedule", "allPractitioner", "currentUser", "appointments"]),
     practitioner() {
       const practitioner = this.allPractitioner.filter(
         practitioner => practitioner.id === this.$route.params.id
@@ -238,17 +264,56 @@ export default {
       window.axios
         .post("/createAppointment", data)
         .then(response => {
-          console.log(response);
+          this.$store.dispatch("setAppointments", {
+            id: this.schedule.id,
+            client: false
+          });
         })
         .catch(function(error) {
           console.log(error.response.data.message);
         });
+    },
+    reserved(hour) {
+      const appointment = this.appointments.filter(
+        appointment =>
+          appointment.hour === hour && appointment.date === this.date
+      );
+
+      if (appointment[0] != undefined) {
+        if (appointment[0].user_id === this.currentUser.id) {
+          return "myAppointment";
+        }
+        return false;
+      } else {
+        return true;
+      }
+    },
+    deleteAppointment(e, hour) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.axios
+        .post("/deleteAppointment", {
+          schedule_id: this.schedule.id,
+          hour: hour,
+          date: this.date
+        })
+        .then(response => {
+          this.$store.dispatch("setAppointments", {
+            id: this.schedule.id,
+            client: false
+          });
+        })
+        .catch(error => console.error(error));
     }
   },
   mounted() {
     this.$store.dispatch("setScheduleDays", this.$route.params.id).then(() => {
-      this.componentReady = true;
-      this.day;
+      this.$store
+        .dispatch("setAppointments", { id: this.schedule.id, client: false })
+        .then(() => {
+          this.componentReady = true;
+          this.day;
+        });
     });
   }
 };

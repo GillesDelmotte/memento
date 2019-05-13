@@ -86,11 +86,9 @@ const actions = {
         })
     },
     setAppointments({ commit }, payload) {
-        
         return new Promise((resolve, reject) => {    
-            window.axios.post('/setAppointments', { id: payload })
+            window.axios.post('/setAppointments', payload)
                 .then(response => {
-                    console.log(response)
                     commit('setAppointments', response.data)
                     resolve()
                 })
