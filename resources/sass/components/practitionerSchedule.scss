@@ -1,0 +1,141 @@
+#practitionerSchedule{
+    .date{
+        z-index: 1;
+        display: flex;
+        position: fixed;
+        box-sizing: border-box;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 20px;
+        background-color: white;
+        //margin-bottom: 20px;
+        box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+        font-size: 20px;
+        color: $color__blue;
+
+        span{
+            display: flex;
+        }
+
+        .previousDate{
+            width: 20px;
+            height: 20px;
+            display: block;
+            background-image: url('../../img/arrow-second.svg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            transform-origin: 50% 50%;
+            transform: rotate(180deg);
+            margin-right: 15px;
+        }
+
+        .nextDate{
+            width: 20px;
+            height: 20px;
+            display: block;
+            background-image: url('../../img/arrow-second.svg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            margin-left: 15px;
+        }
+
+        .picker{
+            width: 25px;
+            height: 25px;
+        }
+
+    }
+
+    .datePicker{
+        z-index: 1;
+        display: none;
+        position: fixed;
+        top: 135px;
+        width: 100%;
+        padding: 17px;
+        box-sizing: border-box;
+        border-style: none;
+        border-top: 1px solid rgba($color: $color__blue, $alpha: 0.5);
+        font-size: 18px;
+        color: $color__blue;
+        outline: none;
+        &.displayed{
+            display: block;
+        }
+    }
+
+    h2{
+        text-align: center;
+        font-size: 30px;
+        padding-top:90px;
+        margin-bottom: 20px;
+        color: $color__blue;
+
+    }
+
+    .holiday, .noSchedule{
+        z-index: 1;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 25px;
+        top:calc(50% - 40px);
+        box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+        left:0;
+        right: 0;
+        height: 80px;
+        font-size: 20px; 
+        font-family: 'Montserrat', sans-serif;
+        color: $color__blue;
+        background-color: white;
+    }
+
+    .list{
+        margin-bottom: 100px;
+        .list__item{
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 20px;
+            .hours{
+                background-color: white;
+                width: 30%;
+                box-sizing: border-box;
+                box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+                letter-spacing: 1.50px;
+                border-radius: 0 3px 3px 0;
+                color: $color__blue;
+                p{
+                    padding: 10px;
+                }
+                p:first-child{
+                    border-bottom: 1px solid rgba($color: $color__blue, $alpha: 0.5);
+                    padding-bottom: 9px;
+                }
+
+            }
+            .person{
+                width: 65%;
+                display: flex;
+                align-items: center;
+                border-radius: 3px 0 0 3px ;
+                background-color: white;
+                padding: 10px;
+                box-sizing: border-box;
+                box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+                position: relative;
+                a{
+                    position: absolute;
+                    top:0;
+                    right:0;
+                    left:0;
+                    bottom:0;
+                }
+            }
+        }
+    }
+}

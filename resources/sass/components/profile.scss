@@ -1,0 +1,203 @@
+#profile{
+    padding: 100px 0 100px;
+    box-sizing: border-box;
+    position: relative;
+
+    .profile__img{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: $color__blue;
+        margin: 0 auto;
+    }
+
+    h2{
+        text-align: center;
+        margin: 15px 0 25px;
+        font-size: 35px;
+
+    }
+
+    .card{
+        background-color: white;
+        // width: 90%;
+        // margin: 10px auto;
+        margin-top: 10px;
+        box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 3px;
+        label, span{
+            display: block;
+            font-size: 20px;
+            letter-spacing: 1.50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: $color__blue;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+
+        }
+        input, p{
+            font-size: 20px;
+            width: 90%;
+            outline: none;
+        }
+        textarea{
+            font-size: 20px;
+            width: 90%;
+            height: auto;
+            outline: none;
+            font-family: 'Nunito', sans-serif;
+
+        }
+    }
+    .job__list{
+        position: fixed;
+        display: none;
+        left: 0; 
+        right: 0;
+        top: 71px;
+        bottom: 0;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        &.open{
+            display: block;
+        }
+
+        .closer{
+            position: absolute;
+            top:0;
+            bottom:0;
+            right:0;
+            left:0;
+            
+        }
+
+        .wrapper{
+            background-color: rgb(245, 245, 245);
+            position: fixed;                
+            left: 0; 
+            right: 0;
+        }
+
+        ul{
+            z-index: 1;
+            overflow-x: hidden;
+            max-height: 300px;
+            li{
+                position: relative;
+                background-color:white;
+                //border-top: 1px solid black;
+                border-bottom: 0.5px solid  rgba(0,0,0,0.2);
+                //margin:20px 0;
+                box-sizing: border-box;
+                padding: 15px 20px;
+                font-size: 17px;
+                left:0;
+                letter-spacing: 1.23px;
+                text-transform: uppercase;
+                transition: all 0.3s; 
+                a{
+                    position: absolute;
+                    top:0;
+                    bottom:0;
+                    right:0;
+                    left:0;
+                }
+                &.swiped{
+                    left: -72px;
+                }
+                .pills{
+                    //z-index: -1;
+                    transition: all 0.3s $easeInQuad;
+                    position: absolute;
+                    right: -72px;
+                    top: calc(50% - 25px);
+                    display: flex;
+                    div{
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;   
+                        background-color: $color__blue;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 10px;
+                        img{
+                            width: 50%;  
+                            position: relative;
+                            top: -1px;
+                            left: -0.5px;
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        .filter{
+            width: 90%;
+            margin: 15px auto;
+            input{
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 17px;
+                padding: 10px 20px;
+                border-radius: 20px; 
+                border: none;
+                font-family: Nunito;
+                text-transform: uppercase;
+                letter-spacing: 1.23px;
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+
+        p{
+            width: 90%;
+            margin: 10px auto;
+            color: rgb(150, 150, 150);
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        .button{
+            box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+            margin: 25px auto;
+        }
+    }
+    .checkboxes{
+        margin-top: 40px;
+        .input__label{
+            width: 90%;
+            margin: 15px auto;
+            font-size: 20px;
+            input{
+                display: none;
+                &:checked ~ .allLabel .falseInput{
+                    background-color: green;
+                }
+                
+            }
+            .allLabel{
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .falseInput{
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: white;
+                border-radius: 50%;
+                margin-right: 20px;
+            }
+            .goodLabel{
+                width: 90%;
+            }
+        }
+    }
+    
+
+}

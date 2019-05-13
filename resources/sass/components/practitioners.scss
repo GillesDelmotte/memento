@@ -1,0 +1,356 @@
+#practitioners{
+    padding-top: 70px;
+    box-sizing: border-box;
+    position: relative;
+
+    .filter{
+        width: 90%;
+        margin: 30px auto 15px;
+        input{
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 17px;
+            padding: 10px 20px;
+            border-radius: 20px; 
+            border: none;
+            font-family: Nunito;
+            text-transform: uppercase;
+            letter-spacing: 1.23px;
+            margin-bottom: 15px;
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+    .jobs{
+            box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+        
+        &.close{
+            .job{
+                display: none;
+    
+            }
+            h3 i{
+                transform: rotate(90deg);
+            }
+        }
+         
+        .job{
+            display: flex;
+            //justify-content: space-between;
+            align-items: center;
+            background-color:white;
+            //width: 90%;
+            //border-top: 1px solid black;
+            border-bottom: 0.5px solid  rgba(0,0,0,0.2);
+            //margin:20px 0;
+            box-sizing: border-box;
+            padding: 10px 20px;
+            left: 0;
+            transition: all 0.3s $easeInQuad; 
+            //border-radius: 3px;
+            //box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+            position: relative;
+
+            &.swiped{
+                left: -200px;
+            }
+            a{
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+
+            .photo{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #526586;
+                margin-right: 20px;
+            }
+            .job__name{
+                font-size: 17px;
+                letter-spacing: 1.23px;
+                text-transform: uppercase;
+                display: block;
+                margin-bottom: 10px;
+            }
+            .name{
+                font-size: 15px;
+                display: block;
+            }
+            .pills{
+                //z-index: -1;
+                transition: all 0.3s $easeInQuad;
+                position: absolute;
+                right: -196px;
+                top: calc(50% - 25px);
+                display: flex;
+                div{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;   
+                    background-color: $color__blue;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 10px;
+                    &.calendar{
+                        background-image: linear-gradient(to left bottom, #526586, #596c8d, #5f7293, #66799a, #6d80a1);
+                    }
+                    &.phone{
+                        background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+                    }
+                    &.message{
+                        background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+                    }
+                    img{
+                        width: 50%;  
+                    }
+                }
+            }
+            
+
+            .arrow{
+                width: 20px;
+                height: 20px;
+                display: block;
+                position: absolute;
+                right: 10px;
+                top: calc(50% - 10px);
+                background-image: url('../../img/arrow-second.svg');
+                background-repeat: no-repeat;
+                background-size: 100%;
+            }
+            
+        }
+        h3{
+            //margin-top: 20px;
+            //text-align: center;
+            color: white;
+            font-size: 30px;
+            padding: 10px 20px;
+            background-color: $color__blue;
+            border-bottom: 0.5px solid rgba(0,0,0,0.49);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            i{
+                background-image: url('../../img/arrow.svg');
+                transform: rotate(-90deg);
+                background-size: 100%;
+                width: 20px;
+                height: 20px;
+                //background-color: red;
+            }
+
+        }
+    }
+
+    .practitioners{
+        box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+
+        &.close{
+            .practitioner{
+                display: none;
+    
+            }
+            h3 i{
+                transform: rotate(90deg);
+            }
+        }
+        .practitioner{
+            display: flex;
+            
+            //justify-content: space-between;
+            align-items: center;
+            background-color:white;
+            //width: 90%;
+            //border-top: 1px solid black;
+            border-bottom: 0.5px solid  rgba(0,0,0,0.2);
+            //margin:20px 0;
+            box-sizing: border-box;
+            padding: 10px 20px;
+            left: 0;
+            transition: all 0.3s $easeInQuad; 
+            //border-radius: 3px;
+            //box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+            position: relative;
+            
+            &.swiped{
+                left: -200px;
+                // .pills{
+                //     right:-200px;
+                //     z-index: 0;
+                // }
+            }
+            a{
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+            .photo{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #526586;
+                margin-right: 20px;
+            }
+            .name{
+                font-size: 17px;
+                letter-spacing: 1.23px;
+                text-transform: uppercase;
+                display: block;
+                margin-bottom: 10px;
+            }
+            .job__name{
+                font-size: 15px;
+                display: block;
+            }
+            .pills{
+                //z-index: -1;
+                transition: all 0.3s $easeInQuad;
+                position: absolute;
+                right: -196px;
+                top: calc(50% - 25px);
+                display: flex;
+                div{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;   
+                    background-color: $color__blue;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 10px;
+                    &.calendar{
+                        background-image: linear-gradient(to left bottom, #526586, #596c8d, #5f7293, #66799a, #6d80a1);
+                    }
+                    &.phone{
+                        background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+                    }
+                    &.message{
+                        background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+                    }
+                    img{
+                        width: 50%;  
+                    }
+                }
+            }
+            .arrow{
+                width: 20px;
+                height: 20px;
+                display: block;
+                position: absolute;
+                right: 10px;
+                top: calc(50% - 10px);
+                background-image: url('../../img/arrow-second.svg');
+                background-repeat: no-repeat;
+                background-size: 100%;
+            }
+        }
+        h3{
+            border-bottom: 0.5px solid rgba(0,0,0,0.49);
+            margin-top: 20px;
+            //text-align: center;
+            color: white;
+            font-size: 30px;
+            padding: 10px 20px;
+            background-color: $color__blue;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            i{
+                background-image: url('../../img/arrow.svg');
+                transform: rotate(-90deg);
+                background-size: 100%;
+                width: 20px;
+                height: 20px;
+                //background-color: red;
+            }
+        }
+    }
+
+    .profile{
+        margin-top: 30px;
+        margin-bottom: 100px;
+
+        .back{
+            display: block;
+            width: 30px;
+            height: 30px;
+            border: none;
+            border: 2px solid $color__blue;
+            border-radius: 50%;
+            background-color: initial;
+            position: absolute;
+            outline: none;
+            top: 80px;
+            left: 10px;
+
+            div{
+                position: absolute;
+                top: calc(50% - 1px);
+                left: calc(50% - 8px);
+                height: 2px;
+                width: 16px;
+                margin: 0 auto;
+                background-color: $color__blue;
+                transform-origin: 50% 50%;
+                &.cross__first{
+                    transform: rotate(45deg);
+                }
+                &.cross__second{
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        .profile__img{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: $color__blue;
+            margin: 0 auto;
+        }
+        h2{
+            text-align: center;
+            margin: 15px 0 25px;
+            font-size: 35px;
+    
+        }
+        .card{
+            background-color: white;
+            // width: 90%;
+            // margin: 10px auto;
+            margin-top: 10px;
+            box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            padding: 20px;
+            border-radius: 3px;
+            span{
+                display: block;
+                font-size: 20px;
+                letter-spacing: 1.50px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: $color__blue;
+                margin-bottom: 10px;
+                font-family: 'Montserrat', sans-serif;
+    
+            }
+            p{
+                font-size: 20px;
+                width: 90%;
+                outline: none;
+            }
+
+        }
+    }
+
+}

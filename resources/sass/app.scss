@@ -1,0 +1,36 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700');
+
+// Variables
+@import 'variables';
+
+//reset
+@import 'reset';
+
+//global
+@import 'global';
+
+//pages
+@import './pages/login';
+@import './pages/register';
+
+//components
+@import './components/navigation';
+@import './components/header';
+@import './components/profile';
+@import './components/menu';
+@import './components/notif';
+@import './components/practitioners';
+@import './components/newSchedule';
+@import './components/scheduleList';
+@import './components/schedule';
+@import './components/practitionerSchedule';
+
+
+
+// Bootstrap
+//@import '~bootstrap/scss/bootstrap';
+
+
+

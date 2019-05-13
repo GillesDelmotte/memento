@@ -1,0 +1,1590 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Montserrat:700);/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#app {
+  position: relative;
+  min-height: 100vh;
+  font-family: "Nunito", sans-serif;
+  overflow: hidden;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  background-position: center center;
+  background-image: url(/images/bgc.png?0da516851b494d07699c52bdd49adfe2);
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+}
+
+.button {
+  display: block;
+  background-color: white;
+  width: 90%;
+  font-size: 20px;
+  border-style: none;
+  margin: 50px auto;
+  box-sizing: border-box;
+  padding: 15px 0;
+  border-radius: 3px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.49);
+  color: #526586;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+  display: none;
+  width: 0px;
+  background: rgba(255, 255, 255, 0);
+}
+
+#login {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-top: 50px;
+  background-color: #526586;
+}
+
+#login .logo {
+  display: block;
+  margin: 0 auto 70px;
+}
+
+#login .loginform__email,
+#login .loginform__password {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+#login .loginform__email input,
+#login .loginform__password input {
+  position: relative;
+  top: 10px;
+  width: 100%;
+  border: none;
+  background-color: initial;
+  font-size: 20px;
+}
+
+#login .loginform__email input:valid ~ label,
+#login .loginform__email input:focus ~ label,
+#login .loginform__password input:valid ~ label,
+#login .loginform__password input:focus ~ label {
+  top: 10px;
+  font-size: 15px;
+}
+
+#login .loginform__email input:focus,
+#login .loginform__password input:focus {
+  outline: none;
+}
+
+#login .loginform__email label,
+#login .loginform__password label {
+  transition: all 0.3s;
+  position: absolute;
+  top: calc(50% - 10px);
+  font-size: 20px;
+  left: 30px;
+}
+
+#login .register__link {
+  position: absolute;
+  display: block;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+#register {
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #526586;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-top: 50px;
+}
+
+#register .logo {
+  display: block;
+  margin: 0 auto 70px;
+}
+
+#register .registerform__name,
+#register .registerform__email,
+#register .registerform__password,
+#register .registerform__confirm {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+#register .registerform__name input,
+#register .registerform__email input,
+#register .registerform__password input,
+#register .registerform__confirm input {
+  position: relative;
+  top: 10px;
+  width: 100%;
+  border: none;
+  background-color: initial;
+  font-size: 20px;
+}
+
+#register .registerform__name input:valid ~ label,
+#register .registerform__name input:focus ~ label,
+#register .registerform__email input:valid ~ label,
+#register .registerform__email input:focus ~ label,
+#register .registerform__password input:valid ~ label,
+#register .registerform__password input:focus ~ label,
+#register .registerform__confirm input:valid ~ label,
+#register .registerform__confirm input:focus ~ label {
+  top: 10px;
+  font-size: 15px;
+}
+
+#register .registerform__name input:focus,
+#register .registerform__email input:focus,
+#register .registerform__password input:focus,
+#register .registerform__confirm input:focus {
+  outline: none;
+}
+
+#register .registerform__name label,
+#register .registerform__email label,
+#register .registerform__password label,
+#register .registerform__confirm label {
+  transition: all 0.3s;
+  position: absolute;
+  top: calc(50% - 10px);
+  font-size: 20px;
+  left: 20px;
+}
+
+#register .register__link {
+  position: absolute;
+  display: block;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+.nav {
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #526586;
+  position: fixed;
+  left: 0;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.49);
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav .nav-link {
+  background-image: url(/images/menusprite.svg?744e663f20ef4d6c541c4eaccf51abf6);
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  outline: none;
+}
+
+.nav .nav-link span {
+  opacity: 0;
+}
+
+.nav .nav__menu {
+  background-position: 100% 50%;
+}
+
+.nav .nav__menu.active {
+  background-position: left 50%;
+}
+
+.nav .nav__praticiens {
+  background-position: 100% 25%;
+}
+
+.nav .nav__praticiens.active {
+  background-position: left 25%;
+}
+
+.nav .nav__notif {
+  background-position: 100% 0%;
+}
+
+.nav .nav__notif.active {
+  background-position: left 0%;
+}
+
+.nav .nav__meet {
+  background-position: 100% 100%;
+}
+
+.nav .nav__meet.active {
+  background-position: left 100%;
+}
+
+.nav .nav__schedule {
+  background-position: 100% 75%;
+}
+
+.nav .nav__schedule.active {
+  background-position: left 75%;
+}
+
+.header {
+  background-color: #526586;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.49);
+  align-items: center;
+}
+
+.header__title {
+  font-size: 30px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+}
+
+.header .logo {
+  width: 50px;
+  height: 50px;
+}
+
+#profile {
+  padding: 100px 0 100px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#profile .profile__img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #526586;
+  margin: 0 auto;
+}
+
+#profile h2 {
+  text-align: center;
+  margin: 15px 0 25px;
+  font-size: 35px;
+}
+
+#profile .card {
+  background-color: white;
+  margin-top: 10px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 3px;
+}
+
+#profile .card label,
+#profile .card span {
+  display: block;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #526586;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#profile .card input,
+#profile .card p {
+  font-size: 20px;
+  width: 90%;
+  outline: none;
+}
+
+#profile .card textarea {
+  font-size: 20px;
+  width: 90%;
+  height: auto;
+  outline: none;
+  font-family: "Nunito", sans-serif;
+}
+
+#profile .job__list {
+  position: fixed;
+  display: none;
+  left: 0;
+  right: 0;
+  top: 71px;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#profile .job__list.open {
+  display: block;
+}
+
+#profile .job__list .closer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#profile .job__list .wrapper {
+  background-color: whitesmoke;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+#profile .job__list ul {
+  z-index: 1;
+  overflow-x: hidden;
+  max-height: 300px;
+}
+
+#profile .job__list ul li {
+  position: relative;
+  background-color: white;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 15px 20px;
+  font-size: 17px;
+  left: 0;
+  letter-spacing: 1.23px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+#profile .job__list ul li a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#profile .job__list ul li.swiped {
+  left: -72px;
+}
+
+#profile .job__list ul li .pills {
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  position: absolute;
+  right: -72px;
+  top: calc(50% - 25px);
+  display: flex;
+}
+
+#profile .job__list ul li .pills div {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #526586;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+#profile .job__list ul li .pills div img {
+  width: 50%;
+  position: relative;
+  top: -1px;
+  left: -0.5px;
+}
+
+#profile .job__list .filter {
+  width: 90%;
+  margin: 15px auto;
+}
+
+#profile .job__list .filter input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 17px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  font-family: Nunito;
+  text-transform: uppercase;
+  letter-spacing: 1.23px;
+}
+
+#profile .job__list .filter input:focus {
+  outline: none;
+}
+
+#profile .job__list p {
+  width: 90%;
+  margin: 10px auto;
+  color: #969696;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+#profile .job__list .button {
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  margin: 25px auto;
+}
+
+#profile .checkboxes {
+  margin-top: 40px;
+}
+
+#profile .checkboxes .input__label {
+  width: 90%;
+  margin: 15px auto;
+  font-size: 20px;
+}
+
+#profile .checkboxes .input__label input {
+  display: none;
+}
+
+#profile .checkboxes .input__label input:checked ~ .allLabel .falseInput {
+  background-color: green;
+}
+
+#profile .checkboxes .input__label .allLabel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#profile .checkboxes .input__label .falseInput {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+#profile .checkboxes .input__label .goodLabel {
+  width: 90%;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu a {
+  display: block;
+  margin: 20px 0;
+  font-size: 30px;
+}
+
+.menu a:after {
+  content: "";
+  transition: all 0.2s;
+  height: 3px;
+  border-radius: 1.5px;
+  width: 0;
+  background-color: black;
+  display: block;
+}
+
+.menu a:hover:after,
+.menu a:target:after {
+  width: 100%;
+}
+
+#notifications {
+  padding-top: 100px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#notifications .explanation {
+  background-color: white;
+}
+
+#practitioners {
+  padding-top: 70px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#practitioners .filter {
+  width: 90%;
+  margin: 30px auto 15px;
+}
+
+#practitioners .filter input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 17px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  font-family: Nunito;
+  text-transform: uppercase;
+  letter-spacing: 1.23px;
+  margin-bottom: 15px;
+}
+
+#practitioners .filter input:focus {
+  outline: none;
+}
+
+#practitioners .jobs {
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+#practitioners .jobs.close .job {
+  display: none;
+}
+
+#practitioners .jobs.close h3 i {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+#practitioners .jobs .job {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 10px 20px;
+  left: 0;
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  position: relative;
+}
+
+#practitioners .jobs .job.swiped {
+  left: -200px;
+}
+
+#practitioners .jobs .job a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#practitioners .jobs .job .photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #526586;
+  margin-right: 20px;
+}
+
+#practitioners .jobs .job .job__name {
+  font-size: 17px;
+  letter-spacing: 1.23px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#practitioners .jobs .job .name {
+  font-size: 15px;
+  display: block;
+}
+
+#practitioners .jobs .job .pills {
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  position: absolute;
+  right: -196px;
+  top: calc(50% - 25px);
+  display: flex;
+}
+
+#practitioners .jobs .job .pills div {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #526586;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+#practitioners .jobs .job .pills div.calendar {
+  background-image: linear-gradient(to left bottom, #526586, #596c8d, #5f7293, #66799a, #6d80a1);
+}
+
+#practitioners .jobs .job .pills div.phone {
+  background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+}
+
+#practitioners .jobs .job .pills div.message {
+  background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+}
+
+#practitioners .jobs .job .pills div img {
+  width: 50%;
+}
+
+#practitioners .jobs .job .arrow {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 10px);
+  background-image: url(/images/arrow-second.svg?d129da748c82d21be077242299e2b97c);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#practitioners .jobs h3 {
+  color: white;
+  font-size: 30px;
+  padding: 10px 20px;
+  background-color: #526586;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.49);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#practitioners .jobs h3 i {
+  background-image: url(/images/arrow.svg?7297178d8cf829ed8e42da9752243cb4);
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  background-size: 100%;
+  width: 20px;
+  height: 20px;
+}
+
+#practitioners .practitioners {
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+#practitioners .practitioners.close .practitioner {
+  display: none;
+}
+
+#practitioners .practitioners.close h3 i {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+#practitioners .practitioners .practitioner {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 10px 20px;
+  left: 0;
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  position: relative;
+}
+
+#practitioners .practitioners .practitioner.swiped {
+  left: -200px;
+}
+
+#practitioners .practitioners .practitioner a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#practitioners .practitioners .practitioner .photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #526586;
+  margin-right: 20px;
+}
+
+#practitioners .practitioners .practitioner .name {
+  font-size: 17px;
+  letter-spacing: 1.23px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#practitioners .practitioners .practitioner .job__name {
+  font-size: 15px;
+  display: block;
+}
+
+#practitioners .practitioners .practitioner .pills {
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  position: absolute;
+  right: -196px;
+  top: calc(50% - 25px);
+  display: flex;
+}
+
+#practitioners .practitioners .practitioner .pills div {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #526586;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+#practitioners .practitioners .practitioner .pills div.calendar {
+  background-image: linear-gradient(to left bottom, #526586, #596c8d, #5f7293, #66799a, #6d80a1);
+}
+
+#practitioners .practitioners .practitioner .pills div.phone {
+  background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+}
+
+#practitioners .practitioners .practitioner .pills div.message {
+  background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+}
+
+#practitioners .practitioners .practitioner .pills div img {
+  width: 50%;
+}
+
+#practitioners .practitioners .practitioner .arrow {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 10px);
+  background-image: url(/images/arrow-second.svg?d129da748c82d21be077242299e2b97c);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#practitioners .practitioners h3 {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.49);
+  margin-top: 20px;
+  color: white;
+  font-size: 30px;
+  padding: 10px 20px;
+  background-color: #526586;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#practitioners .practitioners h3 i {
+  background-image: url(/images/arrow.svg?7297178d8cf829ed8e42da9752243cb4);
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  background-size: 100%;
+  width: 20px;
+  height: 20px;
+}
+
+#practitioners .profile {
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+#practitioners .profile .back {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border: 2px solid #526586;
+  border-radius: 50%;
+  background-color: initial;
+  position: absolute;
+  outline: none;
+  top: 80px;
+  left: 10px;
+}
+
+#practitioners .profile .back div {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: calc(50% - 8px);
+  height: 2px;
+  width: 16px;
+  margin: 0 auto;
+  background-color: #526586;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+
+#practitioners .profile .back div.cross__first {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+#practitioners .profile .back div.cross__second {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+#practitioners .profile .profile__img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #526586;
+  margin: 0 auto;
+}
+
+#practitioners .profile h2 {
+  text-align: center;
+  margin: 15px 0 25px;
+  font-size: 35px;
+}
+
+#practitioners .profile .card {
+  background-color: white;
+  margin-top: 10px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 3px;
+}
+
+#practitioners .profile .card span {
+  display: block;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #526586;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#practitioners .profile .card p {
+  font-size: 20px;
+  width: 90%;
+  outline: none;
+}
+
+#newSchedule {
+  padding: 100px 0 100px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#newSchedule .schedule__name {
+  position: relative;
+  margin: 0 auto 40px;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+#newSchedule .schedule__name input {
+  position: relative;
+  top: 10px;
+  width: 100%;
+  border: none;
+  background-color: initial;
+  font-size: 20px;
+}
+
+#newSchedule .schedule__name input:valid ~ label,
+#newSchedule .schedule__name input:focus ~ label {
+  top: 10px;
+  font-size: 15px;
+}
+
+#newSchedule .schedule__name input:focus {
+  outline: none;
+}
+
+#newSchedule .schedule__name label {
+  transition: all 0.3s;
+  position: absolute;
+  top: calc(50% - 10px);
+  font-size: 20px;
+  left: 30px;
+}
+
+#newSchedule .days {
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+#newSchedule .days .day {
+  box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+#newSchedule .days .day .day__name {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.49);
+  color: white;
+  font-size: 30px;
+  padding: 10px 20px;
+  background-color: #526586;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#newSchedule .days .day .day__name i {
+  background-image: url(/images/arrow.svg?7297178d8cf829ed8e42da9752243cb4);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  background-size: 100%;
+  width: 20px;
+  height: 20px;
+}
+
+#newSchedule .days .day__content {
+  background-color: whitesmoke;
+  display: none;
+  text-align: center;
+  padding: 30px 0;
+}
+
+#newSchedule .days .day__content span {
+  display: block;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+#newSchedule .days .day__content .morning__span,
+#newSchedule .days .day__content .afternoon__span {
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.12px;
+}
+
+#newSchedule .days .day__content .morning__time,
+#newSchedule .days .day__content .afternoon__time {
+  display: flex;
+  justify-content: space-around;
+}
+
+#newSchedule .days .day__content .morning__time .input__time,
+#newSchedule .days .day__content .afternoon__time .input__time {
+  display: block;
+  width: 100px;
+  font-size: 20px;
+  padding: 10px 0;
+  padding-left: 17px;
+  font-family: "Nunito";
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: #526586;
+  outline: none;
+}
+
+#newSchedule .days .day__content .midi__span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+#newSchedule .days .day__content .midi__span::before,
+#newSchedule .days .day__content .midi__span::after {
+  content: "";
+  height: 1px;
+  width: 80px;
+  display: block;
+  background-color: #526586;
+}
+
+#newSchedule .days .day.open .day__content {
+  display: block;
+}
+
+#newSchedule .days .day.open i {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+#scheduleList {
+  padding: 100px 0 100px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#scheduleList .schedules {
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+#scheduleList .schedules .schedule {
+  background-color: white;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 10px 20px;
+  left: 0;
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  position: relative;
+}
+
+#scheduleList .schedules .schedule a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#scheduleList .schedules .schedule.swiped {
+  left: -70px;
+}
+
+#scheduleList .schedules .schedule .days {
+  display: flex;
+}
+
+#scheduleList .schedules .schedule .days .day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 10px;
+  width: 20px;
+  height: 20px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 50%;
+  background-color: #526586;
+}
+
+#scheduleList .schedules .schedule .name {
+  font-size: 17px;
+  letter-spacing: 1.23px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#scheduleList .schedules .schedule .pills {
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  position: absolute;
+  right: -60px;
+  top: calc(50% - 25px);
+  display: flex;
+}
+
+#scheduleList .schedules .schedule .pills .delete {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #526586;
+}
+
+#scheduleList .schedules .schedule .pills .delete div {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: calc(50% - 10px);
+  height: 2px;
+  width: 20px;
+  margin: 0 auto;
+  background-color: white;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+
+#scheduleList .schedules .schedule .pills .delete div.cross__first {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+#scheduleList .schedules .schedule .pills .delete div.cross__second {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+#scheduleList .schedules .schedule .arrow {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 10px);
+  background-image: url(/images/arrow-second.svg?d129da748c82d21be077242299e2b97c);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#mySchedule {
+  position: relative;
+  padding: 70px 0 0;
+  box-sizing: border-box;
+}
+
+#mySchedule .holiday,
+#mySchedule .noSchedule {
+  z-index: 1;
+  position: fixed;
+  top: calc(50% - 40px);
+  left: 0;
+  right: 0;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#mySchedule .holiday p,
+#mySchedule .noSchedule p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  text-align: center;
+  background-color: white;
+  color: #526586;
+  line-height: 25px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+#mySchedule .holiday .button,
+#mySchedule .noSchedule .button {
+  margin: 20px auto;
+}
+
+#mySchedule .date {
+  display: flex;
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  background-color: white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  color: #526586;
+}
+
+#mySchedule .date span {
+  display: flex;
+}
+
+#mySchedule .date .previousDate {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-image: url(/images/arrow-second.svg?d129da748c82d21be077242299e2b97c);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  margin-right: 15px;
+}
+
+#mySchedule .date .nextDate {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-image: url(/images/arrow-second.svg?d129da748c82d21be077242299e2b97c);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-left: 15px;
+}
+
+#mySchedule .date .picker {
+  width: 25px;
+  height: 25px;
+}
+
+#mySchedule .datePicker {
+  display: none;
+  position: fixed;
+  top: 135px;
+  width: 100%;
+  padding: 17px;
+  box-sizing: border-box;
+  border-style: none;
+  border-top: 1px solid rgba(82, 101, 134, 0.5);
+  font-size: 18px;
+  color: #526586;
+  outline: none;
+}
+
+#mySchedule .datePicker.displayed {
+  display: block;
+}
+
+#mySchedule .list {
+  margin: 100px 0;
+}
+
+#mySchedule .list .list__item {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+#mySchedule .list .list__item .hours {
+  background-color: white;
+  width: 30%;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1.5px;
+  color: #526586;
+  border-radius: 0 3px 3px 0;
+}
+
+#mySchedule .list .list__item .hours p {
+  padding: 10px;
+}
+
+#mySchedule .list .list__item .hours p:first-child {
+  border-bottom: 1px solid rgba(82, 101, 134, 0.5);
+  padding-bottom: 9px;
+}
+
+#mySchedule .list .list__item .person {
+  width: 65%;
+  display: flex;
+  border-radius: 3px 0 0 3px;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+#practitionerSchedule .date {
+  z-index: 1;
+  display: flex;
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  background-color: white;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  color: #526586;
+}
+
+#practitionerSchedule .date span {
+  display: flex;
+}
+
+#practitionerSchedule .date .previousDate {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-image: url(/images/arrow-second.svg?d129da748c82d21be077242299e2b97c);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  margin-right: 15px;
+}
+
+#practitionerSchedule .date .nextDate {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-image: url(/images/arrow-second.svg?d129da748c82d21be077242299e2b97c);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-left: 15px;
+}
+
+#practitionerSchedule .date .picker {
+  width: 25px;
+  height: 25px;
+}
+
+#practitionerSchedule .datePicker {
+  z-index: 1;
+  display: none;
+  position: fixed;
+  top: 135px;
+  width: 100%;
+  padding: 17px;
+  box-sizing: border-box;
+  border-style: none;
+  border-top: 1px solid rgba(82, 101, 134, 0.5);
+  font-size: 18px;
+  color: #526586;
+  outline: none;
+}
+
+#practitionerSchedule .datePicker.displayed {
+  display: block;
+}
+
+#practitionerSchedule h2 {
+  text-align: center;
+  font-size: 30px;
+  padding-top: 90px;
+  margin-bottom: 20px;
+  color: #526586;
+}
+
+#practitionerSchedule .holiday,
+#practitionerSchedule .noSchedule {
+  z-index: 1;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 25px;
+  top: calc(50% - 40px);
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  left: 0;
+  right: 0;
+  height: 80px;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: #526586;
+  background-color: white;
+}
+
+#practitionerSchedule .list {
+  margin-bottom: 100px;
+}
+
+#practitionerSchedule .list .list__item {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+#practitionerSchedule .list .list__item .hours {
+  background-color: white;
+  width: 30%;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1.5px;
+  border-radius: 0 3px 3px 0;
+  color: #526586;
+}
+
+#practitionerSchedule .list .list__item .hours p {
+  padding: 10px;
+}
+
+#practitionerSchedule .list .list__item .hours p:first-child {
+  border-bottom: 1px solid rgba(82, 101, 134, 0.5);
+  padding-bottom: 9px;
+}
+
+#practitionerSchedule .list .list__item .person {
+  width: 65%;
+  display: flex;
+  align-items: center;
+  border-radius: 3px 0 0 3px;
+  background-color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+#practitionerSchedule .list .list__item .person a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+

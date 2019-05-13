@@ -1,0 +1,111 @@
+#scheduleList{
+    padding: 100px 0 100px;
+    box-sizing: border-box;
+    position: relative;
+    .schedules{
+        box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+        .schedule{
+            //display: flex;
+            
+            //justify-content: space-between;
+            //align-items: center;
+            background-color:white;
+            //width: 90%;
+            //border-top: 1px solid black;
+            border-bottom: 0.5px solid  rgba(0,0,0,0.2);
+            //margin:20px 0;
+            box-sizing: border-box;
+            padding: 10px 20px;
+            left: 0;
+            transition: all 0.3s $easeInQuad; 
+            //border-radius: 3px;
+            //box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+            position: relative;
+            a{
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+
+            &.swiped{
+                left: -70px;
+                // .pills{
+                //     right:-200px;
+                //     z-index: 0;
+                // }
+            }
+
+            .days{
+                display: flex;
+                .day{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 10px;
+                    font-size: 10px;
+                    width: 20px;
+                    height: 20px;
+                    color:white;
+                    text-transform: uppercase;
+                    border-radius: 50%;
+                    background-color: $color__blue;
+                }
+            }
+
+            .name{
+                font-size: 17px;
+                letter-spacing: 1.23px;
+                text-transform: uppercase;
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .pills{
+                //z-index: -1;
+                transition: all 0.3s $easeInQuad;
+                position: absolute;
+                right: -60px;
+                top: calc(50% - 25px);
+                display: flex;
+                .delete{
+                    position: relative;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;   
+                    background-color: $color__blue;
+                    div{
+                        position: absolute;
+                        top: calc(50% - 1px);
+                        left: calc(50% - 10px);
+                        height: 2px;
+                        width: 20px;
+                        margin: 0 auto;
+                        background-color: white;
+                        transform-origin: 50% 50%;
+                        &.cross__first{
+                            transform: rotate(45deg);
+                        }
+                        &.cross__second{
+                            transform: rotate(-45deg);
+                        }
+                    }
+                }
+            }
+
+            .arrow{
+                width: 20px;
+                height: 20px;
+                display: block;
+                position: absolute;
+                right: 10px;
+                top: calc(50% - 10px);
+                background-image: url('../../img/arrow-second.svg');
+                background-repeat: no-repeat;
+                background-size: 100%;
+            }
+
+        }
+    }
+}
