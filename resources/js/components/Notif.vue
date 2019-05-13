@@ -1,6 +1,6 @@
 <template>
   <section id="notifications">
-    <p
+    <!-- <p
       class="explanation"
     >Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous</p>
     <div class="card">
@@ -9,7 +9,7 @@
     </div>
     <div>
       <p>Quand devons-nous envoyer le message ?</p>
-    </div>
+    </div>-->
   </section>
 </template>
 
