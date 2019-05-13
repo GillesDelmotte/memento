@@ -10,6 +10,7 @@ const state = {
     allPractitioner: null,
     allSchedule: null,
     schedule: null,
+    appointments: null,
 };
 
 const getters = {};
@@ -32,6 +33,9 @@ const mutations = {
     },
     setSchedule(state, schedule) {
         state.schedule = schedule;
+    },
+    setAppointments(state, appointments) {
+        state.appointments = appointments;
     }
 };
 
@@ -77,6 +81,17 @@ const actions = {
             window.axios.post('/getSchedule', { id: payload })
                 .then(response => {
                     commit('setSchedule', response.data)
+                    resolve()
+                })
+        })
+    },
+    setAppointments({ commit }, payload) {
+        
+        return new Promise((resolve, reject) => {    
+            window.axios.post('/setAppointments', { id: payload })
+                .then(response => {
+                    console.log(response)
+                    commit('setAppointments', response.data)
                     resolve()
                 })
         })

@@ -224,8 +224,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch("setScheduleDays", this.currentUser.id).then(() => {
-      this.componentReady = true;
-      this.day;
+      this.$store.dispatch("setAppointments", this.schedule.id).then(() => {
+        this.componentReady = true;
+        this.day;
+      });
     });
   }
 };
