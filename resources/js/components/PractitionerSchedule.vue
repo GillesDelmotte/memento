@@ -229,8 +229,8 @@ export default {
       e.stopPropagation();
 
       const data = {
-        user_id: this.practitioner.id,
-        client_id: this.currentUser.id,
+        user_id: this.currentUser.id,
+        schedule_id: this.schedule.id,
         hour: hour,
         date: this.date
       };

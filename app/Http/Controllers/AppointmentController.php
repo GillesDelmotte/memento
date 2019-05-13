@@ -12,9 +12,11 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $appointments = Appointment::where('schedule_id', $request['id'])->get();
+
+        return $appointments;
     }
 
     /**
@@ -36,11 +38,11 @@ class AppointmentController extends Controller
     public function store(Appointment $appointment, Request $request)
     {
         $user_id = $request['user_id'];
-        $client_id = $request['client_id'];
+        $schedule_id = $request['schedule_id'];
         $hour = $request['hour'];
         $date = $request['date'];
 
-        Appointment::create(['user_id' => $user_id, 'client_id' => $client_id, 'hour' => $hour, 'date' => $date]);
+        Appointment::create(['user_id' => $user_id, 'schedule_id' => $schedule_id, 'hour' => $hour, 'date' => $date]);
     }
 
     /**
