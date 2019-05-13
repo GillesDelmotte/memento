@@ -2454,7 +2454,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       displayed: "schedule"
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["schedule", "allPractitioner"]), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["schedule", "allPractitioner", "currentUser"]), {
     practitioner: function practitioner() {
       var _this = this;
 
@@ -2609,7 +2609,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     reserve: function reserve(e, hour) {
       e.preventDefault();
       e.stopPropagation();
-      console.log(hour);
+      var data = {
+        user_id: this.practitioner.id,
+        client_id: this.currentUser.id,
+        hour: hour,
+        date: this.date
+      };
+      window.axios.post("/createAppointment", data).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.data.message);
+      });
     }
   },
   mounted: function mounted() {
@@ -42535,34 +42545,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { attrs: { id: "notifications" } })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { attrs: { id: "notifications" } }, [
-      _c("p", { staticClass: "explanation" }, [
-        _vm._v(
-          "Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous"
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c("p", [
-          _vm._v(
-            "Bonjour, vous avez rendez-vous avec Didier Delmotte le ... à ..."
-          )
-        ]),
-        _vm._v(" "),
-        _c("i", [_vm._v("icon")])
-      ]),
-      _vm._v(" "),
-      _c("div", [_c("p", [_vm._v("Quand devons-nous envoyer le message ?")])])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
