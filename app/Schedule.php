@@ -13,4 +13,9 @@ class Schedule extends Model
     public function days(){
         return $this->hasMany(ScheduleDays::class);
     }
+
+    public function practitioner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

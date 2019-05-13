@@ -14,4 +14,10 @@ class Appointment extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id')
+            ->with(['practitioner']);
+    }
 }

@@ -29,6 +29,7 @@ Route::post('/deleteSchedule', 'ScheduleController@destroy');
 Route::post('/createAppointment', 'AppointmentController@store');
 Route::post('/setAppointments', 'AppointmentController@index');
 Route::post('/deleteAppointment', 'AppointmentController@destroy');
+Route::post('/getMyAppointments', 'AppointmentController@myAppointments');
 
 
 Route::get('/authenticated-user', 'AuthenticatedUserController@fetch');

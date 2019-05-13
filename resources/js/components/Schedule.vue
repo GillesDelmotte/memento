@@ -32,7 +32,7 @@
       <button class="button" @click="redirect">Créer un agenda</button>
     </div>
     <div v-if="this.displayed === 'holiday'" class="holiday">
-      <p>vous etes en congé</p>
+      <p>vous êtes en congé</p>
     </div>
   </section>
   <section v-else class="loader">plz wait...</section>

@@ -14,7 +14,7 @@ class AppointmentController extends Controller
      */
     public function index(Request $request)
     {
-        $appointments = Appointment::where('schedule_id', $request['id'])->get();
+        $appointments = Appointment::where('schedule_id', $request['id'])->orderBy('date', 'asc')->get();
 
         if($request['client'] === true){
             return $appointments->load('client');
@@ -97,5 +97,12 @@ class AppointmentController extends Controller
         $date = $request['date'];
         $appointment = Appointment::where('schedule_id', $schedule_id)->where('hour', $hour)->where('date', $date)->first();
         $appointment->delete();
+    }
+
+    public function myAppointments(Appointment $appointment)
+    {
+        $myAppointments = Appointment::where('user_id', Auth()->id())->get();
+
+        return $myAppointments->load('schedule');
     }
 }
