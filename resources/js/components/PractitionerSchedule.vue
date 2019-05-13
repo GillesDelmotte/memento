@@ -66,7 +66,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["schedule", "allPractitioner"]),
+    ...mapState(["schedule", "allPractitioner", "currentUser"]),
     practitioner() {
       const practitioner = this.allPractitioner.filter(
         practitioner => practitioner.id === this.$route.params.id
@@ -227,7 +227,22 @@ export default {
     reserve(e, hour) {
       e.preventDefault();
       e.stopPropagation();
-      console.log(hour);
+
+      const data = {
+        user_id: this.practitioner.id,
+        client_id: this.currentUser.id,
+        hour: hour,
+        date: this.date
+      };
+
+      window.axios
+        .post("/createAppointment", data)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error.response.data.message);
+        });
     }
   },
   mounted() {

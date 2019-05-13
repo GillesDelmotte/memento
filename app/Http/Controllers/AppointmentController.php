@@ -33,9 +33,14 @@ class AppointmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Appointment $appointment, Request $request)
     {
-        //
+        $user_id = $request['user_id'];
+        $client_id = $request['client_id'];
+        $hour = $request['hour'];
+        $date = $request['date'];
+
+        Appointment::create(['user_id' => $user_id, 'client_id' => $client_id, 'hour' => $hour, 'date' => $date]);
     }
 
     /**
