@@ -1436,6 +1436,7 @@ table {
   display: flex;
   border-radius: 3px 0 0 3px;
   align-items: center;
+  justify-content: center;
   background-color: white;
   padding: 10px;
   box-sizing: border-box;
@@ -1586,5 +1587,18 @@ table {
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+#practitionerSchedule .list .list__item .person.disabled {
+  width: 30%;
+  opacity: 0.4;
+  background-color: #526586;
+}
+
+#practitionerSchedule .list .list__item .person.myAppointment {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 128, 0, 0.5);
+  color: white;
 }
 

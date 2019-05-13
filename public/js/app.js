@@ -2439,6 +2439,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2454,7 +2480,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       displayed: "schedule"
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["schedule", "allPractitioner", "currentUser"]), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["schedule", "allPractitioner", "currentUser", "appointments"]), {
     practitioner: function practitioner() {
       var _this = this;
 
@@ -2607,6 +2633,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.date = dd + "-" + mm + "-" + yyyy;
     },
     reserve: function reserve(e, hour) {
+      var _this4 = this;
+
       e.preventDefault();
       e.stopPropagation();
       var data = {
@@ -2616,18 +2644,61 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         date: this.date
       };
       window.axios.post("/createAppointment", data).then(function (response) {
-        console.log(response);
+        _this4.$store.dispatch("setAppointments", {
+          id: _this4.schedule.id,
+          client: false
+        });
       })["catch"](function (error) {
         console.log(error.response.data.message);
+      });
+    },
+    reserved: function reserved(hour) {
+      var _this5 = this;
+
+      var appointment = this.appointments.filter(function (appointment) {
+        return appointment.hour === hour && appointment.date === _this5.date;
+      });
+
+      if (appointment[0] != undefined) {
+        if (appointment[0].user_id === this.currentUser.id) {
+          return "myAppointment";
+        }
+
+        return false;
+      } else {
+        return true;
+      }
+    },
+    deleteAppointment: function deleteAppointment(e, hour) {
+      var _this6 = this;
+
+      e.preventDefault();
+      e.stopPropagation();
+      window.axios.post("/deleteAppointment", {
+        schedule_id: this.schedule.id,
+        hour: hour,
+        date: this.date
+      }).then(function (response) {
+        _this6.$store.dispatch("setAppointments", {
+          id: _this6.schedule.id,
+          client: false
+        });
+      })["catch"](function (error) {
+        return console.error(error);
       });
     }
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this7 = this;
 
     this.$store.dispatch("setScheduleDays", this.$route.params.id).then(function () {
-      _this4.componentReady = true;
-      _this4.day;
+      _this7.$store.dispatch("setAppointments", {
+        id: _this7.schedule.id,
+        client: false
+      }).then(function () {
+        _this7.componentReady = true;
+        _this7.day;
+      });
     });
   }
 });
@@ -3169,7 +3240,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       displayed: "schedule"
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["schedule", "currentUser"]), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["schedule", "currentUser", "appointments"]), {
     day: function day() {
       var d = new Date();
       var today = new Date();
@@ -3317,18 +3388,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _router_js__WEBPACK_IMPORTED_MODULE_2__["default"].push({
         name: "newSchedule"
       });
+    },
+    getAppointement: function getAppointement(hour) {
+      var _this3 = this;
+
+      var appointment = this.appointments.filter(function (appointment) {
+        return appointment.hour === hour && appointment.date === _this3.date;
+      });
+
+      if (appointment[0] != undefined) {
+        return appointment[0].client.name;
+      }
     }
   },
   beforeMount: function beforeMount() {
     _store_js__WEBPACK_IMPORTED_MODULE_0__["default"].commit("setComponentDisplayed", "Horaire");
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.$store.dispatch("setScheduleDays", this.currentUser.id).then(function () {
-      _this3.$store.dispatch("setAppointments", _this3.schedule.id).then(function () {
-        _this3.componentReady = true;
-        _this3.day;
+      _this4.$store.dispatch("setAppointments", {
+        id: _this4.schedule.id,
+        client: true
+      }).then(function () {
+        _this4.componentReady = true;
+        _this4.day;
       });
     });
   }
@@ -42688,7 +42773,8 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              index != _vm.createListMorning.length - 1
+              index != _vm.createListMorning.length - 1 &&
+              _vm.reserved(hour) === true
                 ? _c("div", { staticClass: "person" }, [
                     _c("a", {
                       attrs: { href: "" },
@@ -42698,6 +42784,24 @@ var render = function() {
                         }
                       }
                     })
+                  ])
+                : index != _vm.createListMorning.length - 1 &&
+                  _vm.reserved(hour) === false
+                ? _c("div", { staticClass: "person disabled" })
+                : index != _vm.createListMorning.length - 1 &&
+                  _vm.reserved(hour) === "myAppointment"
+                ? _c("div", { staticClass: "person myAppointment" }, [
+                    _c("a", {
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteAppointment($event, hour)
+                        }
+                      }
+                    }),
+                    _vm._v(
+                      "\n        " + _vm._s(_vm.currentUser.name) + "\n      "
+                    )
                   ])
                 : _vm._e()
             ])
@@ -42720,7 +42824,8 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              index != _vm.createListAfternoon.length - 1
+              index != _vm.createListAfternoon.length - 1 &&
+              _vm.reserved(hour) === true
                 ? _c("div", { staticClass: "person" }, [
                     _c("a", {
                       attrs: { href: "" },
@@ -42730,6 +42835,24 @@ var render = function() {
                         }
                       }
                     })
+                  ])
+                : index != _vm.createListMorning.length - 1 &&
+                  _vm.reserved(hour) === false
+                ? _c("div", { staticClass: "person disabled" })
+                : index != _vm.createListMorning.length - 1 &&
+                  _vm.reserved(hour) === "myAppointment"
+                ? _c("div", { staticClass: "person myAppointment" }, [
+                    _c("a", {
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteAppointment($event, hour)
+                        }
+                      }
+                    }),
+                    _vm._v(
+                      "\n        " + _vm._s(_vm.currentUser.name) + "\n      "
+                    )
                   ])
                 : _vm._e()
             ])
@@ -43412,7 +43535,9 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               index != _vm.createListMorning.length - 1
-                ? _c("div", { staticClass: "person" })
+                ? _c("div", { staticClass: "person" }, [
+                    _vm._v(_vm._s(_vm.getAppointement(hour)))
+                  ])
                 : _vm._e()
             ])
           }),
@@ -43435,7 +43560,9 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               index != _vm.createListAfternoon.length - 1
-                ? _c("div", { staticClass: "person" })
+                ? _c("div", { staticClass: "person" }, [
+                    _vm._v(_vm._s(_vm.getAppointement(hour)))
+                  ])
                 : _vm._e()
             ])
           }),
@@ -60953,10 +61080,7 @@ var actions = {
   setAppointments: function setAppointments(_ref6, payload) {
     var commit = _ref6.commit;
     return new Promise(function (resolve, reject) {
-      window.axios.post('/setAppointments', {
-        id: payload
-      }).then(function (response) {
-        console.log(response);
+      window.axios.post('/setAppointments', payload).then(function (response) {
         commit('setAppointments', response.data);
         resolve();
       });
