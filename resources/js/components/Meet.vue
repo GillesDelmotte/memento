@@ -9,7 +9,7 @@
           <li class="list__item card" v-for="appointment in myAppointments" :key="appointment.id">
             <div class="date__hour">
               <span class="hour">{{appointment.hour}}</span>
-              <span class="date">{{appointment.date}}</span>
+              <span class="date">{{dateformat(appointment.date)}}</span>
             </div>
 
             <div class="practitioner__pills">
@@ -74,6 +74,11 @@ export default {
             .catch(error => console.error(error));
         })
         .catch(error => console.error(error));
+    },
+    dateformat(date) {
+      const splitDate = date.split("-");
+
+      return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
     }
   },
   beforeMount() {

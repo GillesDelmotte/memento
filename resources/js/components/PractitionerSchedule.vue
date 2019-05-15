@@ -254,11 +254,13 @@ export default {
       e.preventDefault();
       e.stopPropagation();
 
+      const splitDate = this.date.split("-");
+
       const data = {
         user_id: this.currentUser.id,
         schedule_id: this.schedule.id,
         hour: hour,
-        date: this.date
+        date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
       };
 
       window.axios
@@ -274,9 +276,13 @@ export default {
         });
     },
     reserved(hour) {
+      const splitDate = this.date.split("-");
+
       const appointment = this.appointments.filter(
         appointment =>
-          appointment.hour === hour && appointment.date === this.date
+          appointment.hour === hour &&
+          appointment.date ===
+            splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
       );
 
       if (appointment[0] != undefined) {
@@ -291,11 +297,14 @@ export default {
     deleteAppointment(e, hour) {
       e.preventDefault();
       e.stopPropagation();
+
+      const splitDate = this.date.split("-");
+
       window.axios
         .post("/deleteAppointment", {
           schedule_id: this.schedule.id,
           hour: hour,
-          date: this.date
+          date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
         })
         .then(response => {
           this.$store.dispatch("setAppointments", {

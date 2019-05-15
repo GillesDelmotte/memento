@@ -219,9 +219,12 @@ export default {
       router.push({ name: "newSchedule" });
     },
     getAppointement(hour) {
+      const splitDate = this.date.split("-");
       const appointment = this.appointments.filter(
         appointment =>
-          appointment.hour === hour && appointment.date === this.date
+          appointment.hour === hour &&
+          appointment.date ===
+            splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
       );
 
       if (appointment[0] != undefined) {
