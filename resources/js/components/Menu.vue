@@ -1,6 +1,7 @@
 <template>
   <section class="container menu">
     <a @click="redirect($event, 'scheduleList')">Mes agendas</a>
+    <a v-if="this.currentUser.is_admin" @click="redirect($event, 'admin')">admin</a>
     <a @click="redirect($event, 'profile')">Mon profil</a>
     <a @click="logout">Déconnexion</a>
   </section>
