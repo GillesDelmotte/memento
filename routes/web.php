@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/getJobs', 'JobController@index');
+Route::post('/addJob', 'JobController@store');
 Route::get('/getPractitioners', 'PractitionerController@index');
 Route::post('/updateProfile', 'ProfileController@update');
 Route::get('/getSchedules', 'ScheduleController@index');
