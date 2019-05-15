@@ -11,6 +11,8 @@ import ScheduleList from './components/ScheduleList';
 import Menu from './components/Menu';
 import Profile from './components/Profile';
 import Admin from './components/Admin';
+import AdminStat from './components/AdminStat';
+import AdminReport from './components/AdminReport';
 
 export default [
     { path: '/', redirect: '/meet' },
@@ -84,7 +86,20 @@ export default [
     {
         path: '/admin',
         name: 'admin',
-        component: Admin
+        component: Admin,
+        children: [
+            {
+                path: '/admin-statistiques',
+                name: 'adminStat',
+                component: AdminStat
+            },
+            {
+                path: '/admin-report',
+                name: 'adminReport',
+                component: AdminReport
+            }
+
+        ]
     },
 
 ]
