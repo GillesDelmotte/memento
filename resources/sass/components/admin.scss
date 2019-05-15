@@ -2,4 +2,61 @@
     padding: 100px 0 100px;
     box-sizing: border-box;
     position: relative;
+
+    .toogle__menu{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .toogle__item{
+            background-color: rgba($color: $color__blue, $alpha: 0.6);
+            width: 48%;
+            box-sizing: border-box;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 17px;
+            text-decoration: none;
+            box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.50px;
+            font-weight: bold;
+
+            &:first-of-type{
+                border-radius: 0 3px 3px 0;
+            }
+            &:last-of-type{
+                border-radius:  3px 0 0 3px ;
+            }
+
+            &.active{
+                background-color: $color__blue;
+            }
+
+        }
+    }
+}
+
+#adminReport{
+    .noreport{
+        z-index: 1;
+        position: fixed;
+        top:calc(50% - 40px);
+        left:0;
+        right: 0;
+        font-size: 20px; 
+        font-family: 'Montserrat', sans-serif;
+        p{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            text-align: center;
+            background-color: white;
+            color: $color__blue;
+            line-height: 25px;
+            box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+
+        }
+    }
 }
