@@ -23,7 +23,7 @@
     </div>
     <div class="job__list">
       <a class="closer" @click="updatejobList"></a>
-      <div class="wrapper">
+      <div class="job__wrapper">
         <div class="filter">
           <input
             type="text"
@@ -44,7 +44,7 @@
             <p>{{job.name}}</p>
             <div class="pills">
               <div>
-                <a href @click="report($event)"></a>
+                <a href @click="openReport($event, job)"></a>
                 <img src="../../img/warning.svg" alt>
               </div>
             </div>
@@ -57,6 +57,18 @@
           >Si vous ne trouvez pas votre profession, écrivez le dans la barre de recherche et validez avec le bouton ci dessous</p>
           <button class="button" @click="createJob">Validez</button>
         </div>
+      </div>
+      <div class="report__wrapper close">
+        <ul>
+          <li v-for="report in reports" :key="report">
+            <a href @click="reportJobLink($event, report)"></a>
+            <p>{{report}}</p>
+          </li>
+          <li>
+            <a href @click="back($event)"></a>
+            <p>Retour</p>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="card">
@@ -114,7 +126,13 @@ export default {
   data() {
     return {
       componentReady: false,
-      filter: ""
+      filter: "",
+      reports: [
+        "insulte",
+        "faute d‘orthographe",
+        "cette professsion n‘existe pas"
+      ],
+      reportJob: null
     };
   },
   computed: {
@@ -150,6 +168,11 @@ export default {
 
       if (job__list.classList.contains("open")) {
         job__list.classList.remove("open");
+        document.querySelector(".job__wrapper").classList.remove("close");
+        document.querySelector(".report__wrapper").classList.add("close");
+        if (document.querySelector(".swiped")) {
+          document.querySelector(".swiped").classList.remove("swiped");
+        }
       } else {
         job__list.classList.add("open");
       }
@@ -198,10 +221,65 @@ export default {
         e.target.parentElement.classList.remove("swiped");
       }
     },
-    report(e) {
+    openReport(e, job) {
       e.preventDefault();
       e.stopPropagation();
-      console.log("report");
+
+      this.reportJob = job;
+
+      document.querySelector(".job__wrapper").classList.add("close");
+      document.querySelector(".report__wrapper").classList.remove("close");
+    },
+    reportJobLink(e, report) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (report === "insulte") {
+        var message =
+          "Il y a une insulte dans cet intitulé de profession / (" +
+          this.reportJob.name +
+          " - id: " +
+          this.reportJob.id +
+          ")";
+      } else if (report === "faute d‘orthographe") {
+        var message =
+          "Il y a une faute dans cet intitulé de profession / (" +
+          this.reportJob.name +
+          " - id: " +
+          this.reportJob.id +
+          ")";
+      } else if (report === "cette professsion n‘existe pas") {
+        var message =
+          "Cette profession n'existe pas / (" +
+          this.reportJob.name +
+          " - id: " +
+          this.reportJob.id +
+          ")";
+      }
+
+      const reportObject = {
+        user_id: this.currentUser.id,
+        type: "job",
+        description: message
+      };
+
+      window.axios
+        .post("/addReport", reportObject)
+        .then(response => {
+          document.querySelector(".job__wrapper").classList.remove("close");
+          document.querySelector(".report__wrapper").classList.add("close");
+          document.querySelector(".swiped").classList.remove("swiped");
+        })
+        .catch(function(error) {
+          console.log(error.response.data.message);
+        });
+    },
+    back(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      document.querySelector(".job__wrapper").classList.remove("close");
+      document.querySelector(".report__wrapper").classList.add("close");
     }
   },
   beforeMount() {
