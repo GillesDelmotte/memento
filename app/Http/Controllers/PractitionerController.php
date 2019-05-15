@@ -15,7 +15,7 @@ class PractitionerController extends Controller
      */
     public function index(User $user)
     {
-        $user = User::Where('schedule', '=', 1)->where('id', '<>', auth()->id())->orderBy('name', 'asc')->get();
+        $user = User::Where('schedule', '=', 1)->where('id', '<>', auth()->id())->orderBy('name', 'asc')->where('job_id', '<>', null)->get();
         return $user->load('job');
     }
 
