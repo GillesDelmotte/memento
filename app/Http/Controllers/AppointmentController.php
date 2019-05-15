@@ -101,7 +101,7 @@ class AppointmentController extends Controller
 
     public function myAppointments(Appointment $appointment)
     {
-        $myAppointments = Appointment::where('user_id', Auth()->id())->get();
+        $myAppointments = Appointment::whereRaw('user_id =' . Auth()->id() . ' and DATE_FORMAT(date, "%Y%m%d") > DATE_FORMAT(NOW(), "%Y%m%d")')->orderBy('date', 'asc')->get();
 
         return $myAppointments->load('schedule');
     }
