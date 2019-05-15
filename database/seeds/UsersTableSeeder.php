@@ -36,9 +36,10 @@ class UsersTableSeeder extends Seeder
         \memento\User::create([
             'name' => 'Simon Delmotte',
             'email' => 'simon.delmotte@outlook.be',
+            'job_id' => 3,
             'address' => 'Rue Fraischamps 154, 4030 grivegnée',
             'gsm' => '0497 36 85 95',
-            'schedule' => false,
+            'schedule' => true,
             'private' => true,
             'password' => Hash::make('azerty'),
             'api_token' => str_random(60)

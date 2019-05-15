@@ -18,7 +18,7 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('schedule_id');
             $table->string('hour');
-            $table->string('date');
+            $table->date('date');
             $table->timestamps();
         });
     }
