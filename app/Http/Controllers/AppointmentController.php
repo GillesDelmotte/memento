@@ -3,6 +3,7 @@
 namespace memento\Http\Controllers;
 
 use memento\Appointment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -101,8 +102,11 @@ class AppointmentController extends Controller
 
     public function myAppointments(Appointment $appointment)
     {
-        $myAppointments = Appointment::whereRaw('user_id =' . Auth()->id() . ' and DATE_FORMAT(date, "%Y%m%d") > DATE_FORMAT(NOW(), "%Y%m%d")')->orderBy('date', 'asc')->get();
+        //$myAppointments = Appointment::whereRaw('user_id =' . auth()->id() . "' and DATE_FORMAT(date, "%Y%m%d") > DATE_FORMAT(NOW(), "%Y%m%d")')->orderBy('date', 'asc')->get();
+        //$myAppointments = Appointment::where('user_id', Auth()->id())->where('date', '>=', Carbon::now())->orderBy('date', 'asc')->get();
+        $myAppointments = Appointment::where('user_id', Auth()->id())->whereDate('date', '>=', Carbon::now())->orderBy('date', 'asc')->get();
 
-        return $myAppointments->load('schedule');
+
+         return $myAppointments->load('schedule');
     }
 }
