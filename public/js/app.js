@@ -1932,6 +1932,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (error) {
         return console.error(error);
       });
+    },
+    dateformat: function dateformat(date) {
+      var splitDate = date.split("-");
+      return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
     }
   },
   beforeMount: function beforeMount() {
@@ -2698,11 +2702,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       e.preventDefault();
       e.stopPropagation();
+      var splitDate = this.date.split("-");
       var data = {
         user_id: this.currentUser.id,
         schedule_id: this.schedule.id,
         hour: hour,
-        date: this.date
+        date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
       };
       window.axios.post("/createAppointment", data).then(function (response) {
         _this4.$store.dispatch("setAppointments", {
@@ -2714,10 +2719,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     reserved: function reserved(hour) {
-      var _this5 = this;
-
+      var splitDate = this.date.split("-");
       var appointment = this.appointments.filter(function (appointment) {
-        return appointment.hour === hour && appointment.date === _this5.date;
+        return appointment.hour === hour && appointment.date === splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
       });
 
       if (appointment[0] != undefined) {
@@ -2731,17 +2735,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     deleteAppointment: function deleteAppointment(e, hour) {
-      var _this6 = this;
+      var _this5 = this;
 
       e.preventDefault();
       e.stopPropagation();
+      var splitDate = this.date.split("-");
       window.axios.post("/deleteAppointment", {
         schedule_id: this.schedule.id,
         hour: hour,
-        date: this.date
+        date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
       }).then(function (response) {
-        _this6.$store.dispatch("setAppointments", {
-          id: _this6.schedule.id,
+        _this5.$store.dispatch("setAppointments", {
+          id: _this5.schedule.id,
           client: false
         });
       })["catch"](function (error) {
@@ -2750,15 +2755,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
-    var _this7 = this;
+    var _this6 = this;
 
     this.$store.dispatch("setScheduleDays", this.$route.params.id).then(function () {
-      _this7.$store.dispatch("setAppointments", {
-        id: _this7.schedule.id,
+      _this6.$store.dispatch("setAppointments", {
+        id: _this6.schedule.id,
         client: false
       }).then(function () {
-        _this7.componentReady = true;
-        _this7.day;
+        _this6.componentReady = true;
+        _this6.day;
       });
     });
   }
@@ -3451,10 +3456,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     getAppointement: function getAppointement(hour) {
-      var _this3 = this;
-
+      var splitDate = this.date.split("-");
       var appointment = this.appointments.filter(function (appointment) {
-        return appointment.hour === hour && appointment.date === _this3.date;
+        return appointment.hour === hour && appointment.date === splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
       });
 
       if (appointment[0] != undefined) {
@@ -3466,15 +3470,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     _store_js__WEBPACK_IMPORTED_MODULE_0__["default"].commit("setComponentDisplayed", "Horaire");
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this3 = this;
 
     this.$store.dispatch("setScheduleDays", this.currentUser.id).then(function () {
-      _this4.$store.dispatch("setAppointments", {
-        id: _this4.schedule.id,
+      _this3.$store.dispatch("setAppointments", {
+        id: _this3.schedule.id,
         client: true
       }).then(function () {
-        _this4.componentReady = true;
-        _this4.day;
+        _this3.componentReady = true;
+        _this3.day;
       });
     });
   }
@@ -42389,7 +42393,7 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("span", { staticClass: "date" }, [
-                            _vm._v(_vm._s(appointment.date))
+                            _vm._v(_vm._s(_vm.dateformat(appointment.date)))
                           ])
                         ]),
                         _vm._v(" "),
