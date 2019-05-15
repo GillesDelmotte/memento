@@ -1809,10 +1809,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AdminReport"
+  name: "AdminReport",
+  data: function data() {
+    return {
+      componentReady: false,
+      reports: null
+    };
+  },
+  methods: {
+    date: function date(_date) {
+      var splitDate = _date.split(" ");
+
+      return splitDate[0];
+    },
+    description: function description(desc, number) {
+      var splitDesc = desc.split("/");
+      return splitDesc[number];
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.axios.post("/getReports").then(function (response) {
+      _this.reports = response.data;
+      _this.componentReady = true;
+    })["catch"](function (error) {
+      return console.error(error);
+    });
+  }
 });
 
 /***/ }),
@@ -3227,6 +3269,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3235,7 +3289,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       componentReady: false,
-      filter: ""
+      filter: "",
+      reports: ["insulte", "faute d‘orthographe", "cette professsion n‘existe pas"],
+      reportJob: null
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["currentUser", "allJob"]), {
@@ -3273,6 +3329,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (job__list.classList.contains("open")) {
         job__list.classList.remove("open");
+        document.querySelector(".job__wrapper").classList.remove("close");
+        document.querySelector(".report__wrapper").classList.add("close");
+
+        if (document.querySelector(".swiped")) {
+          document.querySelector(".swiped").classList.remove("swiped");
+        }
       } else {
         job__list.classList.add("open");
       }
@@ -3320,10 +3382,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         e.target.parentElement.classList.remove("swiped");
       }
     },
-    report: function report(e) {
+    openReport: function openReport(e, job) {
       e.preventDefault();
       e.stopPropagation();
-      console.log("report");
+      this.reportJob = job;
+      document.querySelector(".job__wrapper").classList.add("close");
+      document.querySelector(".report__wrapper").classList.remove("close");
+    },
+    reportJobLink: function reportJobLink(e, report) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (report === "insulte") {
+        var message = "Il y a une insulte dans cet intitulé de profession / (" + this.reportJob.name + " - id: " + this.reportJob.id + ")";
+      } else if (report === "faute d‘orthographe") {
+        var message = "Il y a une faute dans cet intitulé de profession / (" + this.reportJob.name + " - id: " + this.reportJob.id + ")";
+      } else if (report === "cette professsion n‘existe pas") {
+        var message = "Cette profession n'existe pas / (" + this.reportJob.name + " - id: " + this.reportJob.id + ")";
+      }
+
+      var reportObject = {
+        user_id: this.currentUser.id,
+        type: "job",
+        description: message
+      };
+      window.axios.post("/addReport", reportObject).then(function (response) {
+        document.querySelector(".job__wrapper").classList.remove("close");
+        document.querySelector(".report__wrapper").classList.add("close");
+        document.querySelector(".swiped").classList.remove("swiped");
+      })["catch"](function (error) {
+        console.log(error.response.data.message);
+      });
+    },
+    back: function back(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      document.querySelector(".job__wrapper").classList.remove("close");
+      document.querySelector(".report__wrapper").classList.add("close");
     }
   },
   beforeMount: function beforeMount() {
@@ -42432,20 +42527,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { attrs: { id: "adminReport" } }, [
-      _c("div", { staticClass: "noreport" }, [
-        _c("p", [_vm._v("il n'y pas pas de report")])
+  return _vm.componentReady
+    ? _c("section", { attrs: { id: "adminReport" } }, [
+        _vm.reports.lenght === 0
+          ? _c("div", { staticClass: "noreport" }, [
+              _c("p", [_vm._v("il n'y pas pas de report")])
+            ])
+          : _c("div", [
+              _c(
+                "ul",
+                { staticClass: "list cards" },
+                _vm._l(_vm.reports, function(report) {
+                  return _c(
+                    "li",
+                    { key: report.id, staticClass: "list__item card" },
+                    [
+                      _c("div", { staticClass: "user__date" }, [
+                        _c("span", { staticClass: "user" }, [
+                          _vm._v(_vm._s(report.user.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "date" }, [
+                          _vm._v(_vm._s(_vm.date(report.created_at)))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("p", [
+                          _vm._v(_vm._s(_vm.description(report.description, 0)))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(_vm._s(_vm.description(report.description, 1)))
+                        ])
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
       ])
-    ])
-  }
-]
+    : _c("section", { staticClass: "loader" }, [_vm._v("plz wait...")])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43679,7 +43804,7 @@ var render = function() {
         _c("div", { staticClass: "job__list" }, [
           _c("a", { staticClass: "closer", on: { click: _vm.updatejobList } }),
           _vm._v(" "),
-          _c("div", { staticClass: "wrapper" }, [
+          _c("div", { staticClass: "job__wrapper" }, [
             _c("div", { staticClass: "filter" }, [
               _c("input", {
                 directives: [
@@ -43753,7 +43878,7 @@ var render = function() {
                               attrs: { href: "" },
                               on: {
                                 click: function($event) {
-                                  return _vm.report($event)
+                                  return _vm.openReport($event, job)
                                 }
                               }
                             }),
@@ -43786,6 +43911,42 @@ var render = function() {
                     [_vm._v("Validez")]
                   )
                 ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "report__wrapper close" }, [
+            _c(
+              "ul",
+              [
+                _vm._l(_vm.reports, function(report) {
+                  return _c("li", { key: report }, [
+                    _c("a", {
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.reportJobLink($event, report)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(report))])
+                  ])
+                }),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", {
+                    attrs: { href: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.back($event)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Retour")])
+                ])
+              ],
+              2
+            )
           ])
         ]),
         _vm._v(" "),
