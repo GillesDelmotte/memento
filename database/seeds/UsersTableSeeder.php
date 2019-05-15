@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'gsm' => '0497 36 85 95',
             'schedule' => true,
             'private' => true,
+            'is_admin' => true,
             'password' => Hash::make('azerty'),
             'api_token' => str_random(60)
         ]);
