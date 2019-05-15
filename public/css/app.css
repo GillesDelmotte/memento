@@ -332,7 +332,7 @@ table {
   position: absolute;
   top: calc(50% - 10px);
   font-size: 20px;
-  left: 20px;
+  left: 30px;
 }
 
 #register .register__link {
