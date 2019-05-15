@@ -44,9 +44,11 @@
             <p>{{job.name}}</p>
             <div class="pills">
               <div>
+                <a href @click="report($event)"></a>
                 <img src="../../img/warning.svg" alt>
               </div>
             </div>
+            <i class="arrow"></i>
           </li>
         </ul>
         <div v-else>
@@ -170,7 +172,20 @@ export default {
         });
     },
     createJob() {
-      console.log(this.filter);
+      const job = this.filter;
+      window.axios
+        .post("/addJob", {
+          job: job,
+          user: this.currentUser.id
+        })
+        .then(response => {
+          this.$store.dispatch("setCurrentUser");
+          const job__list = document.querySelector(".job__list");
+          job__list.classList.remove("open");
+        })
+        .catch(function(error) {
+          console.log(error.response.data.message);
+        });
     },
     onSwipe(e) {
       if (e.direction === 2) {
@@ -182,6 +197,11 @@ export default {
       } else if (e.direction === 4) {
         e.target.parentElement.classList.remove("swiped");
       }
+    },
+    report(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("report");
     }
   },
   beforeMount() {

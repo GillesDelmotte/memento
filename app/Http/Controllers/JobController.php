@@ -3,6 +3,7 @@
 namespace memento\Http\Controllers;
 
 use memento\Job;
+use memento\User;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -33,9 +34,15 @@ class JobController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+        $newJob = Job::create(['name' => $request['job']]);
+
+        $user = User::where('id', $request['user'])->first();
+
+        $user->job_id = $newJob->id;
+
+        $user->save();
     }
 
     /**
