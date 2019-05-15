@@ -73,11 +73,15 @@
             
         }
 
-        .wrapper{
+        .job__wrapper, .report__wrapper{
             background-color: rgb(245, 245, 245);
             position: fixed;                
             left: 0; 
             right: 0;
+
+            &.close{
+                display: none;
+            }
         }
 
         ul{
