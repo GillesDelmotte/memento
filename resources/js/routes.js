@@ -10,6 +10,7 @@ import ScheduleRouter from './components/ScheduleRouter';
 import ScheduleList from './components/ScheduleList';
 import Menu from './components/Menu';
 import Profile from './components/Profile';
+import Admin from './components/Admin';
 
 export default [
     { path: '/', redirect: '/meet' },
@@ -79,5 +80,11 @@ export default [
         path: '/profile',
         name: 'profile',
         component: Profile
-    }
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: Admin
+    },
+
 ]
