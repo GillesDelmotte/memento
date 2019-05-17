@@ -1,7 +1,7 @@
 <template>
   <section id="adminReport" v-if="componentReady">
-    <div class="noreport" v-if="reports.lenght === 0">
-      <p>il n'y pas pas de report</p>
+    <div class="noreport" v-if="reports.length === 0">
+      <p>Il n'y pas pas de report</p>
     </div>
     <div v-else>
       <ul class="list cards">
@@ -11,8 +11,13 @@
             <span class="date">{{date(report.created_at)}}</span>
           </div>
           <div class="description">
-            <p>{{description(report.description, 0)}}</p>
-            <p>{{description(report.description, 1)}}</p>
+            <p class="description__first">{{description(report.description, 0)}}</p>
+            <p class="description__second">{{description(report.description, 1)}}</p>
+          </div>
+          <div class="pill delete">
+            <a href @click="deleteReport($event, report.id)"></a>
+            <div class="cross__first"></div>
+            <div class="cross__second"></div>
           </div>
         </li>
       </ul>
@@ -29,7 +34,7 @@ export default {
   data() {
     return {
       componentReady: false,
-      reports: null
+      reports: []
     };
   },
   methods: {
@@ -41,6 +46,25 @@ export default {
     description(desc, number) {
       const splitDesc = desc.split("/");
       return splitDesc[number];
+    },
+    deleteReport(e, id) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.axios
+        .post("/deleteReport", { id: id })
+        .then(response => {
+          window.axios
+            .post("/getReports")
+            .then(response => {
+              this.reports = response.data;
+              this.componentReady = true;
+            })
+            .catch(error => console.error(error));
+        })
+        .catch(function(error) {
+          console.log(error.response.data.message);
+        });
     }
   },
   mounted() {

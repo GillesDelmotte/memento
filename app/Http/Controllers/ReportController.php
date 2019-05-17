@@ -80,8 +80,10 @@ class ReportController extends Controller
      * @param  \memento\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Report $report)
+    public function destroy(Report $report, Request $request)
     {
-        //
+        $report = Report::where('id', $request['id'])->first();
+
+        $report->delete();
     }
 }

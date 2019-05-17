@@ -236,25 +236,22 @@ export default {
 
       if (report === "insulte") {
         var message =
-          "Il y a une insulte dans cet intitulé de profession / (" +
+          "Il y a une insulte dans cet intitulé de profession / " +
           this.reportJob.name +
           " - id: " +
-          this.reportJob.id +
-          ")";
+          this.reportJob.id;
       } else if (report === "faute d‘orthographe") {
         var message =
-          "Il y a une faute dans cet intitulé de profession / (" +
+          "Il y a une faute dans cet intitulé de profession / " +
           this.reportJob.name +
           " - id: " +
-          this.reportJob.id +
-          ")";
+          this.reportJob.id;
       } else if (report === "cette professsion n‘existe pas") {
         var message =
-          "Cette profession n'existe pas / (" +
+          "Cette profession n'existe pas / " +
           this.reportJob.name +
           " - id: " +
-          this.reportJob.id +
-          ")";
+          this.reportJob.id;
       }
 
       const reportObject = {
