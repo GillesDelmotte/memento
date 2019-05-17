@@ -33,6 +33,7 @@ Route::post('/deleteAppointment', 'AppointmentController@destroy');
 Route::post('/getMyAppointments', 'AppointmentController@myAppointments');
 Route::post('/addReport', 'ReportController@store');
 Route::post('/getReports', 'ReportController@index');
+Route::post('/deleteReport', 'ReportController@destroy');
 
 
 Route::get('/authenticated-user', 'AuthenticatedUserController@fetch');
