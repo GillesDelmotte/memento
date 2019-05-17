@@ -1824,6 +1824,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1831,7 +1836,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       componentReady: false,
-      reports: null
+      reports: []
     };
   },
   methods: {
@@ -1843,14 +1848,32 @@ __webpack_require__.r(__webpack_exports__);
     description: function description(desc, number) {
       var splitDesc = desc.split("/");
       return splitDesc[number];
+    },
+    deleteReport: function deleteReport(e, id) {
+      var _this = this;
+
+      e.preventDefault();
+      e.stopPropagation();
+      window.axios.post("/deleteReport", {
+        id: id
+      }).then(function (response) {
+        window.axios.post("/getReports").then(function (response) {
+          _this.reports = response.data;
+          _this.componentReady = true;
+        })["catch"](function (error) {
+          return console.error(error);
+        });
+      })["catch"](function (error) {
+        console.log(error.response.data.message);
+      });
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     window.axios.post("/getReports").then(function (response) {
-      _this.reports = response.data;
-      _this.componentReady = true;
+      _this2.reports = response.data;
+      _this2.componentReady = true;
     })["catch"](function (error) {
       return console.error(error);
     });
@@ -3394,11 +3417,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       e.stopPropagation();
 
       if (report === "insulte") {
-        var message = "Il y a une insulte dans cet intitulé de profession / (" + this.reportJob.name + " - id: " + this.reportJob.id + ")";
+        var message = "Il y a une insulte dans cet intitulé de profession / " + this.reportJob.name + " - id: " + this.reportJob.id;
       } else if (report === "faute d‘orthographe") {
-        var message = "Il y a une faute dans cet intitulé de profession / (" + this.reportJob.name + " - id: " + this.reportJob.id + ")";
+        var message = "Il y a une faute dans cet intitulé de profession / " + this.reportJob.name + " - id: " + this.reportJob.id;
       } else if (report === "cette professsion n‘existe pas") {
-        var message = "Cette profession n'existe pas / (" + this.reportJob.name + " - id: " + this.reportJob.id + ")";
+        var message = "Cette profession n'existe pas / " + this.reportJob.name + " - id: " + this.reportJob.id;
       }
 
       var reportObject = {
@@ -42529,9 +42552,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.componentReady
     ? _c("section", { attrs: { id: "adminReport" } }, [
-        _vm.reports.lenght === 0
+        _vm.reports.length === 0
           ? _c("div", { staticClass: "noreport" }, [
-              _c("p", [_vm._v("il n'y pas pas de report")])
+              _c("p", [_vm._v("Il n'y pas pas de report")])
             ])
           : _c("div", [
               _c(
@@ -42553,13 +42576,28 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "description" }, [
-                        _c("p", [
+                        _c("p", { staticClass: "description__first" }, [
                           _vm._v(_vm._s(_vm.description(report.description, 0)))
                         ]),
                         _vm._v(" "),
-                        _c("p", [
+                        _c("p", { staticClass: "description__second" }, [
                           _vm._v(_vm._s(_vm.description(report.description, 1)))
                         ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "pill delete" }, [
+                        _c("a", {
+                          attrs: { href: "" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteReport($event, report.id)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "cross__first" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "cross__second" })
                       ])
                     ]
                   )
