@@ -1887,3 +1887,26 @@ table {
           transform: rotate(-45deg);
 }
 
+#adminStat .card {
+  position: relative;
+  background-color: white;
+  margin-top: 10px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#adminStat .card p {
+  font-size: 20px;
+  color: #526586;
+}
+
+#adminStat .card span {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #526586;
+}
+

@@ -1897,10 +1897,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AdminStat"
+  name: "AdminStat",
+  data: function data() {
+    return {
+      componentReady: null,
+      stats: null
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.axios.post("/getStats").then(function (response) {
+      _this.stats = response.data;
+      _this.componentReady = true;
+    })["catch"](function (error) {
+      return console.error(error);
+    });
+  }
 });
 
 /***/ }),
@@ -42630,7 +42664,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { attrs: { id: "adminStat" } }, [_vm._v("statistiques")])
+  return _vm.componentReady
+    ? _c("section", { attrs: { id: "adminStat" } }, [
+        _c("div", { staticClass: "card" }, [
+          _c("p", [_vm._v("Nombre d'utilisateur")]),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.stats.user))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("p", [_vm._v("Nombre d'agenda")]),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.stats.schedule))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("p", [_vm._v("Nombre de rendez-vous")]),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.stats.appointment))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("p", [_vm._v("Nombre de profession")]),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.stats.job))])
+        ])
+      ])
+    : _c("section", { staticClass: "loader" }, [_vm._v("plz wait...")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43500,7 +43560,7 @@ var render = function() {
               name: "filter",
               id: "filter",
               autocomplete: "off",
-              placeholder: "rechercher"
+              placeholder: "Nom, profession"
             },
             domProps: { value: _vm.filter },
             on: {
