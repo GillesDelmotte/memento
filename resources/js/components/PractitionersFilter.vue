@@ -7,7 +7,7 @@
         id="filter"
         v-model="filter"
         autocomplete="off"
-        placeholder="rechercher"
+        placeholder="Nom, profession"
       >
     </div>
     <div>
