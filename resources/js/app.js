@@ -13,6 +13,14 @@ import router from './router.js'
 import { VueHammer } from 'vue2-hammer'
 Vue.use(VueHammer);
 
+
+// Check that service workers are registered
+if ('serviceWorker' in navigator) {
+    // Use the window load event to keep the page load performant
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js');
+    });
+}
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
