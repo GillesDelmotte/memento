@@ -334,7 +334,6 @@ export default {
               date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
             })
             .then(response => {
-              console.log(response);
               this.updateHour = null;
             })
             .catch(function(error) {
