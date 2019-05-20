@@ -3596,7 +3596,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dayNumber: null,
       date: null,
       displayed: "schedule",
-      updateName: null,
+      updateClientName: null,
+      updateClientId: null,
       updateHour: null,
       clients: []
     };
@@ -3768,7 +3769,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (appointment[0] != undefined) {
         this.updateHour = hour;
-        this.updateName = appointment[0].client.name;
+        this.updateClientName = appointment[0].client.name;
+        this.updateClientId = appointment[0].client.id;
         document.querySelector(".deleteAppointment").classList.add("open");
       } else {
         this.updateHour = hour;
@@ -3789,16 +3791,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           client: true
         });
 
-        _this3.updateHour = null;
-        _this3.updateName = null;
         document.querySelector(".deleteAppointment").classList.remove("open");
+        window.axios.post("/sendEmail", {
+          type: "remove",
+          user_id: _this3.updateClientId,
+          hour: _this3.updateHour,
+          date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+        }).then(function (response) {
+          _this3.updateHour = null;
+          _this3.updateClientName = null;
+          _this3.updateClientId = null;
+        })["catch"](function (error) {
+          console.log(error.response.data.message);
+        });
       })["catch"](function (error) {
         return console.error(error);
       });
     },
     notDelete: function notDelete() {
       this.updateHour = null;
-      this.updateName = null;
+      this.updateClientName = null;
+      this.updateClientId = null;
       document.querySelector(".deleteAppointment").classList.remove("open");
     },
     addAppointment: function addAppointment() {
@@ -44420,7 +44433,7 @@ var render = function() {
                   ", " +
                   _vm._s(this.updateHour) +
                   ", " +
-                  _vm._s(this.updateName)
+                  _vm._s(this.updateClientName)
               )
             ]),
             _vm._v(" "),
