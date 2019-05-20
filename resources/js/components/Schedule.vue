@@ -10,7 +10,12 @@
     </div>
     <input type="date" class="datePicker" @change="changeDate">
     <ul class="list">
-      <li v-for="(hour, index) in createListMorning" :key="hour" class="list__item">
+      <li
+        v-for="(hour, index) in createListMorning"
+        :key="hour"
+        class="list__item"
+        v-hammer:press="(event)=> openMenu(event,hour)"
+      >
         <div v-if="index != createListMorning.length - 1" class="hours">
           <p>{{hour}}</p>
           <p>{{createListMorning[index + 1]}}</p>
@@ -19,7 +24,12 @@
       </li>
     </ul>
     <ul class="list">
-      <li v-for="(hour, index) in createListAfternoon" :key="hour" class="list__item">
+      <li
+        v-for="(hour, index) in createListAfternoon"
+        :key="hour"
+        class="list__item"
+        v-hammer:press="(event)=> openMenu(event, hour)"
+      >
         <div v-if="index != createListAfternoon.length - 1" class="hours">
           <p>{{hour}}</p>
           <p>{{createListAfternoon[index + 1]}}</p>
@@ -34,11 +44,32 @@
     <div v-if="this.displayed === 'holiday'" class="holiday">
       <p>vous êtes en congé</p>
     </div>
+    <div class="deleteAppointment">
+      <div>
+        <p>Voulez vous vraiment supprimer ce rendez-vous ?</p>
+        <p>{{this.date}}, {{this.updateHour}}, {{this.updateName}}</p>
+        <button @click="deleteAppointment">oui</button>
+        <button @click="notDelete">non</button>
+      </div>
+    </div>
+    <div class="addAppointment">
+      <div>
+        <p>Qui voulez vous ajouter à cette date ?</p>
+        <p>{{this.date}}, {{this.updateHour}}</p>
+        <select name id="client__name" class="select">
+          <option :value="client.id" v-for="client in this.clients" :key="client.id">{{client.name}}</option>
+        </select>
+        <button @click="addAppointment">Ajouter</button>
+        <button @click="notAdd">Annuler</button>
+      </div>
+    </div>
   </section>
+
   <section v-else class="loader">plz wait...</section>
 </template>
 
 <script>
+import { VueHammer } from "vue2-hammer";
 import store from "../store.js";
 import { mapMutations } from "vuex";
 import router from "../router.js";
@@ -59,7 +90,10 @@ export default {
       ],
       dayNumber: null,
       date: null,
-      displayed: "schedule"
+      displayed: "schedule",
+      updateName: null,
+      updateHour: null,
+      clients: []
     };
   },
   computed: {
@@ -230,6 +264,90 @@ export default {
       if (appointment[0] != undefined) {
         return appointment[0].client.name;
       }
+    },
+    openMenu(e, hour) {
+      const splitDate = this.date.split("-");
+      const appointment = this.appointments.filter(
+        appointment =>
+          appointment.hour === hour &&
+          appointment.date ===
+            splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+      );
+
+      if (appointment[0] != undefined) {
+        this.updateHour = hour;
+        this.updateName = appointment[0].client.name;
+        document.querySelector(".deleteAppointment").classList.add("open");
+      } else {
+        this.updateHour = hour;
+        document.querySelector(".addAppointment").classList.add("open");
+      }
+    },
+    deleteAppointment() {
+      const splitDate = this.date.split("-");
+
+      window.axios
+        .post("/deleteAppointment", {
+          schedule_id: this.schedule.id,
+          hour: this.updateHour,
+          date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+        })
+        .then(response => {
+          this.$store.dispatch("setAppointments", {
+            id: this.schedule.id,
+            client: true
+          });
+          this.updateHour = null;
+          this.updateName = null;
+          document.querySelector(".deleteAppointment").classList.remove("open");
+        })
+        .catch(error => console.error(error));
+    },
+    notDelete() {
+      this.updateHour = null;
+      this.updateName = null;
+      document.querySelector(".deleteAppointment").classList.remove("open");
+    },
+    addAppointment() {
+      const splitDate = this.date.split("-");
+
+      const data = {
+        user_id: document.getElementById("client__name").value,
+        schedule_id: this.schedule.id,
+        hour: this.updateHour,
+        date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+      };
+
+      window.axios
+        .post("/createAppointment", data)
+        .then(response => {
+          this.$store.dispatch("setAppointments", {
+            id: this.schedule.id,
+            client: true
+          });
+          document.querySelector(".addAppointment").classList.remove("open");
+          window.axios
+            .post("/sendEmail", {
+              type: "add",
+              user_id: document.getElementById("client__name").value,
+              hour: this.updateHour,
+              date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+            })
+            .then(response => {
+              console.log(response);
+              this.updateHour = null;
+            })
+            .catch(function(error) {
+              console.log(error.response.data.message);
+            });
+        })
+        .catch(function(error) {
+          console.log(error.response.data.message);
+        });
+    },
+    notAdd() {
+      this.updateHour = null;
+      document.querySelector(".addAppointment").classList.remove("open");
     }
   },
   beforeMount() {
@@ -240,8 +358,14 @@ export default {
       this.$store
         .dispatch("setAppointments", { id: this.schedule.id, client: true })
         .then(() => {
-          this.componentReady = true;
-          this.day;
+          window.axios
+            .post("/getClients", { id: this.schedule.id })
+            .then(response => {
+              this.clients = response.data;
+              this.componentReady = true;
+              this.day;
+            })
+            .catch(error => console.error(error));
         });
     });
   }

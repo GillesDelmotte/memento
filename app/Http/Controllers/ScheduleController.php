@@ -4,6 +4,8 @@ namespace memento\Http\Controllers;
 
 use memento\Schedule;
 use memento\ScheduleDays;
+use memento\Appointment;
+use memento\User;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -110,5 +112,28 @@ class ScheduleController extends Controller
             $days->delete();
         }
         $schedule->delete();
+    }
+
+    public function getClients(Request $request, Appointment $appointment, User $user)
+    {
+        $clients = [];
+        $clients_id = Appointment::where('schedule_id', $request['id'])->distinct()->get('user_id');
+
+        foreach($clients_id as $client_id){
+            $user = User::select('id', 'name')->where('id', $client_id['user_id'])->first();
+            $clients[] = $user; 
+        }
+
+        return $clients;
+    }
+
+    public function sendEmail(Request $request)
+    {
+        if($request['type'] === 'add'){
+            return 'add';
+        }
+        if($request['type'] === 'remove'){
+            return 'remove';
+        }
     }
 }
