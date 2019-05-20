@@ -15,7 +15,7 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('appointment__id');
+            $table->unsignedInteger('appointment_id');
             $table->date('when');
             $table->timestamps();
         });
