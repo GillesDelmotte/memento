@@ -2,11 +2,14 @@
 
 namespace memento\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+
 use memento\Schedule;
 use memento\ScheduleDays;
 use memento\Appointment;
 use memento\User;
 use memento\Mail\AddAppointment;
+use memento\Mail\RemoveAppointment;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -133,11 +136,13 @@ class ScheduleController extends Controller
         if($request['type'] === 'add'){
             $user = User::where('id', $request['user_id'])->first();
             $practitien = User::where('id', Auth()->id())->first();
-            \Mail::to($user->email)->send(new AddAppointment($user, $request['hour'], $request['date'], $practitien));
+            Mail::to($user->email)->send(new AddAppointment($user, $request['hour'], $request['date'], $practitien));
         }
 
         if($request['type'] === 'remove'){
-            return 'remove';
+            $user = User::where('id', $request['user_id'])->first();
+            $practitien = User::where('id', Auth()->id())->first();
+            Mail::to($user->email)->send(new RemoveAppointment($user, $request['hour'], $request['date'], $practitien));
         }
     }
 }

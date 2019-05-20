@@ -47,7 +47,7 @@
     <div class="deleteAppointment">
       <div>
         <p>Voulez vous vraiment supprimer ce rendez-vous ?</p>
-        <p>{{this.date}}, {{this.updateHour}}, {{this.updateName}}</p>
+        <p>{{this.date}}, {{this.updateHour}}, {{this.updateClientName}}</p>
         <button @click="deleteAppointment">oui</button>
         <button @click="notDelete">non</button>
       </div>
@@ -91,7 +91,8 @@ export default {
       dayNumber: null,
       date: null,
       displayed: "schedule",
-      updateName: null,
+      updateClientName: null,
+      updateClientId: null,
       updateHour: null,
       clients: []
     };
@@ -276,7 +277,8 @@ export default {
 
       if (appointment[0] != undefined) {
         this.updateHour = hour;
-        this.updateName = appointment[0].client.name;
+        this.updateClientName = appointment[0].client.name;
+        this.updateClientId = appointment[0].client.id;
         document.querySelector(".deleteAppointment").classList.add("open");
       } else {
         this.updateHour = hour;
@@ -297,15 +299,29 @@ export default {
             id: this.schedule.id,
             client: true
           });
-          this.updateHour = null;
-          this.updateName = null;
           document.querySelector(".deleteAppointment").classList.remove("open");
+          window.axios
+            .post("/sendEmail", {
+              type: "remove",
+              user_id: this.updateClientId,
+              hour: this.updateHour,
+              date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+            })
+            .then(response => {
+              this.updateHour = null;
+              this.updateClientName = null;
+              this.updateClientId = null;
+            })
+            .catch(function(error) {
+              console.log(error.response.data.message);
+            });
         })
         .catch(error => console.error(error));
     },
     notDelete() {
       this.updateHour = null;
-      this.updateName = null;
+      this.updateClientName = null;
+      this.updateClientId = null;
       document.querySelector(".deleteAppointment").classList.remove("open");
     },
     addAppointment() {
