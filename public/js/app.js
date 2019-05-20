@@ -3824,7 +3824,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           hour: _this4.updateHour,
           date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
         }).then(function (response) {
-          console.log(response);
           _this4.updateHour = null;
         })["catch"](function (error) {
           console.log(error.response.data.message);
