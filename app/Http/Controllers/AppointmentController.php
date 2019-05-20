@@ -3,6 +3,7 @@
 namespace memento\Http\Controllers;
 
 use memento\Appointment;
+use memento\Todo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -41,14 +42,20 @@ class AppointmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Appointment $appointment, Request $request)
+    public function store(Appointment $appointment, Todo $todo, Request $request)
     {
         $user_id = $request['user_id'];
         $schedule_id = $request['schedule_id'];
         $hour = $request['hour'];
         $date = $request['date'];
 
-        Appointment::create(['user_id' => $user_id, 'schedule_id' => $schedule_id, 'hour' => $hour, 'date' => $date]);
+        $appointment = Appointment::create(['user_id' => $user_id, 'schedule_id' => $schedule_id, 'hour' => $hour, 'date' => $date]);
+
+        $when = date('Y-m-d', strtotime('-1 day', strtotime($date)));
+
+        Todo::create(['appointment_id' => $appointment['id'], 'when' => $when ]);
+
+
     }
 
     /**
