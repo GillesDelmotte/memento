@@ -37,6 +37,7 @@ Route::post('/deleteReport', 'ReportController@destroy');
 Route::post('/getStats', 'StatController@index');
 Route::post('/getClients', 'ScheduleController@getClients');
 Route::post('/sendEmail', 'ScheduleController@sendEmail');
+Route::post('/image/store', 'ImageController@store');
 
 
 
