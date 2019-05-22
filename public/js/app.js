@@ -3644,6 +3644,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -43309,20 +43319,16 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "day__content" }, [
-              _c("div", [
+              _c("div", { staticClass: "checkbox__conge" }, [
                 _c("input", {
                   attrs: { type: "checkbox", id: day.name + "_conge" }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: day.name + "_conge" } }, [
-                  _vm._v("congé")
-                ])
+                _c("label", { attrs: { for: day.name + "_conge" } })
               ]),
               _vm._v(" "),
-              _c("div", [
-                _c("label", { attrs: { for: day.name + "_time" } }, [
-                  _vm._v("choississez la durée de vos séances")
-                ]),
+              _c("div", { staticClass: "appointment__time" }, [
+                _c("label", { attrs: { for: day.name + "_time" } }),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -44580,32 +44586,42 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "addAppointment" }, [
-          _c("div", [
+          _c("div", { staticClass: "container" }, [
             _c("p", [_vm._v("Qui voulez vous ajouter à cette date ?")]),
             _vm._v(" "),
             _c("p", [
               _vm._v(_vm._s(this.date) + ", " + _vm._s(this.updateHour))
             ]),
             _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass: "select",
-                attrs: { name: "", id: "client__name" }
-              },
-              _vm._l(this.clients, function(client) {
-                return _c(
-                  "option",
-                  { key: client.id, domProps: { value: client.id } },
-                  [_vm._v(_vm._s(client.name))]
-                )
-              }),
-              0
-            ),
+            this.clients.length != 0
+              ? _c("div", [
+                  _c("i", { staticClass: "arrow" }),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "select",
+                      attrs: { name: "", id: "client__name" }
+                    },
+                    _vm._l(this.clients, function(client) {
+                      return _c(
+                        "option",
+                        { key: client.id, domProps: { value: client.id } },
+                        [_vm._v(_vm._s(client.name))]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              : _c("div", { staticClass: "emptyClient" }, [
+                  _c("p", [_vm._v("vous n'avez pas encore de client")])
+                ]),
             _vm._v(" "),
-            _c("button", { on: { click: _vm.addAppointment } }, [
-              _vm._v("Ajouter")
-            ]),
+            this.clients.length != 0
+              ? _c("button", { on: { click: _vm.addAppointment } }, [
+                  _vm._v("Ajouter")
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("button", { on: { click: _vm.notAdd } }, [_vm._v("Annuler")])
           ])
