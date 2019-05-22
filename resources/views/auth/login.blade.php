@@ -26,7 +26,7 @@
         </div>
 
         <button type="submit" class="loginform__submit__button button">
-            connexion
+            Connexion
         </button>
 
         <!-- @if (Route::has('password.request'))
