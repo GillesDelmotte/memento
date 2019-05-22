@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 const state = {
     currentUser: null,
+    curruenUserImage: null,
     currentComponent: null,
     allJob: null,
     allPractitioner: null,
@@ -20,7 +21,8 @@ const mutations = {
         state.currentComponent = component
     },
     setCurrentUser(state, user) {
-        state.currentUser = user
+        state.currentUser = user.user
+        state.currentUserImage = user.img
     },
     setAllJob(state, jobs) {
         state.allJob = jobs;
@@ -86,7 +88,7 @@ const actions = {
         })
     },
     setAppointments({ commit }, payload) {
-        return new Promise((resolve, reject) => {    
+        return new Promise((resolve, reject) => {
             window.axios.post('/setAppointments', payload)
                 .then(response => {
                     commit('setAppointments', response.data)
