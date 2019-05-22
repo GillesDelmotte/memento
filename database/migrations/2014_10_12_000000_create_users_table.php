@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedInteger('job_id')->nullable();
+            $table->unsignedInteger('image_id')->nullable();
             $table->string('address')->nullable();
             $table->char('gsm')->nullable();
             $table->boolean('schedule')->default(true);
