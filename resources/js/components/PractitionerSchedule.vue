@@ -313,6 +313,18 @@ export default {
           });
         })
         .catch(error => console.error(error));
+
+      window.axios
+        .post("/sendEmail", {
+          type: "remove",
+          user_id: this.practitioner.id,
+          hour: hour,
+          date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+        })
+        .then(response => {})
+        .catch(function(error) {
+          console.log(error.response.data.message);
+        });
     }
   },
   mounted() {
