@@ -16,6 +16,7 @@
               <span class="practitioner">{{appointment.schedule.practitioner.name}}</span>
               <div class="pills">
                 <div class="pill phone">
+                  <a :href="'tel:' + appointment.schedule.practitioner.gsm"></a>
                   <img src="../../img/phone-call.svg" alt>
                 </div>
                 <div class="pill message">

@@ -30,6 +30,7 @@
           </div>
           <div class="pills">
             <div class="phone">
+              <a :href="'tel:' + practitioner.gsm"></a>
               <img src="../../img/phone-call.svg" alt>
             </div>
             <div class="message">
@@ -61,6 +62,7 @@
           </div>
           <div class="pills">
             <div class="phone">
+              <a :href="'tel:' + practitioner.gsm"></a>
               <img src="../../img/phone-call.svg" alt>
             </div>
             <div class="message">
