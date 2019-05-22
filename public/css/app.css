@@ -831,6 +831,15 @@ table {
 
 #practitioners .jobs .job .pills div.phone {
   background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+  position: relative;
+}
+
+#practitioners .jobs .job .pills div.phone a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 #practitioners .jobs .job .pills div.message {
@@ -956,6 +965,15 @@ table {
 
 #practitioners .practitioners .practitioner .pills div.phone {
   background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+  position: relative;
+}
+
+#practitioners .practitioners .practitioner .pills div.phone a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 #practitioners .practitioners .practitioner .pills div.message {
@@ -1748,6 +1766,15 @@ table {
 
 #meet .card .practitioner__pills .pills .pill.phone {
   background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+  position: relative;
+}
+
+#meet .card .practitioner__pills .pills .pill.phone a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 #meet .card .practitioner__pills .pills .pill.message {

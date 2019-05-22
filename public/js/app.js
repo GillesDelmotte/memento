@@ -2085,6 +2085,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -2996,6 +2997,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -42990,9 +42993,24 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "pills" }, [
-                            _vm._m(0, true),
+                            _c("div", { staticClass: "pill phone" }, [
+                              _c("a", {
+                                attrs: {
+                                  href:
+                                    "tel:" +
+                                    appointment.schedule.practitioner.gsm
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("img", {
+                                attrs: {
+                                  src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"),
+                                  alt: ""
+                                }
+                              })
+                            ]),
                             _vm._v(" "),
-                            _vm._m(1, true),
+                            _vm._m(0, true),
                             _vm._v(" "),
                             _c("div", { staticClass: "pill delete" }, [
                               _c("a", {
@@ -43026,16 +43044,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pill phone" }, [
-      _c("img", {
-        attrs: { src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"), alt: "" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -43779,9 +43787,20 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "pills" }, [
-                          _vm._m(0, true),
+                          _c("div", { staticClass: "phone" }, [
+                            _c("a", {
+                              attrs: { href: "tel:" + practitioner.gsm }
+                            }),
+                            _vm._v(" "),
+                            _c("img", {
+                              attrs: {
+                                src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"),
+                                alt: ""
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
-                          _vm._m(1, true),
+                          _vm._m(0, true),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -43884,9 +43903,20 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "pills" }, [
-                          _vm._m(2, true),
+                          _c("div", { staticClass: "phone" }, [
+                            _c("a", {
+                              attrs: { href: "tel:" + practitioner.gsm }
+                            }),
+                            _vm._v(" "),
+                            _c("img", {
+                              attrs: {
+                                src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"),
+                                alt: ""
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
-                          _vm._m(3, true),
+                          _vm._m(1, true),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -43926,29 +43956,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "phone" }, [
-      _c("img", {
-        attrs: { src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"), alt: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "message" }, [
       _c("img", {
         attrs: { src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"), alt: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "phone" }, [
-      _c("img", {
-        attrs: { src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"), alt: "" }
       })
     ])
   },
