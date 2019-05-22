@@ -44,6 +44,11 @@
             font-size: 20px;
             left: 30px;
         }
+        .loginform__email__error{
+            display: block;
+            color: red;
+            margin-top: 20px;
+        }
     }
 
     // .loginform__submit__button{

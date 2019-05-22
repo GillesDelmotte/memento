@@ -10,33 +10,33 @@
             <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
             <label for="name" class="col-md-4 col-form-label text-md-right">Nom&nbsp;:</label>
 
-                <!-- @if ($errors->has('name'))
+                @if ($errors->has('name'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('name') }}</strong>
                     </span>
-                @endif -->
+                @endif
         </div>
 
         <div class="registerform__email">
             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email">
             <label for="email" class="col-md-4 col-form-label text-md-right">Adresse email&nbsp;:</label>
 
-                <!-- @if ($errors->has('email'))
+                @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
-                @endif -->
+                @endif
         </div>
 
         <div class="registerform__password">
             <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required autocomplete="new-password">
             <label for="password" class="col-md-4 col-form-label text-md-right">Mot de passe&nbsp;:</label>
 
-                <!-- @if ($errors->has('password'))
+                @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
-                @endif -->
+                @endif
 
         </div>
 

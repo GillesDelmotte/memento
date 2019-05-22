@@ -8,21 +8,21 @@
         <div class="loginform__email">
             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} loginform__email__input" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
             <label for="email" class="loginform__email__label">Adresse email&nbsp;:</label>
-                <!-- @if ($errors->has('email'))
+                @if ($errors->has('email'))
                     <span class="loginform__email__error" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
-                @endif -->
+                @endif
         </div>
         <div class="loginform__password">
             <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} loginform__password__input" name="password" required autocomplete="current-password">
             <label for="password" class="loginform__password__label">Mot de passe&nbsp;:</label>
 
-                <!-- @if ($errors->has('password'))
+                @if ($errors->has('password'))
                     <span class="loginform__password__error" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
-                @endif -->
+                @endif
         </div>
 
         <button type="submit" class="loginform__submit__button button">
