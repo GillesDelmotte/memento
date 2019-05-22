@@ -444,12 +444,56 @@ table {
   position: relative;
 }
 
-#profile .profile__img {
+#profile .profile__img__empty {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   background-color: #526586;
+  border: 3px solid #526586;
   margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#profile .profile__img__empty div {
+  position: absolute;
+  height: 3px;
+  width: 50px;
+  background-color: white;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+}
+
+#profile .profile__img__empty div.cross__second {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+#profile .imageFile {
+  display: none;
+}
+
+#profile .profile__img {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#profile .profile__img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  min-width: 150px;
+  max-width: 200px;
+  min-height: 150px;
+  min-height: 200px;
+  width: 100%;
 }
 
 #profile h2 {
@@ -791,6 +835,19 @@ table {
   border-radius: 50%;
   background-color: #526586;
   margin-right: 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#practitioners .jobs .job .photo img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  min-width: 20px;
+  max-width: 100px;
+  min-height: 20px;
+  min-height: 100px;
+  width: 100%;
 }
 
 #practitioners .jobs .job .job__name {
@@ -925,6 +982,19 @@ table {
   border-radius: 50%;
   background-color: #526586;
   margin-right: 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#practitioners .practitioners .practitioner .photo img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  min-width: 20px;
+  max-width: 100px;
+  min-height: 20px;
+  min-height: 100px;
+  width: 100%;
 }
 
 #practitioners .practitioners .practitioner .name {
@@ -1059,11 +1129,25 @@ table {
 }
 
 #practitioners .profile .profile__img {
+  display: block;
+  margin: 0 auto;
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
   background-color: #526586;
-  margin: 0 auto;
+}
+
+#practitioners .profile .profile__img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  min-width: 150px;
+  max-width: 200px;
+  min-height: 150px;
+  min-height: 200px;
+  width: 100%;
 }
 
 #practitioners .profile h2 {

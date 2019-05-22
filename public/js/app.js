@@ -2594,6 +2594,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3079,6 +3082,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3219,6 +3228,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store.js */ "./resources/js/store.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../router.js */ "./resources/js/router.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3341,6 +3351,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3351,10 +3375,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       componentReady: false,
       filter: "",
       reports: ["insulte", "faute d‘orthographe", "cette professsion n‘existe pas"],
-      reportJob: null
+      reportJob: null,
+      image: ""
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["currentUser", "allJob"]), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["currentUser", "currentUserImage", "allJob"]), {
     filteredJob: function filteredJob() {
       var _this = this;
 
@@ -3479,17 +3504,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       e.stopPropagation();
       document.querySelector(".job__wrapper").classList.remove("close");
       document.querySelector(".report__wrapper").classList.add("close");
+    },
+    onImageChange: function onImageChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var _this3 = this;
+
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = function (e) {
+        vm.image = e.target.result;
+
+        _this3.uploadImage();
+      };
+
+      reader.readAsDataURL(file);
+    },
+    uploadImage: function uploadImage() {
+      window.axios.post("/image/store", {
+        image: this.image
+      }).then(function (response) {
+        _router_js__WEBPACK_IMPORTED_MODULE_2__["default"].go();
+      });
     }
   },
   beforeMount: function beforeMount() {
     _store_js__WEBPACK_IMPORTED_MODULE_0__["default"].commit("setComponentDisplayed", "Profil");
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.$store.dispatch("setCurrentUser").then(function () {
-      _this3.$store.dispatch("setAllJob").then(function () {
-        _this3.componentReady = true;
+      _this4.$store.dispatch("setAllJob").then(function () {
+        _this4.componentReady = true;
       });
     });
   }
@@ -43421,7 +43472,16 @@ var render = function() {
       _c("div", { staticClass: "cross__second" })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "profile__img" }),
+    _vm.practitioner.image
+      ? _c("div", { staticClass: "profile__img" }, [
+          _c("img", {
+            attrs: {
+              src: "./images/profile/" + _vm.practitioner.image.image_name,
+              alt: ""
+            }
+          })
+        ])
+      : _c("div", { staticClass: "profile__img" }),
     _vm._v(" "),
     _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
     _vm._v(" "),
@@ -43774,7 +43834,18 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "photo" }),
+                        practitioner.image
+                          ? _c("div", { staticClass: "photo" }, [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "./images/profile/" +
+                                    practitioner.image.image_name,
+                                  alt: ""
+                                }
+                              })
+                            ])
+                          : _c("div", { staticClass: "photo" }),
                         _vm._v(" "),
                         _c("div", [
                           _c("span", { staticClass: "name" }, [
@@ -43890,7 +43961,18 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c("div", { staticClass: "photo" }),
+                        practitioner.image
+                          ? _c("div", { staticClass: "photo" }, [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "./images/profile/" +
+                                    practitioner.image.image_name,
+                                  alt: ""
+                                }
+                              })
+                            ])
+                          : _c("div", { staticClass: "photo" }),
                         _vm._v(" "),
                         _c("div", [
                           _c("span", { staticClass: "job__name" }, [
@@ -43996,7 +44078,41 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.componentReady
     ? _c("section", { staticClass: "profile", attrs: { id: "profile" } }, [
-        _c("div", { staticClass: "profile__img" }),
+        _vm.currentUserImage === null
+          ? _c(
+              "label",
+              {
+                staticClass: "profile__img__empty",
+                attrs: { for: "imageFile" }
+              },
+              [
+                _c("div", { staticClass: "cross__first" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "cross__second" })
+              ]
+            )
+          : _c(
+              "label",
+              { staticClass: "profile__img", attrs: { for: "imageFile" } },
+              [
+                _c("img", {
+                  attrs: {
+                    src: "./images/profile/" + _vm.currentUserImage.image_name,
+                    alt: ""
+                  }
+                })
+              ]
+            ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "imageFile",
+          attrs: { type: "file", id: "imageFile", accept: "image/*" },
+          on: {
+            change: function($event) {
+              return _vm.onImageChange($event)
+            }
+          }
+        }),
         _vm._v(" "),
         _c("h2", [_vm._v(_vm._s(_vm.currentUser.name))]),
         _vm._v(" "),
@@ -62132,6 +62248,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var state = {
   currentUser: null,
+  curruenUserImage: null,
   currentComponent: null,
   allJob: null,
   allPractitioner: null,
@@ -62145,7 +62262,8 @@ var mutations = {
     state.currentComponent = component;
   },
   setCurrentUser: function setCurrentUser(state, user) {
-    state.currentUser = user;
+    state.currentUser = user.user;
+    state.currentUserImage = user.img;
   },
   setAllJob: function setAllJob(state, jobs) {
     state.allJob = jobs;
