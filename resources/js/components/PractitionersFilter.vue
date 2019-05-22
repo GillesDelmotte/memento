@@ -23,7 +23,10 @@
           v-hammer:swipe.horizontal="(event)=> onSwipe(event)"
         >
           <a href class="practitioner__link" @click="findPratitioner($event, practitioner.id)"></a>
-          <div class="photo"></div>
+          <div class="photo" v-if="practitioner.image">
+            <img :src="'./images/profile/' + practitioner.image.image_name" alt>
+          </div>
+          <div class="photo" v-else></div>
           <div>
             <span class="name">{{practitioner.name}}</span>
             <span class="job__name">{{practitioner.job.name}}</span>
@@ -55,7 +58,10 @@
           v-hammer:swipe.horizontal="(event)=> onSwipe(event)"
         >
           <a href class="practitioner__link" @click="findPratitioner($event, practitioner.id)"></a>
-          <div class="photo"></div>
+          <div class="photo" v-if="practitioner.image">
+            <img :src="'./images/profile/' + practitioner.image.image_name" alt>
+          </div>
+          <div class="photo" v-else></div>
           <div>
             <span class="job__name">{{practitioner.job.name}}</span>
             <span class="name">{{practitioner.name}}</span>

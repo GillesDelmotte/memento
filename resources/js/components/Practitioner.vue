@@ -4,7 +4,10 @@
       <div class="cross__first"></div>
       <div class="cross__second"></div>
     </button>
-    <div class="profile__img"></div>
+    <div class="profile__img" v-if="practitioner.image">
+      <img :src="'./images/profile/' + practitioner.image.image_name" alt>
+    </div>
+    <div class="profile__img" v-else></div>
     <h2>{{practitioner.name}}</h2>
     <div class="card">
       <span>Profession</span>

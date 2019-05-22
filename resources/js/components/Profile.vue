@@ -1,6 +1,19 @@
 <template>
   <section class="profile" v-if="componentReady" id="profile">
-    <div class="profile__img"></div>
+    <label class="profile__img__empty" for="imageFile" v-if="currentUserImage === null">
+      <div class="cross__first"></div>
+      <div class="cross__second"></div>
+    </label>
+    <label for="imageFile" class="profile__img" v-else>
+      <img :src="'./images/profile/' + currentUserImage.image_name" alt>
+    </label>
+    <input
+      type="file"
+      id="imageFile"
+      accept="image/*"
+      class="imageFile"
+      v-on:change="onImageChange($event)"
+    >
     <h2>{{currentUser.name}}</h2>
     <div class="card">
       <label for="gsm">Gsm</label>
@@ -120,6 +133,7 @@
 import store from "../store.js";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
+import router from "../router.js";
 
 export default {
   name: "Profile",
@@ -132,11 +146,12 @@ export default {
         "faute d‘orthographe",
         "cette professsion n‘existe pas"
       ],
-      reportJob: null
+      reportJob: null,
+      image: ""
     };
   },
   computed: {
-    ...mapState(["currentUser", "allJob"]),
+    ...mapState(["currentUser", "currentUserImage", "allJob"]),
     filteredJob() {
       if (this.filter.length === 0) {
         return this.allJob;
@@ -277,6 +292,27 @@ export default {
 
       document.querySelector(".job__wrapper").classList.remove("close");
       document.querySelector(".report__wrapper").classList.add("close");
+    },
+    onImageChange(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      let reader = new FileReader();
+      let vm = this;
+      reader.onload = e => {
+        vm.image = e.target.result;
+        this.uploadImage();
+      };
+      reader.readAsDataURL(file);
+    },
+    uploadImage() {
+      window.axios
+        .post("/image/store", { image: this.image })
+        .then(response => {
+          router.go();
+        });
     }
   },
   beforeMount() {
