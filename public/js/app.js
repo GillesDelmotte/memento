@@ -2942,6 +2942,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (error) {
         return console.error(error);
       });
+      window.axios.post("/sendEmail", {
+        type: "remove",
+        user_id: this.practitioner.id,
+        hour: hour,
+        date: splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]
+      }).then(function (response) {})["catch"](function (error) {
+        console.log(error.response.data.message);
+      });
     }
   },
   mounted: function mounted() {
