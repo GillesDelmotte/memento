@@ -53,6 +53,8 @@ class AppointmentController extends Controller
 
         $when = date('Y-m-d', strtotime('-1 day', strtotime($date)));
 
+        //creer le message a envoyer
+
         Todo::create(['appointment_id' => $appointment['id'], 'when' => $when ]);
 
 
