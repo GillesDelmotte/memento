@@ -254,6 +254,13 @@ table {
   left: 30px;
 }
 
+#login .loginform__email .loginform__email__error,
+#login .loginform__password .loginform__email__error {
+  display: block;
+  color: red;
+  margin-top: 20px;
+}
+
 #login .register__link {
   position: absolute;
   display: block;
@@ -333,6 +340,12 @@ table {
   top: calc(50% - 10px);
   font-size: 20px;
   left: 30px;
+}
+
+#register .invalid-feedback {
+  display: block;
+  color: red;
+  margin-top: 20px;
 }
 
 #register .register__link {

@@ -2366,7 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
         var ae = document.getElementById("Lundi_afternoon_end").value;
         var time = document.getElementById("Lundi_time").value;
         var lundi = {
-          name: "lundi",
+          name: "Lundi",
           ms: ms,
           me: me,
           as: as,
@@ -2386,7 +2386,7 @@ __webpack_require__.r(__webpack_exports__);
         var _ae = document.getElementById("Mardi_afternoon_end").value;
         var _time = document.getElementById("Mardi_time").value;
         var mardi = {
-          name: "mardi",
+          name: "Mardi",
           ms: _ms,
           me: _me,
           as: _as,
@@ -2406,7 +2406,7 @@ __webpack_require__.r(__webpack_exports__);
         var _ae2 = document.getElementById("Mercredi_afternoon_end").value;
         var _time2 = document.getElementById("Mercredi_time").value;
         var mercredi = {
-          name: "mercredi",
+          name: "Mercredi",
           ms: _ms2,
           me: _me2,
           as: _as2,
@@ -2426,7 +2426,7 @@ __webpack_require__.r(__webpack_exports__);
         var _ae3 = document.getElementById("Jeudi_afternoon_end").value;
         var _time3 = document.getElementById("Jeudi_time").value;
         var jeudi = {
-          name: "jeudi",
+          name: "Jeudi",
           ms: _ms3,
           me: _me3,
           as: _as3,
@@ -2446,7 +2446,7 @@ __webpack_require__.r(__webpack_exports__);
         var _ae4 = document.getElementById("Vendredi_afternoon_end").value;
         var _time4 = document.getElementById("Vendredi_time").value;
         var vendredi = {
-          name: "vendredi",
+          name: "Vendredi",
           ms: _ms4,
           me: _me4,
           as: _as4,
@@ -2466,7 +2466,7 @@ __webpack_require__.r(__webpack_exports__);
         var _ae5 = document.getElementById("Samedi_afternoon_end").value;
         var _time5 = document.getElementById("Samedi_time").value;
         var samedi = {
-          name: "samedi",
+          name: "Samedi",
           ms: _ms5,
           me: _me5,
           as: _as5,
@@ -2486,7 +2486,7 @@ __webpack_require__.r(__webpack_exports__);
         var _ae6 = document.getElementById("Dimanche_afternoon_end").value;
         var _time6 = document.getElementById("Dimanche_time").value;
         var dimanche = {
-          name: "dimanche",
+          name: "Dimanche",
           ms: _ms6,
           me: _me6,
           as: _as6,
@@ -2729,7 +2729,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       componentReady: false,
-      days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+      days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
       dayNumber: null,
       date: null,
       displayed: "schedule"
@@ -3664,7 +3664,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       componentReady: false,
-      days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+      days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
       dayNumber: null,
       date: null,
       displayed: "schedule",
