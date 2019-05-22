@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Job::class, 'job_id');
     }
+
+    public function image()
+    {
+        return $this->belongsTo(FilesUpload::class, 'image_id');
+    }
 }
