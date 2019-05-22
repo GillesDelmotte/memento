@@ -53,13 +53,23 @@
       </div>
     </div>
     <div class="addAppointment">
-      <div>
+      <div class="container">
         <p>Qui voulez vous ajouter à cette date ?</p>
         <p>{{this.date}}, {{this.updateHour}}</p>
-        <select name id="client__name" class="select">
-          <option :value="client.id" v-for="client in this.clients" :key="client.id">{{client.name}}</option>
-        </select>
-        <button @click="addAppointment">Ajouter</button>
+        <div v-if="this.clients.length != 0">
+          <i class="arrow"></i>
+          <select name id="client__name" class="select">
+            <option
+              :value="client.id"
+              v-for="client in this.clients"
+              :key="client.id"
+            >{{client.name}}</option>
+          </select>
+        </div>
+        <div class="emptyClient" v-else>
+          <p>vous n'avez pas encore de client</p>
+        </div>
+        <button @click="addAppointment" v-if="this.clients.length != 0">Ajouter</button>
         <button @click="notAdd">Annuler</button>
       </div>
     </div>

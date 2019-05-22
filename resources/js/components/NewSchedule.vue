@@ -11,12 +11,12 @@
           <i class="closer"></i>
         </h3>
         <div class="day__content">
-          <div>
+          <div class="checkbox__conge">
             <input type="checkbox" :id="day.name + '_conge'">
-            <label :for="day.name + '_conge'">congé</label>
+            <label :for="day.name + '_conge'"></label>
           </div>
-          <div>
-            <label :for="day.name + '_time'">choississez la durée de vos séances</label>
+          <div class="appointment__time">
+            <label :for="day.name + '_time'"></label>
             <select :name="day.name + '_time'" :id="day.name + '_time'">
               <option value="15">15</option>
               <option value="30">30</option>
