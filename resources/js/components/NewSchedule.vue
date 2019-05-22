@@ -108,7 +108,7 @@ export default {
         const ae = document.getElementById("Lundi_afternoon_end").value;
         const time = document.getElementById("Lundi_time").value;
         const lundi = {
-          name: "lundi",
+          name: "Lundi",
           ms: ms,
           me: me,
           as: as,
@@ -129,7 +129,7 @@ export default {
         const ae = document.getElementById("Mardi_afternoon_end").value;
         const time = document.getElementById("Mardi_time").value;
         const mardi = {
-          name: "mardi",
+          name: "Mardi",
           ms: ms,
           me: me,
           as: as,
@@ -150,7 +150,7 @@ export default {
         const ae = document.getElementById("Mercredi_afternoon_end").value;
         const time = document.getElementById("Mercredi_time").value;
         const mercredi = {
-          name: "mercredi",
+          name: "Mercredi",
           ms: ms,
           me: me,
           as: as,
@@ -171,7 +171,7 @@ export default {
         const ae = document.getElementById("Jeudi_afternoon_end").value;
         const time = document.getElementById("Jeudi_time").value;
         const jeudi = {
-          name: "jeudi",
+          name: "Jeudi",
           ms: ms,
           me: me,
           as: as,
@@ -192,7 +192,7 @@ export default {
         const ae = document.getElementById("Vendredi_afternoon_end").value;
         const time = document.getElementById("Vendredi_time").value;
         const vendredi = {
-          name: "vendredi",
+          name: "Vendredi",
           ms: ms,
           me: me,
           as: as,
@@ -213,7 +213,7 @@ export default {
         const ae = document.getElementById("Samedi_afternoon_end").value;
         const time = document.getElementById("Samedi_time").value;
         const samedi = {
-          name: "samedi",
+          name: "Samedi",
           ms: ms,
           me: me,
           as: as,
@@ -234,7 +234,7 @@ export default {
         const ae = document.getElementById("Dimanche_afternoon_end").value;
         const time = document.getElementById("Dimanche_time").value;
         const dimanche = {
-          name: "dimanche",
+          name: "Dimanche",
           ms: ms,
           me: me,
           as: as,

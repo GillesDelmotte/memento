@@ -90,13 +90,13 @@ export default {
     return {
       componentReady: false,
       days: [
-        "dimanche",
-        "lundi",
-        "mardi",
-        "mercredi",
-        "jeudi",
-        "vendredi",
-        "samedi"
+        "Dimanche",
+        "Lundi",
+        "Mardi",
+        "Mercredi",
+        "Jeudi",
+        "Vendredi",
+        "Samedi"
       ],
       dayNumber: null,
       date: null,
