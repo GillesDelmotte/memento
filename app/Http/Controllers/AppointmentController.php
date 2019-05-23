@@ -4,6 +4,7 @@ namespace memento\Http\Controllers;
 
 use memento\Appointment;
 use memento\Todo;
+use memento\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -51,9 +52,9 @@ class AppointmentController extends Controller
 
         $appointment = Appointment::create(['user_id' => $user_id, 'schedule_id' => $schedule_id, 'hour' => $hour, 'date' => $date]);
 
-        $when = date('Y-m-d', strtotime('-1 day', strtotime($date)));
+        $notif = Notification::where('user_id', $user_id)->first();
 
-        //creer le message a envoyer
+        $when = date('Y-m-d', strtotime('-' . $notif->delay . 'day', strtotime($date)));
 
         Todo::create(['appointment_id' => $appointment['id'], 'when' => $when ]);
 
@@ -106,6 +107,8 @@ class AppointmentController extends Controller
         $hour = $request['hour'];
         $date = $request['date'];
         $appointment = Appointment::where('schedule_id', $schedule_id)->where('hour', $hour)->where('date', $date)->first();
+        $todo = Todo::where('appointment_id', $appointment->id)->first();
+        $todo->delete();
         $appointment->delete();
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use memento\User;
 use memento\Schedule;
 use memento\Todo;
+use memento\Notification;
 
 use Illuminate\Support\Facades\Mail;
 use memento\Mail\EmailReminder;
@@ -54,10 +55,19 @@ class SendReminderEmail extends Command
             $user = User::where('id', $todo->appointment->user_id)->first();
             $schedule = Schedule::where('id', $todo->appointment->schedule_id)->first();
             $praticien = User::where('id', $schedule->user_id)->first();
+            $notif = Notification::where('user_id', $praticien->id)->first();
+
+            $message = str_replace('[date]', $todo->appointment->date, $notif->message);
+            $message = str_replace('[heure]', $todo->appointment->hour, $message);
+
             $email = $user->email;
 
-            Mail::to($email)->send( new EmailReminder($todo, $user, $praticien));
+            Mail::to($email)->send( new EmailReminder($todo, $user, $praticien, $message));
         }
+    }
 
+    public function fire()
+    {
+        handle();
     }
 }
