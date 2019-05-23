@@ -38,6 +38,8 @@ Route::post('/getStats', 'StatController@index');
 Route::post('/getClients', 'ScheduleController@getClients');
 Route::post('/sendEmail', 'ScheduleController@sendEmail');
 Route::post('/image/store', 'ImageController@store');
+Route::post('/getNotif', 'NotificationController@index');
+Route::post('/updateNotif', 'NotificationController@update');
 
 
 
