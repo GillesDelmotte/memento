@@ -4,6 +4,7 @@ namespace memento\Http\Controllers\Auth;
 
 use memento\User;
 use memento\Job;
+use memento\Notification;
 use memento\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -67,12 +68,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        
         $job = Job::where('name', $data['job'])->first();
 
         if($job === null){
             $job = Job::create(['name' => $data['job']]);
-            return User::create([
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'api_token' => str_random(60),
@@ -81,7 +81,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
             ]);
         }else{
-            return User::create([
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'api_token' => str_random(60),
@@ -91,7 +91,11 @@ class RegisterController extends Controller
             ]);
         }
 
+        $message = 'Bonjour, vous avez rendez vous avec ' . $user->name . ' le [date] à [heure]';
 
+        Notification::create(['user_id' => $user->id, 'delay' => 1, 'message' => $message]);
+
+        return $user;
         
     }
 }
