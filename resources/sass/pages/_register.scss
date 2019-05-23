@@ -1,18 +1,18 @@
 #register{
     box-sizing: border-box;
-    position: absolute;
-    background-color: #526586;
+    //position: absolute;
+    //background-color: #526586;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    padding-top: 50px;
+    padding: 50px 0;
     .logo{
         display: block;
         margin: 0 auto 70px;
     }
 
-    .registerform__name, .registerform__email, .registerform__password, .registerform__confirm{
+    .registerform__name, .registerform__email, .registerform__password, .registerform__confirm, .registerform__gsm, .registerform__job{
         position: relative;
         // width: 90%;
         margin-bottom: 10px;
