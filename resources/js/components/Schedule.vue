@@ -45,7 +45,7 @@
       <p>vous êtes en congé</p>
     </div>
     <div class="deleteAppointment">
-      <div>
+      <div class="container">
         <p>Voulez vous vraiment supprimer ce rendez-vous ?</p>
         <p>{{this.date}}, {{this.updateHour}}, {{this.updateClientName}}</p>
         <button @click="deleteAppointment">oui</button>
