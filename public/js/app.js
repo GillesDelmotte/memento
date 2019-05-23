@@ -2524,6 +2524,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store.js */ "./resources/js/store.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2539,12 +2543,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Notif",
+  data: function data() {
+    return {
+      notif: null,
+      componentReady: false,
+      options: [1, 2, 3]
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["currentUser"])),
+  methods: {
+    selected: function selected(number) {
+      if (this.notif.delay == number) {
+        return "selected";
+      }
+    },
+    updateNotif: function updateNotif(e) {
+      var _this = this;
+
+      window.axios.post("/updateNotif", {
+        message: e.target.value,
+        type: "message"
+      }).then(function (response) {
+        _this.notif = response.data;
+      })["catch"](function (error) {
+        return console.error(error);
+      });
+    },
+    updateDelay: function updateDelay(e) {
+      var _this2 = this;
+
+      window.axios.post("/updateNotif", {
+        delay: e.target.value,
+        type: "delay"
+      }).then(function (response) {
+        _this2.notif = response.data;
+      })["catch"](function (error) {
+        return console.error(error);
+      });
+    }
+  },
   beforeMount: function beforeMount() {
     _store_js__WEBPACK_IMPORTED_MODULE_0__["default"].commit("setComponentDisplayed", "Notifications");
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    window.axios.post("/getNotif").then(function (response) {
+      _this3.notif = response.data;
+      _this3.componentReady = true;
+    })["catch"](function (error) {
+      return console.error(error);
+    });
   }
 });
 
@@ -43455,9 +43528,89 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { attrs: { id: "notifications" } })
+  return _vm.componentReady
+    ? _c("section", { attrs: { id: "notifications" } }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.notif.message,
+                expression: "notif.message"
+              }
+            ],
+            attrs: { name: "desc", id: "desc", cols: "30", rows: "4" },
+            domProps: { value: _vm.notif.message },
+            on: {
+              blur: function($event) {
+                return _vm.updateNotif($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.notif, "message", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "when" }, [
+          _c("p", [_vm._v("Quand devons-nous envoyer le message ?")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("i", { staticClass: "arrow" }),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                attrs: { name: "when", id: "when" },
+                on: {
+                  change: function($event) {
+                    return _vm.updateDelay($event)
+                  }
+                }
+              },
+              _vm._l(_vm.options, function(option) {
+                return _c(
+                  "option",
+                  {
+                    key: option,
+                    domProps: { value: option, selected: _vm.selected(option) }
+                  },
+                  [_vm._v(_vm._s(option) + " jours avant")]
+                )
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    : _c("section", { staticClass: "loader" }, [_vm._v("plz wait...")])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "explanation" }, [
+      _c("span", [
+        _vm._v(
+          "Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous."
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v(
+          "Pour ce faire, si vous voulez ajouter la date utilisez ceci [date] et si vous voulez ajouter l'heure utilisez ceci [heure]"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
