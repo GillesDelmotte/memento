@@ -3,6 +3,7 @@
 namespace memento\Http\Controllers\Auth;
 
 use memento\User;
+use memento\Job;
 use memento\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -52,6 +53,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'gsm' => ['required'],
+            'job' => ['required']
         ]);
     }
 
@@ -63,11 +66,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'api_token' => str_random(60),
-            'password' => Hash::make($data['password']),
-        ]);
+
+        
+        $job = Job::where('name', $data['job'])->first();
+
+        if($job === null){
+            $job = Job::create(['name' => $data['job']]);
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'api_token' => str_random(60),
+                'gsm' => $data['gsm'],
+                'job_id' => $job->id,
+                'password' => Hash::make($data['password']),
+            ]);
+        }else{
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'api_token' => str_random(60),
+                'gsm' => $data['gsm'],
+                'job_id' => $job->id,
+                'password' => Hash::make($data['password']),
+            ]);
+        }
+
+
+        
     }
 }

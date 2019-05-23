@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('image_id')->nullable();
             $table->string('address')->nullable();
             $table->char('gsm')->nullable();
-            $table->boolean('schedule')->default(true);
+            $table->boolean('schedule')->default(false);
             $table->boolean('private')->default(true);
             $table->text('description')->nullable();
             $table->string('api_token', 60)->unique();
