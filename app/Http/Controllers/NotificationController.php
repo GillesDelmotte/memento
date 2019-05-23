@@ -14,7 +14,12 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        $notif = Notification::where('user_id', auth()->id())->first();
+
+        if($notif){
+            return $notif;
+        }
+
     }
 
     /**
@@ -69,7 +74,19 @@ class NotificationController extends Controller
      */
     public function update(Request $request, Notification $notification)
     {
-        //
+        $notif = Notification::where('user_id', auth()->id())->first();
+        if($request['type'] === 'message'){
+            $notif->message = $request['message'];
+            $notif->save();
+        }
+
+        if($request['type'] === 'delay'){
+            $notif->delay = $request['delay'];
+            $notif->save();
+        }
+
+        return $notif;
+
     }
 
     /**
