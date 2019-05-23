@@ -1,25 +1,87 @@
 <template>
-  <section id="notifications">
-    <!-- <p
-      class="explanation"
-    >Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous</p>
+  <section id="notifications" v-if="componentReady">
+    <p class="explanation">
+      <span>Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous.</span>
+      <span>Pour ce faire, si vous voulez ajouter la date utilisez ceci [date] et si vous voulez ajouter l'heure utilisez ceci [heure]</span>
+    </p>
     <div class="card">
-      <p>Bonjour, vous avez rendez-vous avec Didier Delmotte le ... à ...</p>
-      <i>icon</i>
+      <textarea
+        name="desc"
+        id="desc"
+        cols="30"
+        rows="4"
+        v-model="notif.message"
+        @blur="updateNotif($event)"
+      ></textarea>
     </div>
-    <div>
+    <div class="when">
       <p>Quand devons-nous envoyer le message ?</p>
-    </div>-->
+      <div>
+        <i class="arrow"></i>
+        <select name="when" id="when" v-on:change="updateDelay($event)">
+          <option
+            v-for="option in options"
+            :key="option"
+            :value="option"
+            :selected="selected(option)"
+          >{{option}} jours avant</option>
+        </select>
+      </div>
+    </div>
   </section>
+  <section class="loader" v-else>plz wait...</section>
 </template>
 
 <script>
 import store from "../store.js";
 import { mapMutations } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "Notif",
+  data() {
+    return {
+      notif: null,
+      componentReady: false,
+      options: [1, 2, 3]
+    };
+  },
+  computed: {
+    ...mapState(["currentUser"])
+  },
+  methods: {
+    selected(number) {
+      if (this.notif.delay == number) {
+        return "selected";
+      }
+    },
+    updateNotif(e) {
+      window.axios
+        .post("/updateNotif", { message: e.target.value, type: "message" })
+        .then(response => {
+          this.notif = response.data;
+        })
+        .catch(error => console.error(error));
+    },
+    updateDelay(e) {
+      window.axios
+        .post("/updateNotif", { delay: e.target.value, type: "delay" })
+        .then(response => {
+          this.notif = response.data;
+        })
+        .catch(error => console.error(error));
+    }
+  },
   beforeMount() {
     store.commit("setComponentDisplayed", "Notifications");
+  },
+  mounted() {
+    window.axios
+      .post("/getNotif")
+      .then(response => {
+        this.notif = response.data;
+        this.componentReady = true;
+      })
+      .catch(error => console.error(error));
   }
 };
 </script>
