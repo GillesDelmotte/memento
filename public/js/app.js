@@ -44562,7 +44562,7 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "deleteAppointment" }, [
-          _c("div", [
+          _c("div", { staticClass: "container" }, [
             _c("p", [
               _vm._v("Voulez vous vraiment supprimer ce rendez-vous ?")
             ]),
