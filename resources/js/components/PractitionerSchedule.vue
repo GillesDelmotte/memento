@@ -428,7 +428,7 @@ export default {
 
           if (noSchedule) {
             tl.from(practitioner__infos, 0.3, { autoAlpha: 0 }).from(
-              holiday,
+              noSchedule,
               0.3,
               {
                 autoAlpha: 0,
