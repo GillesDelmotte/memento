@@ -2771,6 +2771,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     window.axios.post("/getNotif").then(function (response) {
       _this3.notif = response.data;
       _this3.componentReady = true;
+    }).then(function () {
+      var _this3$$refs = _this3.$refs,
+          explanation = _this3$$refs.explanation,
+          card = _this3$$refs.card,
+          when = _this3$$refs.when;
+      var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
+      tl.from(explanation, 0.3, {
+        autoAlpha: 0,
+        top: 50,
+        ease: Power2.easeInOut
+      }).from(card, 0.3, {
+        autoAlpha: 0,
+        top: 50,
+        ease: Power2.easeInOut
+      }, "-=0.2").from(when, 0.3, {
+        autoAlpha: 0,
+        top: 50,
+        ease: Power2.easeInOut
+      }, "-=0.2");
     })["catch"](function (error) {
       return console.error(error);
     });
@@ -52534,9 +52553,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.componentReady
     ? _c("section", { attrs: { id: "notifications" } }, [
-        _vm._m(0),
+        _c("p", { ref: "explanation", staticClass: "explanation" }, [
+          _c("span", [
+            _vm._v(
+              "Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous."
+            )
+          ]),
+          _vm._v(" "),
+          _c("span", [
+            _vm._v(
+              "Pour ce faire, si vous voulez ajouter la date utilisez ceci [date] et si vous voulez ajouter l'heure utilisez ceci [heure]"
+            )
+          ])
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
+        _c("div", { ref: "card", staticClass: "card" }, [
           _c("textarea", {
             directives: [
               {
@@ -52562,7 +52593,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "when" }, [
+        _c("div", { ref: "when", staticClass: "when" }, [
           _c("p", [_vm._v("Quand devons-nous envoyer le message ?")]),
           _vm._v(" "),
           _c("div", [
@@ -52595,26 +52626,7 @@ var render = function() {
       ])
     : _c("div", { ref: "loader", staticClass: "loader" })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "explanation" }, [
-      _c("span", [
-        _vm._v(
-          "Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous."
-        )
-      ]),
-      _vm._v(" "),
-      _c("span", [
-        _vm._v(
-          "Pour ce faire, si vous voulez ajouter la date utilisez ceci [date] et si vous voulez ajouter l'heure utilisez ceci [heure]"
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
