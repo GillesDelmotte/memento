@@ -2913,6 +2913,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3164,6 +3179,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function () {
         _this6.componentReady = true;
         _this6.day;
+      }).then(function () {
+        var _this6$$refs = _this6.$refs,
+            list__morning = _this6$$refs.list__morning,
+            list__afternoon = _this6$$refs.list__afternoon,
+            holiday = _this6$$refs.holiday,
+            noSchedule = _this6$$refs.noSchedule,
+            practitioner__infos = _this6$$refs.practitioner__infos;
+        var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
+
+        if (list__morning) {
+          tl.from(practitioner__infos, 0.3, {
+            autoAlpha: 0
+          }).staggerFrom(list__morning, 0.3, {
+            autoAlpha: 0,
+            top: 50,
+            ease: Power2.easeInOut
+          }, 0.1, 0.2).staggerFrom(list__afternoon, 0.3, {
+            autoAlpha: 0,
+            top: 50,
+            ease: Power2.easeInOut
+          }, 0.1);
+        }
+
+        if (holiday) {
+          tl.from(practitioner__infos, 0.3, {
+            autoAlpha: 0
+          }).from(holiday, 0.3, {
+            autoAlpha: 0,
+            top: "+=50px",
+            ease: Power2.easeInOut
+          }, 0.2);
+        }
+
+        if (noSchedule) {
+          tl.from(practitioner__infos, 0.3, {
+            autoAlpha: 0
+          }).from(holiday, 0.3, {
+            autoAlpha: 0,
+            top: "+=50px",
+            ease: Power2.easeInOut
+          }, 0.2);
+        }
+      })["catch"](function (error) {
+        return console.error(error);
       });
     });
   }
@@ -4182,7 +4241,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }).then(function () {
           var _this5$$refs = _this5.$refs,
               list__morning = _this5$$refs.list__morning,
-              list_afternoon = _this5$$refs.list_afternoon,
+              list__afternoon = _this5$$refs.list__afternoon,
               holiday = _this5$$refs.holiday,
               noSchedule = _this5$$refs.noSchedule;
           var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
@@ -52563,90 +52622,112 @@ var render = function() {
           on: { change: _vm.changeDate }
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "practitioner__infos" }, [
-          _vm.practitioner.image != null
-            ? _c("div", { staticClass: "photo" }, [
+        _c(
+          "div",
+          { ref: "practitioner__infos", staticClass: "practitioner__infos" },
+          [
+            _vm.practitioner.image != null
+              ? _c("div", { staticClass: "photo" }, [
+                  _c("img", {
+                    attrs: {
+                      src:
+                        "./images/profile/" + _vm.practitioner.image.image_name,
+                      alt: ""
+                    }
+                  })
+                ])
+              : _c("div", { staticClass: "photo" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "name__job" }, [
+              _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.practitioner.job.name))])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pills" }, [
+              _c("div", { staticClass: "pill phone" }, [
+                _c("a", { attrs: { href: "tel:" + _vm.practitioner.gsm } }),
+                _vm._v(" "),
+                _c("img", {
+                  attrs: { src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"), alt: "" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pill message" }, [
+                _c("a", {
+                  attrs: { href: "mailto:" + _vm.practitioner.email }
+                }),
+                _vm._v(" "),
                 _c("img", {
                   attrs: {
-                    src:
-                      "./images/profile/" + _vm.practitioner.image.image_name,
+                    src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"),
                     alt: ""
                   }
                 })
               ])
-            : _c("div", { staticClass: "photo" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "name__job" }, [
-            _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
-            _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(_vm.practitioner.job.name))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "pills" }, [
-            _c("div", { staticClass: "pill phone" }, [
-              _c("a", { attrs: { href: "tel:" + _vm.practitioner.gsm } }),
-              _vm._v(" "),
-              _c("img", {
-                attrs: { src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"), alt: "" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "pill message" }, [
-              _c("a", { attrs: { href: "mailto:" + _vm.practitioner.email } }),
-              _vm._v(" "),
-              _c("img", {
-                attrs: { src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"), alt: "" }
-              })
             ])
-          ])
-        ]),
+          ]
+        ),
         _vm._v(" "),
         _c(
           "ul",
           { staticClass: "list" },
           _vm._l(_vm.createListMorning, function(hour, index) {
-            return _c("li", { key: hour, staticClass: "list__item" }, [
-              index != _vm.createListMorning.length - 1
-                ? _c("div", { staticClass: "hours" }, [
-                    _c("p", [_vm._v(_vm._s(hour))]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(_vm.createListMorning[index + 1]))])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              index != _vm.createListMorning.length - 1 &&
-              _vm.reserved(hour) === true
-                ? _c("div", { staticClass: "person" }, [
-                    _c("a", {
-                      attrs: { href: "" },
-                      on: {
-                        click: function($event) {
-                          return _vm.reserve($event, hour)
+            return _c(
+              "li",
+              {
+                key: hour,
+                ref: "list__morning",
+                refInFor: true,
+                staticClass: "list__item"
+              },
+              [
+                index != _vm.createListMorning.length - 1
+                  ? _c("div", { staticClass: "hours" }, [
+                      _c("p", [_vm._v(_vm._s(hour))]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.createListMorning[index + 1]))
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                index != _vm.createListMorning.length - 1 &&
+                _vm.reserved(hour) === true
+                  ? _c("div", { staticClass: "person" }, [
+                      _c("a", {
+                        attrs: { href: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.reserve($event, hour)
+                          }
                         }
-                      }
-                    })
-                  ])
-                : index != _vm.createListMorning.length - 1 &&
-                  _vm.reserved(hour) === false
-                ? _c("div", { staticClass: "person disabled" })
-                : index != _vm.createListMorning.length - 1 &&
-                  _vm.reserved(hour) === "myAppointment"
-                ? _c("div", { staticClass: "person myAppointment" }, [
-                    _c("a", {
-                      attrs: { href: "" },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteAppointment($event, hour)
+                      })
+                    ])
+                  : index != _vm.createListMorning.length - 1 &&
+                    _vm.reserved(hour) === false
+                  ? _c("div", { staticClass: "person disabled" })
+                  : index != _vm.createListMorning.length - 1 &&
+                    _vm.reserved(hour) === "myAppointment"
+                  ? _c("div", { staticClass: "person myAppointment" }, [
+                      _c("a", {
+                        attrs: { href: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteAppointment($event, hour)
+                          }
                         }
-                      }
-                    }),
-                    _vm._v(
-                      "\n        " + _vm._s(_vm.currentUser.name) + "\n        "
-                    ),
-                    _vm._m(0, true)
-                  ])
-                : _vm._e()
-            ])
+                      }),
+                      _vm._v(
+                        "\n        " +
+                          _vm._s(_vm.currentUser.name) +
+                          "\n        "
+                      ),
+                      _vm._m(0, true)
+                    ])
+                  : _vm._e()
+              ]
+            )
           }),
           0
         ),
@@ -52655,62 +52736,73 @@ var render = function() {
           "ul",
           { staticClass: "list" },
           _vm._l(_vm.createListAfternoon, function(hour, index) {
-            return _c("li", { key: hour, staticClass: "list__item" }, [
-              index != _vm.createListAfternoon.length - 1
-                ? _c("div", { staticClass: "hours" }, [
-                    _c("p", [_vm._v(_vm._s(hour))]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(_vm._s(_vm.createListAfternoon[index + 1]))
+            return _c(
+              "li",
+              {
+                key: hour,
+                ref: "list__afternoon",
+                refInFor: true,
+                staticClass: "list__item"
+              },
+              [
+                index != _vm.createListAfternoon.length - 1
+                  ? _c("div", { staticClass: "hours" }, [
+                      _c("p", [_vm._v(_vm._s(hour))]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(_vm._s(_vm.createListAfternoon[index + 1]))
+                      ])
                     ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              index != _vm.createListAfternoon.length - 1 &&
-              _vm.reserved(hour) === true
-                ? _c("div", { staticClass: "person" }, [
-                    _c("a", {
-                      attrs: { href: "" },
-                      on: {
-                        click: function($event) {
-                          return _vm.reserve($event, hour)
+                  : _vm._e(),
+                _vm._v(" "),
+                index != _vm.createListAfternoon.length - 1 &&
+                _vm.reserved(hour) === true
+                  ? _c("div", { staticClass: "person" }, [
+                      _c("a", {
+                        attrs: { href: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.reserve($event, hour)
+                          }
                         }
-                      }
-                    })
-                  ])
-                : index != _vm.createListMorning.length - 1 &&
-                  _vm.reserved(hour) === false
-                ? _c("div", { staticClass: "person disabled" })
-                : index != _vm.createListMorning.length - 1 &&
-                  _vm.reserved(hour) === "myAppointment"
-                ? _c("div", { staticClass: "person myAppointment" }, [
-                    _c("a", {
-                      attrs: { href: "" },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteAppointment($event, hour)
+                      })
+                    ])
+                  : index != _vm.createListMorning.length - 1 &&
+                    _vm.reserved(hour) === false
+                  ? _c("div", { staticClass: "person disabled" })
+                  : index != _vm.createListMorning.length - 1 &&
+                    _vm.reserved(hour) === "myAppointment"
+                  ? _c("div", { staticClass: "person myAppointment" }, [
+                      _c("a", {
+                        attrs: { href: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteAppointment($event, hour)
+                          }
                         }
-                      }
-                    }),
-                    _vm._v(
-                      "\n        " + _vm._s(_vm.currentUser.name) + "\n        "
-                    ),
-                    _vm._m(1, true)
-                  ])
-                : _vm._e()
-            ])
+                      }),
+                      _vm._v(
+                        "\n        " +
+                          _vm._s(_vm.currentUser.name) +
+                          "\n        "
+                      ),
+                      _vm._m(1, true)
+                    ])
+                  : _vm._e()
+              ]
+            )
           }),
           0
         ),
         _vm._v(" "),
         this.displayed === "noSchedule"
-          ? _c("div", { staticClass: "noSchedule" }, [
+          ? _c("div", { ref: "noSchedule", staticClass: "noSchedule" }, [
               _vm._v("votre praticien n'a pas encore d'agenda en ligne")
             ])
           : _vm._e(),
         _vm._v(" "),
         this.displayed === "holiday"
-          ? _c("div", { staticClass: "holiday" }, [
+          ? _c("div", { ref: "holiday", staticClass: "holiday" }, [
               _vm._v("votre praticien est en congé")
             ])
           : _vm._e()
