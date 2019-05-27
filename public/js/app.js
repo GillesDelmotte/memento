@@ -2099,6 +2099,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2167,6 +2171,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     takeAppointment: function takeAppointment() {
       _router_js__WEBPACK_IMPORTED_MODULE_3__["default"].push({
         name: "practitionersFilter"
+      });
+    },
+    redirect: function redirect(e, id) {
+      e.preventDefault();
+      e.stopPropagation();
+      _router_js__WEBPACK_IMPORTED_MODULE_3__["default"].push({
+        name: "practitioner",
+        params: {
+          id: id
+        }
       });
     }
   },
@@ -2761,6 +2775,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -2768,7 +2783,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Practitioner",
   data: function data() {
-    return {};
+    return {
+      componentReady: false
+    };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["allJob", "allPractitioner"]), {
     practitioner: function practitioner() {
@@ -2782,9 +2799,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   methods: {
     back: function back() {
-      _router_js__WEBPACK_IMPORTED_MODULE_2__["default"].push({
-        name: "practitionersFilter"
-      });
+      _router_js__WEBPACK_IMPORTED_MODULE_2__["default"].go(-1);
     },
     getSchedule: function getSchedule(id) {
       _router_js__WEBPACK_IMPORTED_MODULE_2__["default"].push({
@@ -2794,6 +2809,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.$store.dispatch("setAllJob").then(function () {
+      _this2.$store.dispatch("setAllPractitioner").then(function () {
+        _this2.componentReady = true;
+      });
+    });
   }
 });
 
@@ -51982,8 +52006,23 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "practitioner__pills" }, [
                           _c("span", { staticClass: "practitioner" }, [
-                            _vm._v(
-                              _vm._s(appointment.schedule.practitioner.name)
+                            _c(
+                              "a",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    return _vm.redirect(
+                                      $event,
+                                      appointment.schedule.practitioner.id
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(appointment.schedule.practitioner.name)
+                                )
+                              ]
                             )
                           ]),
                           _vm._v(" "),
@@ -52511,63 +52550,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "profile" }, [
-    _c("button", { staticClass: "back", on: { click: _vm.back } }, [
-      _c("div", { staticClass: "cross__first" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "cross__second" })
-    ]),
-    _vm._v(" "),
-    _vm.practitioner.image
-      ? _c("div", { staticClass: "profile__img" }, [
-          _c("img", {
-            attrs: {
-              src: "./images/profile/" + _vm.practitioner.image.image_name,
-              alt: ""
+  return _vm.componentReady
+    ? _c("div", { staticClass: "profile" }, [
+        _c("button", { staticClass: "back", on: { click: _vm.back } }, [
+          _c("div", { staticClass: "cross__first" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "cross__second" })
+        ]),
+        _vm._v(" "),
+        _vm.practitioner.image
+          ? _c("div", { staticClass: "profile__img" }, [
+              _c("img", {
+                attrs: {
+                  src: "./images/profile/" + _vm.practitioner.image.image_name,
+                  alt: ""
+                }
+              })
+            ])
+          : _c("div", { staticClass: "profile__img" }),
+        _vm._v(" "),
+        _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("span", [_vm._v("Profession")]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.practitioner.job.name))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("span", [_vm._v("Gsm")]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.practitioner.gsm))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("span", [_vm._v("Adresse")]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.practitioner.address))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("span", [_vm._v("Description")]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.practitioner.description))])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "button",
+            on: {
+              click: function($event) {
+                return _vm.getSchedule(_vm.practitioner.id)
+              }
             }
-          })
-        ])
-      : _c("div", { staticClass: "profile__img" }),
-    _vm._v(" "),
-    _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("span", [_vm._v("Profession")]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.practitioner.job.name))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("span", [_vm._v("Gsm")]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.practitioner.gsm))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("span", [_vm._v("Adresse")]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.practitioner.address))])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("span", [_vm._v("Description")]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.practitioner.description))])
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "button",
-        on: {
-          click: function($event) {
-            return _vm.getSchedule(_vm.practitioner.id)
-          }
-        }
-      },
-      [_vm._v("prendre rendez-vous")]
-    )
-  ])
+          },
+          [_vm._v("prendre rendez-vous")]
+        )
+      ])
+    : _c("div", { staticClass: "loader" })
 }
 var staticRenderFns = []
 render._withStripped = true
