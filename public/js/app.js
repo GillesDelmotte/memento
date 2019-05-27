@@ -1799,8 +1799,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store.js */ "./resources/js/store.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store.js */ "./resources/js/store.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -1829,6 +1830,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1871,6 +1873,14 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
+    var loader = this.$refs.loader;
+    var timeline = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]({
+      repeat: -1,
+      yoyo: true
+    });
+    timeline.to(loader, 1, {
+      autoAlpha: 0.3
+    });
     window.axios.post("/getReports").then(function (response) {
       _this2.reports = response.data;
       _this2.componentReady = true;
@@ -1891,8 +1901,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store.js */ "./resources/js/store.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store.js */ "./resources/js/store.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -1915,6 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1928,6 +1940,14 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    var loader = this.$refs.loader;
+    var timeline = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]({
+      repeat: -1,
+      yoyo: true
+    });
+    timeline.to(loader, 1, {
+      autoAlpha: 0.3
+    });
     window.axios.post("/getStats").then(function (response) {
       _this.stats = response.data;
       _this.componentReady = true;
@@ -51807,7 +51827,7 @@ var render = function() {
               )
             ])
       ])
-    : _c("section", { staticClass: "loader" }, [_vm._v("plz wait...")])
+    : _c("div", { ref: "loader", staticClass: "loader" })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51857,7 +51877,7 @@ var render = function() {
           _c("span", [_vm._v(_vm._s(_vm.stats.job))])
         ])
       ])
-    : _c("section", { staticClass: "loader" }, [_vm._v("plz wait...")])
+    : _c("div", { ref: "loader", staticClass: "loader" })
 }
 var staticRenderFns = []
 render._withStripped = true
