@@ -3,6 +3,7 @@
     <div v-if="componentReady">
       <div v-if="myAppointments.length === 0" class="noMeeting">
         <p>vous n'avez pas de rendez-vous</p>
+        <button class="button" @click="takeAppointment">Prendre un rendez-vous</button>
       </div>
       <div v-else>
         <ul class="list cards">
@@ -20,6 +21,7 @@
                   <img src="../../img/phone-call.svg" alt>
                 </div>
                 <div class="pill message">
+                  <a :href="'mailto:' + appointment.schedule.practitioner.email"></a>
                   <img src="../../img/speech-bubble.svg" alt>
                 </div>
                 <div class="pill delete">
@@ -44,6 +46,7 @@
 import store from "../store.js";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
+import router from "../router.js";
 export default {
   name: "Meet",
   data() {
@@ -80,6 +83,9 @@ export default {
       const splitDate = date.split("-");
 
       return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
+    },
+    takeAppointment() {
+      router.push({ name: "practitionersFilter" });
     }
   },
   beforeMount() {
