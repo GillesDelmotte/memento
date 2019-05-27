@@ -4,24 +4,24 @@
       <div class="cross__first"></div>
       <div class="cross__second"></div>
     </button>
-    <div class="profile__img" v-if="practitioner.image">
+    <div class="profile__img" v-if="practitioner.image" ref="image">
       <img :src="'./images/profile/' + practitioner.image.image_name" alt>
     </div>
-    <div class="profile__img" v-else></div>
-    <h2>{{practitioner.name}}</h2>
-    <div class="card">
+    <div class="profile__img" v-else ref="image"></div>
+    <h2 ref="name">{{practitioner.name}}</h2>
+    <div class="card" ref="job">
       <span>Profession</span>
       <p>{{practitioner.job.name}}</p>
     </div>
-    <div class="card">
+    <div class="card" ref="gsm">
       <span>Gsm</span>
       <p>{{practitioner.gsm}}</p>
     </div>
-    <div class="card">
+    <div class="card" ref="address">
       <span>Adresse</span>
       <p>{{practitioner.address}}</p>
     </div>
-    <div class="card">
+    <div class="card" ref="desc">
       <span>Description</span>
       <p>{{practitioner.description}}</p>
     </div>
@@ -61,9 +61,42 @@ export default {
   },
   mounted() {
     this.$store.dispatch("setAllJob").then(() => {
-      this.$store.dispatch("setAllPractitioner").then(() => {
-        this.componentReady = true;
-      });
+      this.$store
+        .dispatch("setAllPractitioner")
+        .then(() => {
+          this.componentReady = true;
+        })
+        .then(() => {
+          const { image, name, job, gsm, address, desc } = this.$refs;
+          const tl = new TimelineMax();
+
+          tl.from(image, 0.3, { autoAlpha: 0 })
+            .from(name, 0.3, { autoAlpha: 0 }, 0)
+            .from(
+              job,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.1"
+            )
+            .from(
+              gsm,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.2"
+            )
+            .from(
+              address,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.2"
+            )
+            .from(
+              desc,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.2"
+            );
+        });
     });
   }
 };
