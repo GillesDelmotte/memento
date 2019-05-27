@@ -165,7 +165,13 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  background-image: url(/images/logo-black.svg?f83c4c7a7bbc7a2d9b7bf8cfabd39b00);
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
 }
 
 .logo {
@@ -861,13 +867,14 @@ table {
 #practitioners .filter {
   width: 90%;
   margin: 30px auto 15px;
+  position: relative;
 }
 
 #practitioners .filter input {
   width: 100%;
   box-sizing: border-box;
   font-size: 17px;
-  padding: 10px 20px;
+  padding: 10px 50px 10px 20px;
   border-radius: 20px;
   border: none;
   font-family: Nunito;
@@ -878,6 +885,19 @@ table {
 
 #practitioners .filter input:focus {
   outline: none;
+}
+
+#practitioners .filter .icon-loupe {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-image: url(/images/loupe.svg?73d0609a4b976a0015b47ace4fac1e8e);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  right: 15px;
+  top: 11px;
+  opacity: 0.4;
 }
 
 #practitioners .jobs {
