@@ -40,7 +40,7 @@
                 <div class="pill delete">
                   <a
                     href
-                    @click="deleteAppointment($event, appointment.schedule.id,appointment.hour,appointment.date, appointment.schedule.practitioner.id)"
+                    @click="anim($event, appointment.schedule.id,appointment.hour,appointment.date, appointment.schedule.practitioner.id)"
                   ></a>
                   <div class="cross__first"></div>
                   <div class="cross__second"></div>
@@ -73,9 +73,21 @@ export default {
     ...mapState(["currentUser"])
   },
   methods: {
-    deleteAppointment(e, schedule_id, hour, date, id) {
+    anim(e, schedule_id, hour, date, id) {
       e.preventDefault();
       e.stopPropagation();
+      const tl = new TimelineMax({
+        onComplete: () => {
+          this.deleteAppointment(e, schedule_id, hour, date, id);
+        }
+      });
+      var item = e.target.parentNode.parentNode.parentNode.parentNode;
+
+      tl.to(item, 0.5, {
+        left: "-100%"
+      }).to(item, 0.3, { height: 0, padding: 0, margin: 0 });
+    },
+    deleteAppointment(e, schedule_id, hour, date, id) {
       window.axios
         .post("/deleteAppointment", {
           schedule_id: schedule_id,
