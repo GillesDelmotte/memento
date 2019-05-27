@@ -96,17 +96,39 @@
                 right: 20px;
                 input{
                     display: none;
-                    &:checked ~ label{
-                        background-color: red;
+                    &:checked ~ .label__fond{
+                        background-color: green;
+                        .label__dot{
+                            left: 23px; 
+                        }
                     }
                 }
-                label{
+                .label__fond{
                     display: block;
-                    width: 30px;
+                    position: relative;
+                    width: 50px;
                     height: 30px;
-                    background-color: green;
-                    border-radius: 50%;
+                    border-radius: 16px;
+                    background-color: red;
+                    .label__dot{
+                        transition: all 0.2s;
+                        display: block;
+                        width: 24px;
+                        height: 24px;
+                        position: absolute;
+                        left: 3px; 
+                        top: calc(50% - 12px);
+                        background-color: white;
+                        border-radius: 50%;
+                    }
                 }
+                .label__name{
+                    position: absolute;
+                    top: 5px;
+                    right:60px;
+                    font-size: 20px;
+                }
+                
             }
 
             &__content{

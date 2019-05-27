@@ -13,7 +13,10 @@
         <div class="day__content">
           <div class="checkbox__conge">
             <input type="checkbox" :id="day.name + '_conge'">
-            <label :for="day.name + '_conge'"></label>
+            <label :for="day.name + '_conge'" class="label__fond">
+              <label :for="day.name + '_conge'" class="label__dot"></label>
+            </label>
+            <label :for="day.name + '_conge'" class="label__name">congé</label>
           </div>
           <div class="appointment__time">
             <label :for="day.name + '_time'"></label>
