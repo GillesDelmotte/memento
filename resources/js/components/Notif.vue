@@ -1,10 +1,10 @@
 <template>
   <section id="notifications" v-if="componentReady">
-    <p class="explanation">
+    <p class="explanation" ref="explanation">
       <span>Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous.</span>
       <span>Pour ce faire, si vous voulez ajouter la date utilisez ceci [date] et si vous voulez ajouter l'heure utilisez ceci [heure]</span>
     </p>
-    <div class="card">
+    <div class="card" ref="card">
       <textarea
         name="desc"
         id="desc"
@@ -14,7 +14,7 @@
         @blur="updateNotif($event)"
       ></textarea>
     </div>
-    <div class="when">
+    <div class="when" ref="when">
       <p>Quand devons-nous envoyer le message ?</p>
       <div>
         <i class="arrow"></i>
@@ -87,6 +87,36 @@ export default {
       .then(response => {
         this.notif = response.data;
         this.componentReady = true;
+      })
+      .then(() => {
+        const { explanation, card, when } = this.$refs;
+        var tl = new TimelineMax();
+
+        tl.from(explanation, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        })
+          .from(
+            card,
+            0.3,
+            {
+              autoAlpha: 0,
+              top: 50,
+              ease: Power2.easeInOut
+            },
+            "-=0.2"
+          )
+          .from(
+            when,
+            0.3,
+            {
+              autoAlpha: 0,
+              top: 50,
+              ease: Power2.easeInOut
+            },
+            "-=0.2"
+          );
       })
       .catch(error => console.error(error));
   }
