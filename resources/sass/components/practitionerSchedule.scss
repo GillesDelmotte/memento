@@ -65,14 +65,85 @@
         }
     }
 
-    h2{
-        text-align: center;
-        font-size: 30px;
+    .practitioner__infos{
+        display: flex;
+        align-items: center;
         padding-top:90px;
-        margin-bottom: 20px;
-        color: $color__blue;
-
+        margin-bottom: 30px;
+        position: relative;
+        .photo{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #526586;
+            margin: 0 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            img{
+                object-fit: cover;
+                    min-width: 20px;
+                    max-width: 100px;
+                    min-height: 20px;
+                    min-height: 100px;
+                    width: 100%;
+            }
+        }
+        h2{
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: $color__blue;
+    
+        }
+        span{
+            font-size: 20px;   
+        }
+        .pills{
+            position: absolute;
+            right: 20px;
+            bottom: -15px;
+            .pill{
+                background-color: $color__blue;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-left: 10px;
+                margin-bottom: 10px;
+                img{
+                    width: 58%;
+                }
+                &.phone{
+                    background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+                    position: relative;
+                    a{
+                        position: absolute;
+                        top:0;
+                        bottom:0;
+                        right:0;
+                        left:0;
+                    }
+                }
+                &.message{
+                    background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+                    position: relative;
+                    a{
+                        position: absolute;
+                        top:0;
+                        right:0;
+                        left:0;
+                        bottom:0;
+                    }
+                }
+                
+            }
+        }
     }
+
+    
 
     .holiday, .noSchedule{
         z-index: 1;
@@ -147,6 +218,37 @@
                     justify-content: center;
                     background-color: rgba($color: green, $alpha: 0.5);
                     color: white;
+                    position: relative;
+                    .cross{
+                        position: absolute;
+                        top: 5px;
+                        left: 5px;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        
+                        .cross__first{
+                            position: absolute;
+                            background-color: white;
+                            transform-origin: 50% 50%;
+                            margin: 0 auto;
+                            height: 1px;
+                            width: 16px;
+                            transform: rotate(45deg);
+                        }
+                        .cross__second{
+                            position: absolute;
+                            background-color: white;
+                            transform-origin: 50% 50%;
+                            margin: 0 auto;
+                            height: 1px;
+                            width: 16px;
+                            transform: rotate(-45deg);
+                        }
+                    }
                 }
             }
         }
