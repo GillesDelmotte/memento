@@ -17,10 +17,11 @@
       <span>{{stats.job}}</span>
     </div>
   </section>
-  <section class="loader" v-else>plz wait...</section>
+  <div ref="loader" v-else class="loader"></div>
 </template>
 
 <script>
+import { TimelineMax } from "gsap";
 import store from "../store.js";
 import { mapMutations } from "vuex";
 export default {
@@ -32,6 +33,13 @@ export default {
     };
   },
   mounted() {
+    var { loader } = this.$refs;
+
+    var timeline = new TimelineMax({
+      repeat: -1,
+      yoyo: true
+    });
+    timeline.to(loader, 1, { autoAlpha: 0.3 });
     window.axios
       .post("/getStats")
       .then(response => {
