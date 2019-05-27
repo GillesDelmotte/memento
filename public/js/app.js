@@ -3215,7 +3215,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (noSchedule) {
           tl.from(practitioner__infos, 0.3, {
             autoAlpha: 0
-          }).from(holiday, 0.3, {
+          }).from(noSchedule, 0.3, {
             autoAlpha: 0,
             top: "+=50px",
             ease: Power2.easeInOut
