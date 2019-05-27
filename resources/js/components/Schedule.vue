@@ -14,7 +14,8 @@
         v-for="(hour, index) in createListMorning"
         :key="hour"
         class="list__item"
-        v-hammer:press="(event)=> openMenu(event,hour)"
+        ref="list__morning"
+        v-hammer:tap="(event)=> openMenu(event,hour)"
       >
         <div v-if="index != createListMorning.length - 1" class="hours">
           <p>{{hour}}</p>
@@ -28,7 +29,8 @@
         v-for="(hour, index) in createListAfternoon"
         :key="hour"
         class="list__item"
-        v-hammer:press="(event)=> openMenu(event, hour)"
+        ref="list__afternoon"
+        v-hammer:tap="(event)=> openMenu(event, hour)"
       >
         <div v-if="index != createListAfternoon.length - 1" class="hours">
           <p>{{hour}}</p>
@@ -37,11 +39,11 @@
         <div class="person" v-if="index != createListAfternoon.length - 1">{{getAppointement(hour)}}</div>
       </li>
     </ul>
-    <div class="noSchedule" v-if="this.displayed === 'noSchedule'">
+    <div class="noSchedule" v-if="this.displayed === 'noSchedule'" ref="noSchedule">
       <p>vous n'avez pas encore créer d'agenda</p>
       <button class="button" @click="redirect">Créer un agenda</button>
     </div>
-    <div v-if="this.displayed === 'holiday'" class="holiday">
+    <div v-if="this.displayed === 'holiday'" class="holiday" ref="holiday">
       <p>vous êtes en congé</p>
     </div>
     <div class="deleteAppointment">
@@ -395,6 +397,46 @@ export default {
               this.clients = response.data;
               this.componentReady = true;
               this.day;
+            })
+            .then(() => {
+              const {
+                list__morning,
+                list_afternoon,
+                holiday,
+                noSchedule
+              } = this.$refs;
+
+              var tl = new TimelineMax();
+
+              if (list__morning) {
+                tl.staggerFrom(
+                  list__morning,
+                  0.3,
+                  { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+                  0.1
+                ).staggerFrom(
+                  list__afternoon,
+                  0.3,
+                  { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+                  0.1
+                );
+              }
+
+              if (holiday) {
+                tl.from(holiday, 0.3, {
+                  autoAlpha: 0,
+                  top: "+=50px",
+                  ease: Power2.easeInOut
+                });
+              }
+
+              if (noSchedule) {
+                tl.from(holiday, 0.3, {
+                  autoAlpha: 0,
+                  top: "+=50px",
+                  ease: Power2.easeInOut
+                });
+              }
             })
             .catch(error => console.error(error));
         });
