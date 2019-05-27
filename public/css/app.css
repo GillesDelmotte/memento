@@ -1411,16 +1411,40 @@ table {
   display: none;
 }
 
-#newSchedule .days .day .checkbox__conge input:checked ~ label {
+#newSchedule .days .day .checkbox__conge input:checked ~ .label__fond {
+  background-color: green;
+}
+
+#newSchedule .days .day .checkbox__conge input:checked ~ .label__fond .label__dot {
+  left: 23px;
+}
+
+#newSchedule .days .day .checkbox__conge .label__fond {
+  display: block;
+  position: relative;
+  width: 50px;
+  height: 30px;
+  border-radius: 16px;
   background-color: red;
 }
 
-#newSchedule .days .day .checkbox__conge label {
+#newSchedule .days .day .checkbox__conge .label__fond .label__dot {
+  transition: all 0.2s;
   display: block;
-  width: 30px;
-  height: 30px;
-  background-color: green;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 3px;
+  top: calc(50% - 12px);
+  background-color: white;
   border-radius: 50%;
+}
+
+#newSchedule .days .day .checkbox__conge .label__name {
+  position: absolute;
+  top: 5px;
+  right: 60px;
+  font-size: 20px;
 }
 
 #newSchedule .days .day__content {

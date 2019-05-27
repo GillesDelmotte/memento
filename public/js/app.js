@@ -2392,6 +2392,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -52156,7 +52159,28 @@ var render = function() {
                   attrs: { type: "checkbox", id: day.name + "_conge" }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: day.name + "_conge" } })
+                _c(
+                  "label",
+                  {
+                    staticClass: "label__fond",
+                    attrs: { for: day.name + "_conge" }
+                  },
+                  [
+                    _c("label", {
+                      staticClass: "label__dot",
+                      attrs: { for: day.name + "_conge" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "label__name",
+                    attrs: { for: day.name + "_conge" }
+                  },
+                  [_vm._v("congé")]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "appointment__time" }, [
