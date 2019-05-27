@@ -9,7 +9,27 @@
       <img src="../../img/picker.svg" alt class="picker" @click="datePicker">
     </div>
     <input type="date" class="datePicker" @change="changeDate">
-    <h2>{{practitioner.name}}</h2>
+    <div class="practitioner__infos">
+      <div v-if="practitioner.image != null" class="photo">
+        <img :src="'./images/profile/' + practitioner.image.image_name" alt>
+      </div>
+      <div v-else class="photo"></div>
+      <div class="name__job">
+        <h2>{{practitioner.name}}</h2>
+        <span>{{practitioner.job.name}}</span>
+      </div>
+      <div class="pills">
+        <div class="pill phone">
+          <a :href="'tel:' + practitioner.gsm"></a>
+          <img src="../../img/phone-call.svg" alt>
+        </div>
+        <div class="pill message">
+          <a :href="'mailto:' + practitioner.email"></a>
+          <img src="../../img/speech-bubble.svg" alt>
+        </div>
+      </div>
+    </div>
+
     <ul class="list">
       <li v-for="(hour, index) in createListMorning" :key="hour" class="list__item">
         <div v-if="index != createListMorning.length - 1" class="hours">
@@ -29,6 +49,10 @@
         >
           <a href @click="deleteAppointment($event,hour)"></a>
           {{currentUser.name}}
+          <div class="cross">
+            <div class="cross__first"></div>
+            <div class="cross__second"></div>
+          </div>
         </div>
       </li>
     </ul>
@@ -55,6 +79,10 @@
         >
           <a href @click="deleteAppointment($event, hour)"></a>
           {{currentUser.name}}
+          <div class="cross">
+            <div class="cross__first"></div>
+            <div class="cross__second"></div>
+          </div>
         </div>
       </li>
     </ul>
