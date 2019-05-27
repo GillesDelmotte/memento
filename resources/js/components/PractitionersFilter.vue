@@ -1,6 +1,6 @@
 <template>
   <div v-if="componentReady">
-    <div class="filter">
+    <div class="filter" ref="filter">
       <input
         type="text"
         name="filter"
@@ -202,9 +202,16 @@ export default {
     });
     timeline.to(loader, 1, { autoAlpha: 0.3 });
     this.$store.dispatch("setAllJob").then(() => {
-      this.$store.dispatch("setAllPractitioner").then(() => {
-        this.componentReady = true;
-      });
+      this.$store
+        .dispatch("setAllPractitioner")
+        .then(() => {
+          this.componentReady = true;
+        })
+        .then(() => {
+          var { filter } = this.$refs;
+          var tl = new TimelineMax();
+          tl.from(filter, 0.3, { autoAlpha: 0 });
+        });
     });
   }
 };
