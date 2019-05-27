@@ -764,6 +764,7 @@ table {
 }
 
 .menu a {
+  position: relative;
   display: block;
   margin: 20px 0;
   font-size: 30px;

@@ -2303,6 +2303,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         name: name
       });
     }
+  },
+  mounted: function mounted() {
+    var _this$$refs = this.$refs,
+        agenda = _this$$refs.agenda,
+        admin = _this$$refs.admin,
+        profil = _this$$refs.profil,
+        logout = _this$$refs.logout;
+    var tl = new TimelineMax();
+    tl.from(agenda, 0.3, {
+      autoAlpha: 0,
+      top: 50,
+      ease: Power2.easeInOut
+    });
+
+    if (admin) {
+      tl.from(admin, 0.3, {
+        autoAlpha: 0,
+        top: 50,
+        ease: Power2.easeInOut
+      }, "-=0.2");
+    }
+
+    tl.from(profil, 0.3, {
+      autoAlpha: 0,
+      top: 50,
+      ease: Power2.easeInOut
+    }, "-=0.2").from(logout, 0.3, {
+      autoAlpha: 0,
+      top: 50,
+      ease: Power2.easeInOut
+    }, "-=0.2");
   }
 });
 
@@ -52169,6 +52200,7 @@ var render = function() {
     _c(
       "a",
       {
+        ref: "agenda",
         on: {
           click: function($event) {
             return _vm.redirect($event, "scheduleList")
@@ -52182,6 +52214,7 @@ var render = function() {
       ? _c(
           "a",
           {
+            ref: "admin",
             on: {
               click: function($event) {
                 return _vm.redirect($event, "adminStat")
@@ -52195,6 +52228,7 @@ var render = function() {
     _c(
       "a",
       {
+        ref: "profil",
         on: {
           click: function($event) {
             return _vm.redirect($event, "profile")
@@ -52204,7 +52238,9 @@ var render = function() {
       [_vm._v("Mon profil")]
     ),
     _vm._v(" "),
-    _c("a", { on: { click: _vm.logout } }, [_vm._v("Déconnexion")])
+    _c("a", { ref: "logout", on: { click: _vm.logout } }, [
+      _vm._v("Déconnexion")
+    ])
   ])
 }
 var staticRenderFns = []
