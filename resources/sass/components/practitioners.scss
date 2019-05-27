@@ -125,6 +125,14 @@
                     }
                     &.message{
                         background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+                        position: relative;
+                        a{
+                            position: absolute;
+                            top:0;
+                            bottom:0;
+                            right:0;
+                            left:0;
+                        }
                     }
                     img{
                         width: 50%;  
@@ -274,6 +282,14 @@
                     }
                     &.message{
                         background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+                        position: relative;
+                        a{
+                            position: absolute;
+                            top:0;
+                            bottom:0;
+                            right:0;
+                            left:0;
+                        }
                     }
                     img{
                         width: 50%;  
