@@ -2816,6 +2816,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch("setAllJob").then(function () {
       _this2.$store.dispatch("setAllPractitioner").then(function () {
         _this2.componentReady = true;
+      }).then(function () {
+        var _this2$$refs = _this2.$refs,
+            image = _this2$$refs.image,
+            name = _this2$$refs.name,
+            job = _this2$$refs.job,
+            gsm = _this2$$refs.gsm,
+            address = _this2$$refs.address,
+            desc = _this2$$refs.desc;
+        var tl = new TimelineMax();
+        tl.from(image, 0.3, {
+          autoAlpha: 0
+        }).from(name, 0.3, {
+          autoAlpha: 0
+        }, 0).from(job, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.1").from(gsm, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.2").from(address, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.2").from(desc, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.2");
       });
     });
   }
@@ -52559,7 +52589,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm.practitioner.image
-          ? _c("div", { staticClass: "profile__img" }, [
+          ? _c("div", { ref: "image", staticClass: "profile__img" }, [
               _c("img", {
                 attrs: {
                   src: "./images/profile/" + _vm.practitioner.image.image_name,
@@ -52567,29 +52597,29 @@ var render = function() {
                 }
               })
             ])
-          : _c("div", { staticClass: "profile__img" }),
+          : _c("div", { ref: "image", staticClass: "profile__img" }),
         _vm._v(" "),
-        _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
+        _c("h2", { ref: "name" }, [_vm._v(_vm._s(_vm.practitioner.name))]),
         _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
+        _c("div", { ref: "job", staticClass: "card" }, [
           _c("span", [_vm._v("Profession")]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.practitioner.job.name))])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
+        _c("div", { ref: "gsm", staticClass: "card" }, [
           _c("span", [_vm._v("Gsm")]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.practitioner.gsm))])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
+        _c("div", { ref: "address", staticClass: "card" }, [
           _c("span", [_vm._v("Adresse")]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.practitioner.address))])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
+        _c("div", { ref: "desc", staticClass: "card" }, [
           _c("span", [_vm._v("Description")]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.practitioner.description))])
