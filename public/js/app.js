@@ -2090,6 +2090,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2105,7 +2110,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(["currentUser"])),
   methods: {
-    deleteAppointment: function deleteAppointment(e, schedule_id, hour, date) {
+    deleteAppointment: function deleteAppointment(e, schedule_id, hour, date, id) {
       var _this = this;
 
       e.preventDefault();
@@ -2123,6 +2128,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       })["catch"](function (error) {
         return console.error(error);
+      });
+      window.axios.post("/sendEmail", {
+        type: "remove",
+        user_id: id,
+        hour: hour,
+        date: date
+      }).then(function (response) {})["catch"](function (error) {
+        console.log(error.response.data.message);
       });
     },
     dateformat: function dateformat(date) {
@@ -2153,6 +2166,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       window.axios.post("/getMyAppointments").then(function (response) {
         _this2.myAppointments = response.data;
         _this2.componentReady = true;
+      }).then(function () {
+        var card = _this2.$refs.card;
+        var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
+        tl.staggerFrom(card, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, 0.1);
       })["catch"](function (error) {
         return console.error(error);
       });
@@ -51793,7 +51814,12 @@ var render = function() {
                   _vm._l(_vm.myAppointments, function(appointment) {
                     return _c(
                       "li",
-                      { key: appointment.id, staticClass: "list__item card" },
+                      {
+                        key: appointment.id,
+                        ref: "card",
+                        refInFor: true,
+                        staticClass: "list__item card"
+                      },
                       [
                         _c("div", { staticClass: "date__hour" }, [
                           _c("span", { staticClass: "hour" }, [
@@ -51856,7 +51882,8 @@ var render = function() {
                                       $event,
                                       appointment.schedule.id,
                                       appointment.hour,
-                                      appointment.date
+                                      appointment.date,
+                                      appointment.schedule.practitioner.id
                                     )
                                   }
                                 }
