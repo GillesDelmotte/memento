@@ -401,7 +401,7 @@ export default {
             .then(() => {
               const {
                 list__morning,
-                list_afternoon,
+                list__afternoon,
                 holiday,
                 noSchedule
               } = this.$refs;

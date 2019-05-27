@@ -9,7 +9,7 @@
       <img src="../../img/picker.svg" alt class="picker" @click="datePicker">
     </div>
     <input type="date" class="datePicker" @change="changeDate">
-    <div class="practitioner__infos">
+    <div class="practitioner__infos" ref="practitioner__infos">
       <div v-if="practitioner.image != null" class="photo">
         <img :src="'./images/profile/' + practitioner.image.image_name" alt>
       </div>
@@ -31,7 +31,12 @@
     </div>
 
     <ul class="list">
-      <li v-for="(hour, index) in createListMorning" :key="hour" class="list__item">
+      <li
+        v-for="(hour, index) in createListMorning"
+        :key="hour"
+        class="list__item"
+        ref="list__morning"
+      >
         <div v-if="index != createListMorning.length - 1" class="hours">
           <p>{{hour}}</p>
           <p>{{createListMorning[index + 1]}}</p>
@@ -57,7 +62,12 @@
       </li>
     </ul>
     <ul class="list">
-      <li v-for="(hour, index) in createListAfternoon" :key="hour" class="list__item">
+      <li
+        v-for="(hour, index) in createListAfternoon"
+        :key="hour"
+        class="list__item"
+        ref="list__afternoon"
+      >
         <div v-if="index != createListAfternoon.length - 1" class="hours">
           <p>{{hour}}</p>
           <p>{{createListAfternoon[index + 1]}}</p>
@@ -89,8 +99,13 @@
     <div
       class="noSchedule"
       v-if="this.displayed === 'noSchedule'"
+      ref="noSchedule"
     >votre praticien n'a pas encore d'agenda en ligne</div>
-    <div v-if="this.displayed === 'holiday'" class="holiday">votre praticien est en congé</div>
+    <div
+      v-if="this.displayed === 'holiday'"
+      class="holiday"
+      ref="holiday"
+    >votre praticien est en congé</div>
   </section>
   <div ref="loader" v-else class="loader"></div>
 </template>
@@ -369,7 +384,62 @@ export default {
         .then(() => {
           this.componentReady = true;
           this.day;
-        });
+        })
+        .then(() => {
+          const {
+            list__morning,
+            list__afternoon,
+            holiday,
+            noSchedule,
+            practitioner__infos
+          } = this.$refs;
+
+          var tl = new TimelineMax();
+
+          if (list__morning) {
+            tl.from(practitioner__infos, 0.3, { autoAlpha: 0 })
+              .staggerFrom(
+                list__morning,
+                0.3,
+                { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+                0.1,
+                0.2
+              )
+              .staggerFrom(
+                list__afternoon,
+                0.3,
+                { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+                0.1
+              );
+          }
+
+          if (holiday) {
+            tl.from(practitioner__infos, 0.3, { autoAlpha: 0 }).from(
+              holiday,
+              0.3,
+              {
+                autoAlpha: 0,
+                top: "+=50px",
+                ease: Power2.easeInOut
+              },
+              0.2
+            );
+          }
+
+          if (noSchedule) {
+            tl.from(practitioner__infos, 0.3, { autoAlpha: 0 }).from(
+              holiday,
+              0.3,
+              {
+                autoAlpha: 0,
+                top: "+=50px",
+                ease: Power2.easeInOut
+              },
+              0.2
+            );
+          }
+        })
+        .catch(error => console.error(error));
     });
   }
 };
