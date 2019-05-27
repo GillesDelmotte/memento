@@ -37,6 +37,7 @@
               <img src="../../img/phone-call.svg" alt>
             </div>
             <div class="message">
+              <a :href="'mailto:' + practitioner.email"></a>
               <img src="../../img/speech-bubble.svg" alt>
             </div>
             <div class="calendar" @click="redirect(practitioner.id)">
@@ -72,6 +73,7 @@
               <img src="../../img/phone-call.svg" alt>
             </div>
             <div class="message">
+              <a :href="'mailto:' + practitioner.email"></a>
               <img src="../../img/speech-bubble.svg" alt>
             </div>
             <div class="calendar" @click="redirect(practitioner.id)">
