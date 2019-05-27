@@ -3883,6 +3883,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -4177,6 +4179,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this5.clients = response.data;
           _this5.componentReady = true;
           _this5.day;
+        }).then(function () {
+          var _this5$$refs = _this5.$refs,
+              list__morning = _this5$$refs.list__morning,
+              list_afternoon = _this5$$refs.list_afternoon,
+              holiday = _this5$$refs.holiday,
+              noSchedule = _this5$$refs.noSchedule;
+          var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
+
+          if (list__morning) {
+            tl.staggerFrom(list__morning, 0.3, {
+              autoAlpha: 0,
+              top: 50,
+              ease: Power2.easeInOut
+            }, 0.1).staggerFrom(list__afternoon, 0.3, {
+              autoAlpha: 0,
+              top: 50,
+              ease: Power2.easeInOut
+            }, 0.1);
+          }
+
+          if (holiday) {
+            tl.from(holiday, 0.3, {
+              autoAlpha: 0,
+              top: "+=50px",
+              ease: Power2.easeInOut
+            });
+          }
+
+          if (noSchedule) {
+            tl.from(holiday, 0.3, {
+              autoAlpha: 0,
+              top: "+=50px",
+              ease: Power2.easeInOut
+            });
+          }
         })["catch"](function (error) {
           return console.error(error);
         });
@@ -53465,15 +53502,17 @@ var render = function() {
                 directives: [
                   {
                     name: "hammer",
-                    rawName: "v-hammer:press",
+                    rawName: "v-hammer:tap",
                     value: function(event) {
                       return _vm.openMenu(event, hour)
                     },
                     expression: "(event)=> openMenu(event,hour)",
-                    arg: "press"
+                    arg: "tap"
                   }
                 ],
                 key: hour,
+                ref: "list__morning",
+                refInFor: true,
                 staticClass: "list__item"
               },
               [
@@ -53508,15 +53547,17 @@ var render = function() {
                 directives: [
                   {
                     name: "hammer",
-                    rawName: "v-hammer:press",
+                    rawName: "v-hammer:tap",
                     value: function(event) {
                       return _vm.openMenu(event, hour)
                     },
                     expression: "(event)=> openMenu(event, hour)",
-                    arg: "press"
+                    arg: "tap"
                   }
                 ],
                 key: hour,
+                ref: "list__afternoon",
+                refInFor: true,
                 staticClass: "list__item"
               },
               [
@@ -53542,7 +53583,7 @@ var render = function() {
         ),
         _vm._v(" "),
         this.displayed === "noSchedule"
-          ? _c("div", { staticClass: "noSchedule" }, [
+          ? _c("div", { ref: "noSchedule", staticClass: "noSchedule" }, [
               _c("p", [_vm._v("vous n'avez pas encore créer d'agenda")]),
               _vm._v(" "),
               _c(
@@ -53554,7 +53595,7 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         this.displayed === "holiday"
-          ? _c("div", { staticClass: "holiday" }, [
+          ? _c("div", { ref: "holiday", staticClass: "holiday" }, [
               _c("p", [_vm._v("vous êtes en congé")])
             ])
           : _vm._e(),
