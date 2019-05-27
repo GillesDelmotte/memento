@@ -2,8 +2,12 @@
   <section id="meet">
     <div v-if="componentReady">
       <div v-if="myAppointments.length === 0" class="noMeeting">
-        <p>vous n'avez pas de rendez-vous</p>
-        <button class="button" @click="takeAppointment">Prendre un rendez-vous</button>
+        <p ref="noMeeting__p">vous n'avez pas de rendez-vous</p>
+        <button
+          class="button"
+          ref="noMeeting__button"
+          @click="takeAppointment"
+        >Prendre un rendez-vous</button>
       </div>
       <div v-else>
         <ul class="list cards">
@@ -83,6 +87,28 @@ export default {
             })
             .catch(error => console.error(error));
         })
+        .then(() => {
+          const { card, noMeeting__p, noMeeting__button } = this.$refs;
+          var tl2 = new TimelineMax();
+          if (noMeeting__p) {
+            tl2
+              .from(noMeeting__p, 0.3, {
+                autoAlpha: 0,
+                top: 50,
+                ease: Power2.easeInOut
+              })
+              .from(
+                noMeeting__button,
+                0.3,
+                {
+                  autoAlpha: 0,
+                  top: 50,
+                  ease: Power2.easeInOut
+                },
+                0.1
+              );
+          }
+        })
         .catch(error => console.error(error));
 
       window.axios
@@ -125,14 +151,33 @@ export default {
           this.componentReady = true;
         })
         .then(() => {
-          const { card } = this.$refs;
+          const { card, noMeeting__p, noMeeting__button } = this.$refs;
           var tl = new TimelineMax();
+          var tl2 = new TimelineMax();
           tl.staggerFrom(
             card,
             0.3,
             { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
             0.1
           );
+          if (noMeeting__p) {
+            tl2
+              .from(noMeeting__p, 0.3, {
+                autoAlpha: 0,
+                top: 50,
+                ease: Power2.easeInOut
+              })
+              .from(
+                noMeeting__button,
+                0.3,
+                {
+                  autoAlpha: 0,
+                  top: 50,
+                  ease: Power2.easeInOut
+                },
+                0.1
+              );
+          }
         })
         .catch(error => console.error(error));
     });
