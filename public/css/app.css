@@ -140,6 +140,7 @@ table {
   min-height: 100vh;
   font-family: "Nunito", sans-serif;
   background-color: #526586;
+  overflow: hidden;
 }
 
 .background {
@@ -988,6 +989,15 @@ table {
 
 #practitioners .jobs .job .pills div.message {
   background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+  position: relative;
+}
+
+#practitioners .jobs .job .pills div.message a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 #practitioners .jobs .job .pills div img {
@@ -1135,6 +1145,15 @@ table {
 
 #practitioners .practitioners .practitioner .pills div.message {
   background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+  position: relative;
+}
+
+#practitioners .practitioners .practitioner .pills div.message a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 #practitioners .practitioners .practitioner .pills div img {
@@ -1854,12 +1873,92 @@ table {
   display: block;
 }
 
-#practitionerSchedule h2 {
+#practitionerSchedule .practitioner__infos {
+  display: flex;
+  align-items: center;
+  padding-top: 90px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+#practitionerSchedule .practitioner__infos .photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #526586;
+  margin: 0 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#practitionerSchedule .practitioner__infos .photo img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  min-width: 20px;
+  max-width: 100px;
+  min-height: 20px;
+  min-height: 100px;
+  width: 100%;
+}
+
+#practitionerSchedule .practitioner__infos h2 {
   text-align: center;
   font-size: 30px;
-  padding-top: 90px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #526586;
+}
+
+#practitionerSchedule .practitioner__infos span {
+  font-size: 20px;
+}
+
+#practitionerSchedule .practitioner__infos .pills {
+  position: absolute;
+  right: 20px;
+  bottom: -15px;
+}
+
+#practitionerSchedule .practitioner__infos .pills .pill {
+  background-color: #526586;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+#practitionerSchedule .practitioner__infos .pills .pill img {
+  width: 58%;
+}
+
+#practitionerSchedule .practitioner__infos .pills .pill.phone {
+  background-image: linear-gradient(to left bottom, #5b8652, #68925f, #759e6d, #83aa7a, #90b688);
+  position: relative;
+}
+
+#practitionerSchedule .practitioner__infos .pills .pill.phone a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#practitionerSchedule .practitioner__infos .pills .pill.message {
+  background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+  position: relative;
+}
+
+#practitionerSchedule .practitioner__infos .pills .pill.message a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 #practitionerSchedule .holiday,
@@ -1945,6 +2044,42 @@ table {
   justify-content: center;
   background-color: rgba(0, 128, 0, 0.5);
   color: white;
+  position: relative;
+}
+
+#practitionerSchedule .list .list__item .person.myAppointment .cross {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#practitionerSchedule .list .list__item .person.myAppointment .cross .cross__first {
+  position: absolute;
+  background-color: white;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  margin: 0 auto;
+  height: 1px;
+  width: 16px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+#practitionerSchedule .list .list__item .person.myAppointment .cross .cross__second {
+  position: absolute;
+  background-color: white;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  margin: 0 auto;
+  height: 1px;
+  width: 16px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 
 #meet {
@@ -2018,6 +2153,15 @@ table {
 
 #meet .card .practitioner__pills .pills .pill.message {
   background-image: linear-gradient(to left bottom, #e76e37, #e9733e, #ec7945, #ee7e4b, #f08352);
+  position: relative;
+}
+
+#meet .card .practitioner__pills .pills .pill.message a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 #meet .card .practitioner__pills .pills .pill.delete {
@@ -2075,6 +2219,10 @@ table {
   color: #526586;
   line-height: 25px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+}
+
+#meet .noMeeting .button {
+  margin-top: 20px;
 }
 
 #admin {

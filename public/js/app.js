@@ -2040,6 +2040,7 @@ Vue.component("header-component", __webpack_require__(/*! ./Header.vue */ "./res
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store.js */ "./resources/js/store.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../router.js */ "./resources/js/router.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2086,6 +2087,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+
 
 
 
@@ -2122,6 +2126,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     dateformat: function dateformat(date) {
       var splitDate = date.split("-");
       return splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0];
+    },
+    takeAppointment: function takeAppointment() {
+      _router_js__WEBPACK_IMPORTED_MODULE_2__["default"].push({
+        name: "practitionersFilter"
+      });
     }
   },
   beforeMount: function beforeMount() {
@@ -2793,6 +2802,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3081,6 +3118,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -43106,7 +43145,13 @@ var render = function() {
       ? _c("div", [
           _vm.myAppointments.length === 0
             ? _c("div", { staticClass: "noMeeting" }, [
-                _c("p", [_vm._v("vous n'avez pas de rendez-vous")])
+                _c("p", [_vm._v("vous n'avez pas de rendez-vous")]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "button", on: { click: _vm.takeAppointment } },
+                  [_vm._v("Prendre un rendez-vous")]
+                )
               ])
             : _c("div", [
                 _c(
@@ -43152,7 +43197,22 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _vm._m(0, true),
+                            _c("div", { staticClass: "pill message" }, [
+                              _c("a", {
+                                attrs: {
+                                  href:
+                                    "mailto:" +
+                                    appointment.schedule.practitioner.email
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("img", {
+                                attrs: {
+                                  src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"),
+                                  alt: ""
+                                }
+                              })
+                            ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "pill delete" }, [
                               _c("a", {
@@ -43185,18 +43245,7 @@ var render = function() {
       : _c("div", { staticClass: "loader" }, [_vm._v("plz wait...")])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pill message" }, [
-      _c("img", {
-        attrs: { src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"), alt: "" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43743,7 +43792,43 @@ var render = function() {
           on: { change: _vm.changeDate }
         }),
         _vm._v(" "),
-        _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
+        _c("div", { staticClass: "practitioner__infos" }, [
+          _vm.practitioner.image != null
+            ? _c("div", { staticClass: "photo" }, [
+                _c("img", {
+                  attrs: {
+                    src:
+                      "./images/profile/" + _vm.practitioner.image.image_name,
+                    alt: ""
+                  }
+                })
+              ])
+            : _c("div", { staticClass: "photo" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "name__job" }, [
+            _c("h2", [_vm._v(_vm._s(_vm.practitioner.name))]),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.practitioner.job.name))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pills" }, [
+            _c("div", { staticClass: "pill phone" }, [
+              _c("a", { attrs: { href: "tel:" + _vm.practitioner.gsm } }),
+              _vm._v(" "),
+              _c("img", {
+                attrs: { src: __webpack_require__(/*! ../../img/phone-call.svg */ "./resources/img/phone-call.svg"), alt: "" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pill message" }, [
+              _c("a", { attrs: { href: "mailto:" + _vm.practitioner.email } }),
+              _vm._v(" "),
+              _c("img", {
+                attrs: { src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"), alt: "" }
+              })
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "ul",
@@ -43785,8 +43870,9 @@ var render = function() {
                       }
                     }),
                     _vm._v(
-                      "\n        " + _vm._s(_vm.currentUser.name) + "\n      "
-                    )
+                      "\n        " + _vm._s(_vm.currentUser.name) + "\n        "
+                    ),
+                    _vm._m(0, true)
                   ])
                 : _vm._e()
             ])
@@ -43836,8 +43922,9 @@ var render = function() {
                       }
                     }),
                     _vm._v(
-                      "\n        " + _vm._s(_vm.currentUser.name) + "\n      "
-                    )
+                      "\n        " + _vm._s(_vm.currentUser.name) + "\n        "
+                    ),
+                    _vm._m(1, true)
                   ])
                 : _vm._e()
             ])
@@ -43859,7 +43946,28 @@ var render = function() {
       ])
     : _c("section", { staticClass: "loader" }, [_vm._v("plz wait...")])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cross" }, [
+      _c("div", { staticClass: "cross__first" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "cross__second" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cross" }, [
+      _c("div", { staticClass: "cross__first" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "cross__second" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44038,7 +44146,18 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _vm._m(0, true),
+                          _c("div", { staticClass: "message" }, [
+                            _c("a", {
+                              attrs: { href: "mailto:" + practitioner.email }
+                            }),
+                            _vm._v(" "),
+                            _c("img", {
+                              attrs: {
+                                src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"),
+                                alt: ""
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -44165,7 +44284,18 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _vm._m(1, true),
+                          _c("div", { staticClass: "message" }, [
+                            _c("a", {
+                              attrs: { href: "mailto:" + practitioner.email }
+                            }),
+                            _vm._v(" "),
+                            _c("img", {
+                              attrs: {
+                                src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"),
+                                alt: ""
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -44200,28 +44330,7 @@ var render = function() {
       ])
     : _c("div", { staticClass: "loader" }, [_vm._v("plz wait...")])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "message" }, [
-      _c("img", {
-        attrs: { src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"), alt: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "message" }, [
-      _c("img", {
-        attrs: { src: __webpack_require__(/*! ../../img/speech-bubble.svg */ "./resources/img/speech-bubble.svg"), alt: "" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
