@@ -2138,27 +2138,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])(["currentUser"])),
   methods: {
-    deleteAppointment: function deleteAppointment(e, schedule_id, hour, date, id) {
+    anim: function anim(e, schedule_id, hour, date, id) {
       var _this = this;
 
       e.preventDefault();
       e.stopPropagation();
+      var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]({
+        onComplete: function onComplete() {
+          _this.deleteAppointment(e, schedule_id, hour, date, id);
+        }
+      });
+      var item = e.target.parentNode.parentNode.parentNode.parentNode;
+      tl.to(item, 0.5, {
+        left: "-100%"
+      }).to(item, 0.3, {
+        height: 0,
+        padding: 0,
+        margin: 0
+      });
+    },
+    deleteAppointment: function deleteAppointment(e, schedule_id, hour, date, id) {
+      var _this2 = this;
+
       window.axios.post("/deleteAppointment", {
         schedule_id: schedule_id,
         hour: hour,
         date: date
       }).then(function (response) {
         window.axios.post("/getMyAppointments").then(function (response) {
-          _this.myAppointments = response.data;
-          _this.componentReady = true;
+          _this2.myAppointments = response.data;
+          _this2.componentReady = true;
         })["catch"](function (error) {
           return console.error(error);
         });
       }).then(function () {
-        var _this$$refs = _this.$refs,
-            card = _this$$refs.card,
-            noMeeting__p = _this$$refs.noMeeting__p,
-            noMeeting__button = _this$$refs.noMeeting__button;
+        var _this2$$refs = _this2.$refs,
+            card = _this2$$refs.card,
+            noMeeting__p = _this2$$refs.noMeeting__p,
+            noMeeting__button = _this2$$refs.noMeeting__button;
         var tl2 = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
 
         if (noMeeting__p) {
@@ -2208,7 +2225,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     _store_js__WEBPACK_IMPORTED_MODULE_1__["default"].commit("setComponentDisplayed", "Rendez-vous");
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     var loader = this.$refs.loader;
     var timeline = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]({
@@ -2220,13 +2237,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
     this.$store.dispatch("setCurrentUser").then(function () {
       window.axios.post("/getMyAppointments").then(function (response) {
-        _this2.myAppointments = response.data;
-        _this2.componentReady = true;
+        _this3.myAppointments = response.data;
+        _this3.componentReady = true;
       }).then(function () {
-        var _this2$$refs = _this2.$refs,
-            card = _this2$$refs.card,
-            noMeeting__p = _this2$$refs.noMeeting__p,
-            noMeeting__button = _this2$$refs.noMeeting__button;
+        var _this3$$refs = _this3.$refs,
+            card = _this3$$refs.card,
+            noMeeting__p = _this3$$refs.noMeeting__p,
+            noMeeting__button = _this3$$refs.noMeeting__button;
         var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
         var tl2 = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
         tl.staggerFrom(card, 0.3, {
@@ -52166,7 +52183,7 @@ var render = function() {
                                 attrs: { href: "" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.deleteAppointment(
+                                    return _vm.anim(
                                       $event,
                                       appointment.schedule.id,
                                       appointment.hour,
