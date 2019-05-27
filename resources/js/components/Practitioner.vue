@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile" v-if="componentReady">
     <button @click="back" class="back">
       <div class="cross__first"></div>
       <div class="cross__second"></div>
@@ -27,6 +27,7 @@
     </div>
     <button class="button" @click="getSchedule(practitioner.id)">prendre rendez-vous</button>
   </div>
+  <div v-else class="loader"></div>
 </template>
 
 <script>
@@ -37,7 +38,9 @@ import { mapState } from "vuex";
 export default {
   name: "Practitioner",
   data() {
-    return {};
+    return {
+      componentReady: false
+    };
   },
   computed: {
     ...mapState(["allJob", "allPractitioner"]),
@@ -50,11 +53,18 @@ export default {
   },
   methods: {
     back() {
-      router.push({ name: "practitionersFilter" });
+      router.go(-1);
     },
     getSchedule(id) {
       router.push({ name: "practitionerSchedule", params: { id: id } });
     }
+  },
+  mounted() {
+    this.$store.dispatch("setAllJob").then(() => {
+      this.$store.dispatch("setAllPractitioner").then(() => {
+        this.componentReady = true;
+      });
+    });
   }
 };
 </script>

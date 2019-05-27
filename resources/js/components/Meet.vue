@@ -23,7 +23,11 @@
             </div>
 
             <div class="practitioner__pills">
-              <span class="practitioner">{{appointment.schedule.practitioner.name}}</span>
+              <span class="practitioner">
+                <a
+                  @click="redirect($event, appointment.schedule.practitioner.id)"
+                >{{appointment.schedule.practitioner.name}}</a>
+              </span>
               <div class="pills">
                 <div class="pill phone">
                   <a :href="'tel:' + appointment.schedule.practitioner.gsm"></a>
@@ -130,6 +134,11 @@ export default {
     },
     takeAppointment() {
       router.push({ name: "practitionersFilter" });
+    },
+    redirect(e, id) {
+      e.preventDefault();
+      e.stopPropagation();
+      router.push({ name: "practitioner", params: { id: id } });
     }
   },
   beforeMount() {
