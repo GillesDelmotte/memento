@@ -127,9 +127,10 @@
       </div>
     </div>
   </section>
-  <div v-else class="loader">plz wait...</div>
+  <div ref="loader" v-else class="loader"></div>
 </template>
 <script>
+import { TimelineMax } from "gsap";
 import store from "../store.js";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
@@ -319,6 +320,12 @@ export default {
     store.commit("setComponentDisplayed", "Profil");
   },
   mounted() {
+    var { loader } = this.$refs;
+    var timeline = new TimelineMax({
+      repeat: -1,
+      yoyo: true
+    });
+    timeline.to(loader, 1, { autoAlpha: 0.3 });
     this.$store.dispatch("setCurrentUser").then(() => {
       this.$store.dispatch("setAllJob").then(() => {
         this.componentReady = true;

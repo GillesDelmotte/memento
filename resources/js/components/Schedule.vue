@@ -74,11 +74,11 @@
       </div>
     </div>
   </section>
-
-  <section v-else class="loader">plz wait...</section>
+  <div v-else ref="loader" class="loader"></div>
 </template>
 
 <script>
+import { TimelineMax } from "gsap";
 import { VueHammer } from "vue2-hammer";
 import store from "../store.js";
 import { mapMutations } from "vuex";
@@ -379,6 +379,12 @@ export default {
     store.commit("setComponentDisplayed", "Horaire");
   },
   mounted() {
+    var { loader } = this.$refs;
+    var timeline = new TimelineMax({
+      repeat: -1,
+      yoyo: true
+    });
+    timeline.to(loader, 1, { autoAlpha: 0.3 });
     this.$store.dispatch("setScheduleDays", this.currentUser.id).then(() => {
       this.$store
         .dispatch("setAppointments", { id: this.schedule.id, client: true })

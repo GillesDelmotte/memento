@@ -9,6 +9,7 @@
         autocomplete="off"
         placeholder="Nom, profession"
       >
+      <i class="icon-loupe"></i>
     </div>
     <div>
       <ul class="practitioners" v-if="filterPractitionerComputed.length !== 0">
@@ -85,7 +86,7 @@
       </ul>
     </div>
   </div>
-  <div v-else class="loader">plz wait...</div>
+  <div v-else class="loader" ref="loader"></div>
 </template>
 
 <script>
@@ -194,6 +195,12 @@ export default {
     store.commit("setComponentDisplayed", "Praticiens");
   },
   mounted() {
+    var { loader } = this.$refs;
+    var timeline = new TimelineMax({
+      repeat: -1,
+      yoyo: true
+    });
+    timeline.to(loader, 1, { autoAlpha: 0.3 });
     this.$store.dispatch("setAllJob").then(() => {
       this.$store.dispatch("setAllPractitioner").then(() => {
         this.componentReady = true;

@@ -92,10 +92,11 @@
     >votre praticien n'a pas encore d'agenda en ligne</div>
     <div v-if="this.displayed === 'holiday'" class="holiday">votre praticien est en congé</div>
   </section>
-  <section v-else class="loader">plz wait...</section>
+  <div ref="loader" v-else class="loader"></div>
 </template>
 
 <script>
+import { TimelineMax } from "gsap";
 import store from "../store.js";
 import { mapMutations } from "vuex";
 import router from "../router.js";
@@ -356,6 +357,12 @@ export default {
     }
   },
   mounted() {
+    var { loader } = this.$refs;
+    var timeline = new TimelineMax({
+      repeat: -1,
+      yoyo: true
+    });
+    timeline.to(loader, 1, { autoAlpha: 0.3 });
     this.$store.dispatch("setScheduleDays", this.$route.params.id).then(() => {
       this.$store
         .dispatch("setAppointments", { id: this.schedule.id, client: false })
