@@ -7,7 +7,12 @@
       </div>
       <div v-else>
         <ul class="list cards">
-          <li class="list__item card" v-for="appointment in myAppointments" :key="appointment.id">
+          <li
+            class="list__item card"
+            ref="card"
+            v-for="appointment in myAppointments"
+            :key="appointment.id"
+          >
             <div class="date__hour">
               <span class="hour">{{appointment.hour}}</span>
               <span class="date">{{dateformat(appointment.date)}}</span>
@@ -27,7 +32,7 @@
                 <div class="pill delete">
                   <a
                     href
-                    @click="deleteAppointment($event, appointment.schedule.id,appointment.hour,appointment.date)"
+                    @click="deleteAppointment($event, appointment.schedule.id,appointment.hour,appointment.date, appointment.schedule.practitioner.id)"
                   ></a>
                   <div class="cross__first"></div>
                   <div class="cross__second"></div>
@@ -60,7 +65,7 @@ export default {
     ...mapState(["currentUser"])
   },
   methods: {
-    deleteAppointment(e, schedule_id, hour, date) {
+    deleteAppointment(e, schedule_id, hour, date, id) {
       e.preventDefault();
       e.stopPropagation();
       window.axios
@@ -79,6 +84,18 @@ export default {
             .catch(error => console.error(error));
         })
         .catch(error => console.error(error));
+
+      window.axios
+        .post("/sendEmail", {
+          type: "remove",
+          user_id: id,
+          hour: hour,
+          date: date
+        })
+        .then(response => {})
+        .catch(function(error) {
+          console.log(error.response.data.message);
+        });
     },
     dateformat(date) {
       const splitDate = date.split("-");
@@ -94,6 +111,7 @@ export default {
   },
   mounted() {
     var { loader } = this.$refs;
+
     var timeline = new TimelineMax({
       repeat: -1,
       yoyo: true
@@ -105,6 +123,16 @@ export default {
         .then(response => {
           this.myAppointments = response.data;
           this.componentReady = true;
+        })
+        .then(() => {
+          const { card } = this.$refs;
+          var tl = new TimelineMax();
+          tl.staggerFrom(
+            card,
+            0.3,
+            { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+            0.1
+          );
         })
         .catch(error => console.error(error));
     });
