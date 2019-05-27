@@ -2231,6 +2231,7 @@ table {
 }
 
 #meet .noMeeting p {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2243,6 +2244,7 @@ table {
 }
 
 #meet .noMeeting .button {
+  position: relative;
   margin-top: 20px;
 }
 

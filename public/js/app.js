@@ -2095,6 +2095,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2126,6 +2130,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })["catch"](function (error) {
           return console.error(error);
         });
+      }).then(function () {
+        var _this$$refs = _this.$refs,
+            card = _this$$refs.card,
+            noMeeting__p = _this$$refs.noMeeting__p,
+            noMeeting__button = _this$$refs.noMeeting__button;
+        var tl2 = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
+
+        if (noMeeting__p) {
+          tl2.from(noMeeting__p, 0.3, {
+            autoAlpha: 0,
+            top: 50,
+            ease: Power2.easeInOut
+          }).from(noMeeting__button, 0.3, {
+            autoAlpha: 0,
+            top: 50,
+            ease: Power2.easeInOut
+          }, 0.1);
+        }
       })["catch"](function (error) {
         return console.error(error);
       });
@@ -2167,13 +2189,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.myAppointments = response.data;
         _this2.componentReady = true;
       }).then(function () {
-        var card = _this2.$refs.card;
+        var _this2$$refs = _this2.$refs,
+            card = _this2$$refs.card,
+            noMeeting__p = _this2$$refs.noMeeting__p,
+            noMeeting__button = _this2$$refs.noMeeting__button;
         var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
+        var tl2 = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
         tl.staggerFrom(card, 0.3, {
           autoAlpha: 0,
           top: 50,
           ease: Power2.easeInOut
         }, 0.1);
+
+        if (noMeeting__p) {
+          tl2.from(noMeeting__p, 0.3, {
+            autoAlpha: 0,
+            top: 50,
+            ease: Power2.easeInOut
+          }).from(noMeeting__button, 0.3, {
+            autoAlpha: 0,
+            top: 50,
+            ease: Power2.easeInOut
+          }, 0.1);
+        }
       })["catch"](function (error) {
         return console.error(error);
       });
@@ -3390,6 +3428,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch("setAllJob").then(function () {
       _this5.$store.dispatch("setAllPractitioner").then(function () {
         _this5.componentReady = true;
+      }).then(function () {
+        var filter = _this5.$refs.filter;
+        var tl = new TimelineMax();
+        tl.from(filter, 0.3, {
+          autoAlpha: 0
+        });
       });
     });
   }
@@ -51799,11 +51843,17 @@ var render = function() {
       ? _c("div", [
           _vm.myAppointments.length === 0
             ? _c("div", { staticClass: "noMeeting" }, [
-                _c("p", [_vm._v("vous n'avez pas de rendez-vous")]),
+                _c("p", { ref: "noMeeting__p" }, [
+                  _vm._v("vous n'avez pas de rendez-vous")
+                ]),
                 _vm._v(" "),
                 _c(
                   "button",
-                  { staticClass: "button", on: { click: _vm.takeAppointment } },
+                  {
+                    ref: "noMeeting__button",
+                    staticClass: "button",
+                    on: { click: _vm.takeAppointment }
+                  },
                   [_vm._v("Prendre un rendez-vous")]
                 )
               ])
@@ -52680,7 +52730,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.componentReady
     ? _c("div", [
-        _c("div", { staticClass: "filter" }, [
+        _c("div", { ref: "filter", staticClass: "filter" }, [
           _c("input", {
             directives: [
               {
