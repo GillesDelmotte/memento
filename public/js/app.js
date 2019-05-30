@@ -3978,6 +3978,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch("setCurrentUser").then(function () {
       _this4.$store.dispatch("setAllJob").then(function () {
         _this4.componentReady = true;
+      }).then(function () {
+        var _this4$$refs = _this4.$refs,
+            image = _this4$$refs.image,
+            name = _this4$$refs.name,
+            job = _this4$$refs.job,
+            gsm = _this4$$refs.gsm,
+            address = _this4$$refs.address,
+            desc = _this4$$refs.desc;
+        var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
+        tl.from(image, 0.3, {
+          autoAlpha: 0
+        }).from(name, 0.3, {
+          autoAlpha: 0
+        }, 0).from(gsm, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.1").from(address, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.2").from(job, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.2").from(desc, 0.3, {
+          autoAlpha: 0,
+          top: 50,
+          ease: Power2.easeInOut
+        }, "-=0.2");
       });
     });
   }
@@ -53374,290 +53404,310 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.componentReady
-    ? _c("section", { staticClass: "profile", attrs: { id: "profile" } }, [
-        _vm.currentUserImage === null
-          ? _c(
-              "label",
-              {
-                staticClass: "profile__img__empty",
-                attrs: { for: "imageFile" }
-              },
-              [
-                _c("div", { staticClass: "cross__first" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "cross__second" })
-              ]
-            )
-          : _c(
-              "label",
-              { staticClass: "profile__img", attrs: { for: "imageFile" } },
-              [
-                _c("img", {
-                  attrs: {
-                    src: "./images/profile/" + _vm.currentUserImage.image_name,
-                    alt: ""
-                  }
-                })
-              ]
-            ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "imageFile",
-          attrs: { type: "file", id: "imageFile", accept: "image/*" },
-          on: {
-            change: function($event) {
-              return _vm.onImageChange($event)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("h2", [_vm._v(_vm._s(_vm.currentUser.name))]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
-          _c("label", { attrs: { for: "gsm" } }, [_vm._v("Gsm")]),
+    ? _c(
+        "section",
+        { ref: "image", staticClass: "profile", attrs: { id: "profile" } },
+        [
+          _vm.currentUserImage === null
+            ? _c(
+                "label",
+                {
+                  staticClass: "profile__img__empty",
+                  attrs: { for: "imageFile" }
+                },
+                [
+                  _c("div", { staticClass: "cross__first" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "cross__second" })
+                ]
+              )
+            : _c(
+                "label",
+                {
+                  ref: "image",
+                  staticClass: "profile__img",
+                  attrs: { for: "imageFile" }
+                },
+                [
+                  _c("img", {
+                    attrs: {
+                      src:
+                        "./images/profile/" + _vm.currentUserImage.image_name,
+                      alt: ""
+                    }
+                  })
+                ]
+              ),
           _vm._v(" "),
           _c("input", {
-            attrs: { type: "tel", name: "gsm", id: "gsm" },
-            domProps: { value: _vm.currentUser.gsm },
+            staticClass: "imageFile",
+            attrs: { type: "file", id: "imageFile", accept: "image/*" },
             on: {
-              blur: function($event) {
-                return _vm.updateProfile("gsm", "text")
+              change: function($event) {
+                return _vm.onImageChange($event)
               }
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
-          _c("label", { attrs: { for: "address" } }, [_vm._v("Adresse")]),
+          }),
           _vm._v(" "),
-          _c(
-            "textarea",
-            {
-              attrs: { name: "address", id: "address", rows: "2" },
+          _c("h2", { ref: "name" }, [_vm._v(_vm._s(_vm.currentUser.name))]),
+          _vm._v(" "),
+          _c("div", { ref: "gsm", staticClass: "card" }, [
+            _c("label", { attrs: { for: "gsm" } }, [_vm._v("Gsm")]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "tel", name: "gsm", id: "gsm" },
+              domProps: { value: _vm.currentUser.gsm },
               on: {
                 blur: function($event) {
-                  return _vm.updateProfile("address", "text")
+                  return _vm.updateProfile("gsm", "text")
                 }
               }
-            },
-            [_vm._v(_vm._s(_vm.currentUser.address))]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card", on: { click: _vm.updatejobList } }, [
-          _c("span", [_vm._v("Profession")]),
-          _vm._v(" "),
-          _vm.currentUser.job !== null
-            ? _c("p", { staticClass: "job" }, [
-                _vm._v(_vm._s(_vm.currentUser.job.name))
-              ])
-            : _c("p", { staticClass: "job" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "job__list" }, [
-          _c("a", { staticClass: "closer", on: { click: _vm.updatejobList } }),
-          _vm._v(" "),
-          _c("div", { staticClass: "job__wrapper" }, [
-            _c("div", { staticClass: "filter" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filter,
-                    expression: "filter"
-                  }
-                ],
-                attrs: {
-                  type: "text",
-                  name: "filter",
-                  id: "filter",
-                  autocomplete: "off",
-                  placeholder: "rechercher"
-                },
-                domProps: { value: _vm.filter },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.filter = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _vm.filteredJob.length !== 0
-              ? _c(
-                  "ul",
-                  _vm._l(_vm.filteredJob, function(job) {
-                    return _c(
-                      "li",
-                      {
-                        directives: [
-                          {
-                            name: "hammer",
-                            rawName: "v-hammer:swipe.horizontal",
-                            value: function(event) {
-                              return _vm.onSwipe(event)
-                            },
-                            expression: "(event)=> onSwipe(event)",
-                            arg: "swipe",
-                            modifiers: { horizontal: true }
-                          }
-                        ],
-                        key: job.id
-                      },
-                      [
-                        _c("a", {
-                          attrs: { href: "" },
-                          on: {
-                            click: function($event) {
-                              return _vm.updateJob(
-                                $event,
-                                job,
-                                "job_id",
-                                "text"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(job.name))]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "pills" }, [
-                          _c("div", [
-                            _c("a", {
-                              attrs: { href: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.openReport($event, job)
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("img", {
-                              attrs: {
-                                src: __webpack_require__(/*! ../../img/warning.svg */ "./resources/img/warning.svg"),
-                                alt: ""
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("i", { staticClass: "arrow" })
-                      ]
-                    )
-                  }),
-                  0
-                )
-              : _c("div", [
-                  _c("p", { staticClass: "nojobs" }, [
-                    _vm._v(
-                      "Si vous ne trouvez pas votre profession, écrivez le dans la barre de recherche et validez avec le bouton ci dessous"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "button", on: { click: _vm.createJob } },
-                    [_vm._v("Validez")]
-                  )
-                ])
+            })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "report__wrapper close" }, [
+          _c("div", { ref: "address", staticClass: "card" }, [
+            _c("label", { attrs: { for: "address" } }, [_vm._v("Adresse")]),
+            _vm._v(" "),
             _c(
-              "ul",
-              [
-                _vm._l(_vm.reports, function(report) {
-                  return _c("li", { key: report }, [
+              "textarea",
+              {
+                attrs: { name: "address", id: "address", rows: "2" },
+                on: {
+                  blur: function($event) {
+                    return _vm.updateProfile("address", "text")
+                  }
+                }
+              },
+              [_vm._v(_vm._s(_vm.currentUser.address))]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              ref: "job",
+              staticClass: "card",
+              on: { click: _vm.updatejobList }
+            },
+            [
+              _c("span", [_vm._v("Profession")]),
+              _vm._v(" "),
+              _vm.currentUser.job !== null
+                ? _c("p", { staticClass: "job" }, [
+                    _vm._v(_vm._s(_vm.currentUser.job.name))
+                  ])
+                : _c("p", { staticClass: "job" })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "job__list" }, [
+            _c("a", {
+              staticClass: "closer",
+              on: { click: _vm.updatejobList }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "job__wrapper" }, [
+              _c("div", { staticClass: "filter" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filter,
+                      expression: "filter"
+                    }
+                  ],
+                  attrs: {
+                    type: "text",
+                    name: "filter",
+                    id: "filter",
+                    autocomplete: "off",
+                    placeholder: "rechercher"
+                  },
+                  domProps: { value: _vm.filter },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.filter = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.filteredJob.length !== 0
+                ? _c(
+                    "ul",
+                    _vm._l(_vm.filteredJob, function(job) {
+                      return _c(
+                        "li",
+                        {
+                          directives: [
+                            {
+                              name: "hammer",
+                              rawName: "v-hammer:swipe.horizontal",
+                              value: function(event) {
+                                return _vm.onSwipe(event)
+                              },
+                              expression: "(event)=> onSwipe(event)",
+                              arg: "swipe",
+                              modifiers: { horizontal: true }
+                            }
+                          ],
+                          key: job.id
+                        },
+                        [
+                          _c("a", {
+                            attrs: { href: "" },
+                            on: {
+                              click: function($event) {
+                                return _vm.updateJob(
+                                  $event,
+                                  job,
+                                  "job_id",
+                                  "text"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(job.name))]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "pills" }, [
+                            _c("div", [
+                              _c("a", {
+                                attrs: { href: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.openReport($event, job)
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("img", {
+                                attrs: {
+                                  src: __webpack_require__(/*! ../../img/warning.svg */ "./resources/img/warning.svg"),
+                                  alt: ""
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("i", { staticClass: "arrow" })
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                : _c("div", [
+                    _c("p", { staticClass: "nojobs" }, [
+                      _vm._v(
+                        "Si vous ne trouvez pas votre profession, écrivez le dans la barre de recherche et validez avec le bouton ci dessous"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      { staticClass: "button", on: { click: _vm.createJob } },
+                      [_vm._v("Validez")]
+                    )
+                  ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "report__wrapper close" }, [
+              _c(
+                "ul",
+                [
+                  _vm._l(_vm.reports, function(report) {
+                    return _c("li", { key: report }, [
+                      _c("a", {
+                        attrs: { href: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.reportJobLink($event, report)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(report))])
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("li", [
                     _c("a", {
                       attrs: { href: "" },
                       on: {
                         click: function($event) {
-                          return _vm.reportJobLink($event, report)
+                          return _vm.back($event)
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(report))])
+                    _c("p", [_vm._v("Retour")])
                   ])
-                }),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", {
-                    attrs: { href: "" },
-                    on: {
-                      click: function($event) {
-                        return _vm.back($event)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("Retour")])
-                ])
-              ],
-              2
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card" }, [
+            _c("label", { ref: "desc", attrs: { for: "description" } }, [
+              _vm._v("Description")
+            ]),
+            _vm._v(" "),
+            _c(
+              "textarea",
+              {
+                attrs: { name: "description", id: "description", rows: "5" },
+                on: {
+                  blur: function($event) {
+                    return _vm.updateProfile("description", "text")
+                  }
+                }
+              },
+              [_vm._v(_vm._s(_vm.currentUser.description))]
             )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
-          _c("label", { attrs: { for: "description" } }, [
-            _vm._v("Description")
           ]),
           _vm._v(" "),
-          _c(
-            "textarea",
-            {
-              attrs: { name: "description", id: "description", rows: "5" },
-              on: {
-                blur: function($event) {
-                  return _vm.updateProfile("description", "text")
+          _c("div", { staticClass: "checkboxes" }, [
+            _c("div", { staticClass: "input__label" }, [
+              _c("input", {
+                attrs: { type: "checkbox", name: "schedule", id: "schedule" },
+                domProps: {
+                  value: _vm.currentUser.schedule,
+                  checked: _vm.currentUser.schedule ? "checked" : ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.updateProfile("schedule", "check")
+                  }
                 }
-              }
-            },
-            [_vm._v(_vm._s(_vm.currentUser.description))]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "checkboxes" }, [
-          _c("div", { staticClass: "input__label" }, [
-            _c("input", {
-              attrs: { type: "checkbox", name: "schedule", id: "schedule" },
-              domProps: {
-                value: _vm.currentUser.schedule,
-                checked: _vm.currentUser.schedule ? "checked" : ""
-              },
-              on: {
-                change: function($event) {
-                  return _vm.updateProfile("schedule", "check")
-                }
-              }
-            }),
+              }),
+              _vm._v(" "),
+              _vm._m(0)
+            ]),
             _vm._v(" "),
-            _vm._m(0)
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input__label" }, [
-            _c("input", {
-              attrs: { type: "checkbox", name: "private", id: "private" },
-              domProps: {
-                value: _vm.currentUser.private,
-                checked: _vm.currentUser.private ? "checked" : ""
-              },
-              on: {
-                change: function($event) {
-                  return _vm.updateProfile("private", "check")
+            _c("div", { staticClass: "input__label" }, [
+              _c("input", {
+                attrs: { type: "checkbox", name: "private", id: "private" },
+                domProps: {
+                  value: _vm.currentUser.private,
+                  checked: _vm.currentUser.private ? "checked" : ""
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.updateProfile("private", "check")
+                  }
                 }
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(1)
+              }),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
           ])
-        ])
-      ])
+        ]
+      )
     : _c("div", { ref: "loader", staticClass: "loader" })
 }
 var staticRenderFns = [
