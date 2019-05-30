@@ -135,12 +135,18 @@ table {
   border-spacing: 0;
 }
 
+body {
+  background-color: black;
+}
+
 #app {
   position: relative;
   min-height: 100vh;
   font-family: "Nunito", sans-serif;
   background-color: #526586;
   overflow: hidden;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .background {
@@ -153,6 +159,8 @@ table {
   background-color: whitesmoke;
   background-position: center center;
   background-image: url(/images/bgc.png?0da516851b494d07699c52bdd49adfe2);
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .loader {
@@ -381,13 +389,20 @@ table {
   padding: 20px;
   background-color: #526586;
   position: fixed;
-  left: 0;
+  left: calc(50% - 250px);
   border-top: 0.5px solid rgba(0, 0, 0, 0.49);
   bottom: 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  .nav {
+    left: 0;
+  }
 }
 
 .nav .nav-link {
@@ -446,7 +461,7 @@ table {
   background-color: #526586;
   position: fixed;
   top: 0;
-  left: 0;
+  left: calc(50% - 250px);
   width: 100%;
   z-index: 1;
   padding: 10px 20px;
@@ -455,6 +470,13 @@ table {
   justify-content: space-between;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.49);
   align-items: center;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  .header {
+    left: 0;
+  }
 }
 
 .header__title {
@@ -558,6 +580,7 @@ table {
   font-size: 20px;
   width: 90%;
   outline: none;
+  border: none;
 }
 
 #profile .card textarea {
@@ -566,16 +589,25 @@ table {
   height: auto;
   outline: none;
   font-family: "Nunito", sans-serif;
+  border: none;
 }
 
 #profile .job__list {
+  z-index: 1;
   position: fixed;
   display: none;
-  left: 0;
+  left: calc(50% - 250px);
   right: 0;
   top: 71px;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #profile .job__list {
+    left: 0;
+  }
 }
 
 #profile .job__list.open {
@@ -594,8 +626,16 @@ table {
 #profile .job__list .report__wrapper {
   background-color: whitesmoke;
   position: fixed;
-  left: 0;
+  left: calc(50% - 250px);
   right: 0;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #profile .job__list .job__wrapper,
+  #profile .job__list .report__wrapper {
+    left: 0;
+  }
 }
 
 #profile .job__list .job__wrapper.close,
@@ -787,7 +827,7 @@ table {
 }
 
 #notifications {
-  padding-top: 100px;
+  padding: 100px 0;
   box-sizing: border-box;
   position: relative;
 }
@@ -1638,10 +1678,18 @@ table {
   z-index: 1;
   position: fixed;
   top: calc(50% - 40px);
-  left: 0;
+  left: calc(50% - 250px);
   right: 0;
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #mySchedule .holiday,
+  #mySchedule .noSchedule {
+    left: 0;
+  }
 }
 
 #mySchedule .holiday p,
@@ -1668,6 +1716,7 @@ table {
   display: flex;
   position: fixed;
   box-sizing: border-box;
+  left: calc(50% - 250px);
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -1676,6 +1725,13 @@ table {
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
   font-size: 20px;
   color: #526586;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #mySchedule .date {
+    left: 0;
+  }
 }
 
 #mySchedule .date span {
@@ -1715,6 +1771,7 @@ table {
   z-index: 1;
   display: none;
   position: fixed;
+  left: calc(50% - 250px);
   top: 135px;
   width: 100%;
   padding: 17px;
@@ -1724,6 +1781,13 @@ table {
   font-size: 18px;
   color: #526586;
   outline: none;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #mySchedule .datePicker {
+    left: 0;
+  }
 }
 
 #mySchedule .datePicker.displayed {
@@ -1867,11 +1931,19 @@ table {
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  left: calc(50% - 250px);
   padding: 20px 20px;
   background-color: white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
   font-size: 20px;
   color: #526586;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #practitionerSchedule .date {
+    left: 0;
+  }
 }
 
 #practitionerSchedule .date span {
@@ -1912,6 +1984,7 @@ table {
   display: none;
   position: fixed;
   top: 135px;
+  left: calc(50% - 250px);
   width: 100%;
   padding: 17px;
   box-sizing: border-box;
@@ -1920,6 +1993,13 @@ table {
   font-size: 18px;
   color: #526586;
   outline: none;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #practitionerSchedule .datePicker {
+    left: 0;
+  }
 }
 
 #practitionerSchedule .datePicker.displayed {
@@ -2257,11 +2337,18 @@ table {
 #meet .noMeeting {
   z-index: 1;
   position: fixed;
+  left: calc(50% - 250px);
   top: calc(50% - 40px);
-  left: 0;
   right: 0;
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #meet .noMeeting {
+    left: 0;
+  }
 }
 
 #meet .noMeeting p {
@@ -2329,10 +2416,17 @@ table {
   z-index: 1;
   position: fixed;
   top: calc(50% - 40px);
-  left: 0;
+  left: calc(50% - 250px);
   right: 0;
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
+  max-width: 500px;
+}
+
+@media (max-width: 500px) {
+  #adminReport .noreport {
+    left: 0;
+  }
 }
 
 #adminReport .noreport p {

@@ -1,9 +1,14 @@
+body{
+    background-color: black;
+}
 #app{
     position: relative;
     min-height: 100vh;
     font-family: 'Nunito', sans-serif;
     background-color: $color__blue;
     overflow: hidden;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .background{
@@ -16,6 +21,8 @@
     background-color: rgb(245, 245, 245);
     background-position: center center;
     background-image: url('../img/bgc.png');
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .loader{
