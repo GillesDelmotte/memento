@@ -3,7 +3,7 @@
     background-color: $color__blue;
     position: fixed;
     top:0;
-    left:0;
+    left:calc(50% - 250px);
     width: 100%;
     z-index: 1;
     padding:  10px 20px;
@@ -12,6 +12,11 @@
     justify-content: space-between;
     border-bottom: 0.5px solid rgba(0,0,0,0.49);
     align-items: center;
+    max-width: 500px;
+
+    @media(max-width: 500px){
+        left: 0;
+    }
     //box-shadow: inset 0px -10px 10px 1px rgba(0,0,0,0.49);
     &__title{
         font-size: 30px;

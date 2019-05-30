@@ -43,10 +43,15 @@
         z-index: 1;
         position: fixed;
         top:calc(50% - 40px);
-        left:0;
+        left:calc(50% - 250px);
         right: 0;
         font-size: 20px; 
         font-family: 'Montserrat', sans-serif;
+        max-width: 500px;
+
+        @media(max-width: 500px){
+            left: 0;
+        }
         p{
             display: flex;
             align-items: center;
