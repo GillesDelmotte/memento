@@ -164,6 +164,7 @@ export default {
       yoyo: true
     });
     timeline.to(loader, 1, { autoAlpha: 0.3 });
+
     this.$store.dispatch("setCurrentUser").then(() => {
       window.axios
         .post("/getMyAppointments")
