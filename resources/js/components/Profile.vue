@@ -1,10 +1,10 @@
 <template>
-  <section class="profile" v-if="componentReady" id="profile">
+  <section class="profile" v-if="componentReady" id="profile" ref="image">
     <label class="profile__img__empty" for="imageFile" v-if="currentUserImage === null">
       <div class="cross__first"></div>
       <div class="cross__second"></div>
     </label>
-    <label for="imageFile" class="profile__img" v-else>
+    <label for="imageFile" class="profile__img" v-else ref="image">
       <img :src="'./images/profile/' + currentUserImage.image_name" alt>
     </label>
     <input
@@ -14,8 +14,8 @@
       class="imageFile"
       v-on:change="onImageChange($event)"
     >
-    <h2>{{currentUser.name}}</h2>
-    <div class="card">
+    <h2 ref="name">{{currentUser.name}}</h2>
+    <div class="card" ref="gsm">
       <label for="gsm">Gsm</label>
       <input
         type="tel"
@@ -25,11 +25,11 @@
         @blur="updateProfile('gsm', 'text')"
       >
     </div>
-    <div class="card">
+    <div class="card" ref="address">
       <label for="address">Adresse</label>
       <textarea name="address" id="address" rows="2" @blur="updateProfile('address', 'text')">{{currentUser.address}}</textarea>
     </div>
-    <div class="card" @click="updatejobList">
+    <div class="card" @click="updatejobList" ref="job">
       <span>Profession</span>
       <p v-if="currentUser.job !== null" class="job">{{currentUser.job.name}}</p>
       <p v-else class="job"></p>
@@ -85,7 +85,7 @@
       </div>
     </div>
     <div class="card">
-      <label for="description">Description</label>
+      <label for="description" ref="desc">Description</label>
       <textarea
         name="description"
         id="description"
@@ -327,9 +327,42 @@ export default {
     });
     timeline.to(loader, 1, { autoAlpha: 0.3 });
     this.$store.dispatch("setCurrentUser").then(() => {
-      this.$store.dispatch("setAllJob").then(() => {
-        this.componentReady = true;
-      });
+      this.$store
+        .dispatch("setAllJob")
+        .then(() => {
+          this.componentReady = true;
+        })
+        .then(() => {
+          const { image, name, job, gsm, address, desc } = this.$refs;
+          const tl = new TimelineMax();
+
+          tl.from(image, 0.3, { autoAlpha: 0 })
+            .from(name, 0.3, { autoAlpha: 0 }, 0)
+            .from(
+              gsm,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.1"
+            )
+            .from(
+              address,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.2"
+            )
+            .from(
+              job,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.2"
+            )
+            .from(
+              desc,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              "-=0.2"
+            );
+        });
     });
   }
 };
