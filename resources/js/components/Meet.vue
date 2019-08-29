@@ -176,12 +176,15 @@ export default {
           const { card, noMeeting__p, noMeeting__button } = this.$refs;
           var tl = new TimelineMax();
           var tl2 = new TimelineMax();
-          tl.staggerFrom(
-            card,
-            0.3,
-            { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
-            0.1
-          );
+          if (card) {
+            tl.staggerFrom(
+              card,
+              0.3,
+              { autoAlpha: 0, top: 50, ease: Power2.easeInOut },
+              0.1
+            );
+          }
+
           if (noMeeting__p) {
             tl2
               .from(noMeeting__p, 0.3, {

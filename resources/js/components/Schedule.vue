@@ -40,7 +40,7 @@
       </li>
     </ul>
     <div class="noSchedule" v-if="this.displayed === 'noSchedule'" ref="noSchedule">
-      <p>vous n'avez pas encore créer d'agenda</p>
+      <p>vous n'avez pas encore créé d'agenda</p>
       <button class="button" @click="redirect">Créer un agenda</button>
     </div>
     <div v-if="this.displayed === 'holiday'" class="holiday" ref="holiday">
@@ -431,7 +431,7 @@ export default {
               }
 
               if (noSchedule) {
-                tl.from(holiday, 0.3, {
+                tl.from(noSchedule, 0.3, {
                   autoAlpha: 0,
                   top: "+=50px",
                   ease: Power2.easeInOut

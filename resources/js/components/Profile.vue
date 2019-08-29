@@ -105,7 +105,7 @@
         >
         <div class="allLabel">
           <label for="schedule" class="falseInput"></label>
-          <label for="schedule" class="goodLabel">je veux pouvoir créer un agenda</label>
+          <label for="schedule" class="goodLabel">je veux que mon agenda soit indexé</label>
         </div>
       </div>
       <div class="input__label">
@@ -145,7 +145,7 @@ export default {
       reports: [
         "insulte",
         "faute d‘orthographe",
-        "cette professsion n‘existe pas"
+        "cette profession n‘existe pas"
       ],
       reportJob: null,
       image: ""

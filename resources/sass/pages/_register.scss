@@ -28,10 +28,6 @@
             border: none;
             background-color: initial;
             font-size: 20px;
-            &:valid ~ label, &:focus ~ label{
-                top: 10px;
-                font-size: 15px;
-            }
 
             &:focus{
                 outline: none;
@@ -40,8 +36,8 @@
         label{
             transition: all 0.3s;
             position: absolute;
-            top: calc(50% - 10px);
-            font-size: 20px;
+            top: 10px;
+            font-size: 15px;
             left: 30px;
         }
     }

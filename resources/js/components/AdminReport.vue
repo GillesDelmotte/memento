@@ -1,7 +1,7 @@
 <template>
   <section id="adminReport" v-if="componentReady">
     <div class="noreport" v-if="reports.length === 0">
-      <p>Il n'y pas pas de report</p>
+      <p>Il n'y pas de report</p>
     </div>
     <div v-else>
       <ul class="list cards">

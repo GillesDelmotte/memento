@@ -2246,11 +2246,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             noMeeting__button = _this3$$refs.noMeeting__button;
         var tl = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
         var tl2 = new gsap__WEBPACK_IMPORTED_MODULE_0__["TimelineMax"]();
-        tl.staggerFrom(card, 0.3, {
-          autoAlpha: 0,
-          top: 50,
-          ease: Power2.easeInOut
-        }, 0.1);
+
+        if (card) {
+          tl.staggerFrom(card, 0.3, {
+            autoAlpha: 0,
+            top: 50,
+            ease: Power2.easeInOut
+          }, 0.1);
+        }
 
         if (noMeeting__p) {
           tl2.from(noMeeting__p, 0.3, {
@@ -2692,6 +2695,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -3803,7 +3810,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       componentReady: false,
       filter: "",
-      reports: ["insulte", "faute d‘orthographe", "cette professsion n‘existe pas"],
+      reports: ["insulte", "faute d‘orthographe", "cette profession n‘existe pas"],
       reportJob: null,
       image: ""
     };
@@ -4438,7 +4445,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
 
           if (noSchedule) {
-            tl.from(holiday, 0.3, {
+            tl.from(noSchedule, 0.3, {
               autoAlpha: 0,
               top: "+=50px",
               ease: Power2.easeInOut
@@ -51872,7 +51879,7 @@ var render = function() {
     ? _c("section", { attrs: { id: "adminReport" } }, [
         _vm.reports.length === 0
           ? _c("div", { staticClass: "noreport" }, [
-              _c("p", [_vm._v("Il n'y pas pas de report")])
+              _c("p", [_vm._v("Il n'y pas de report")])
             ])
           : _c("div", [
               _c(
@@ -52603,7 +52610,7 @@ var render = function() {
         _c("p", { ref: "explanation", staticClass: "explanation" }, [
           _c("span", [
             _vm._v(
-              "Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous."
+              "Vous pouvez ici gérer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous."
             )
           ]),
           _vm._v(" "),
@@ -52663,7 +52670,13 @@ var render = function() {
                     key: option,
                     domProps: { value: option, selected: _vm.selected(option) }
                   },
-                  [_vm._v(_vm._s(option) + " jours avant")]
+                  [
+                    _vm._v("\n          " + _vm._s(option) + "\n          "),
+                    option === 1
+                      ? _c("i", [_vm._v("jour")])
+                      : _c("i", [_vm._v("jours")]),
+                    _vm._v(" avant\n        ")
+                  ]
                 )
               }),
               0
@@ -53719,7 +53732,7 @@ var staticRenderFns = [
       _c("label", { staticClass: "falseInput", attrs: { for: "schedule" } }),
       _vm._v(" "),
       _c("label", { staticClass: "goodLabel", attrs: { for: "schedule" } }, [
-        _vm._v("je veux pouvoir créer un agenda")
+        _vm._v("je veux que mon agenda soit indexé")
       ])
     ])
   },
@@ -53882,7 +53895,7 @@ var render = function() {
         _vm._v(" "),
         this.displayed === "noSchedule"
           ? _c("div", { ref: "noSchedule", staticClass: "noSchedule" }, [
-              _c("p", [_vm._v("vous n'avez pas encore créer d'agenda")]),
+              _c("p", [_vm._v("vous n'avez pas encore créé d'agenda")]),
               _vm._v(" "),
               _c(
                 "button",

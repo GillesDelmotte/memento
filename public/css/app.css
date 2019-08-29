@@ -247,14 +247,6 @@ body {
   font-size: 20px;
 }
 
-#login .loginform__email input:valid ~ label,
-#login .loginform__email input:focus ~ label,
-#login .loginform__password input:valid ~ label,
-#login .loginform__password input:focus ~ label {
-  top: 10px;
-  font-size: 15px;
-}
-
 #login .loginform__email input:focus,
 #login .loginform__password input:focus {
   outline: none;
@@ -264,8 +256,8 @@ body {
 #login .loginform__password label {
   transition: all 0.3s;
   position: absolute;
-  top: calc(50% - 10px);
-  font-size: 20px;
+  top: 10px;
+  font-size: 15px;
   left: 30px;
 }
 
@@ -329,22 +321,6 @@ body {
   font-size: 20px;
 }
 
-#register .registerform__name input:valid ~ label,
-#register .registerform__name input:focus ~ label,
-#register .registerform__email input:valid ~ label,
-#register .registerform__email input:focus ~ label,
-#register .registerform__password input:valid ~ label,
-#register .registerform__password input:focus ~ label,
-#register .registerform__confirm input:valid ~ label,
-#register .registerform__confirm input:focus ~ label,
-#register .registerform__gsm input:valid ~ label,
-#register .registerform__gsm input:focus ~ label,
-#register .registerform__job input:valid ~ label,
-#register .registerform__job input:focus ~ label {
-  top: 10px;
-  font-size: 15px;
-}
-
 #register .registerform__name input:focus,
 #register .registerform__email input:focus,
 #register .registerform__password input:focus,
@@ -362,8 +338,8 @@ body {
 #register .registerform__job label {
   transition: all 0.3s;
   position: absolute;
-  top: calc(50% - 10px);
-  font-size: 20px;
+  top: 10px;
+  font-size: 15px;
   left: 30px;
 }
 

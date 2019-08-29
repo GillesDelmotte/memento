@@ -1,7 +1,7 @@
 <template>
   <section id="notifications" v-if="componentReady">
     <p class="explanation" ref="explanation">
-      <span>Vous pouvez ici gerer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous.</span>
+      <span>Vous pouvez ici gérer l'envoi de vos notifications pour rappeler à vos clients qu'ils ont un rendez-vous.</span>
       <span>Pour ce faire, si vous voulez ajouter la date utilisez ceci [date] et si vous voulez ajouter l'heure utilisez ceci [heure]</span>
     </p>
     <div class="card" ref="card">
@@ -24,7 +24,11 @@
             :key="option"
             :value="option"
             :selected="selected(option)"
-          >{{option}} jours avant</option>
+          >
+            {{option}}
+            <i v-if="option === 1">jour</i>
+            <i v-else>jours</i> avant
+          </option>
         </select>
       </div>
     </div>
